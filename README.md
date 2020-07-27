@@ -1,9 +1,9 @@
 # RMIT SEPT 2020 Major Project
 
-# Group 00
+# Group 06
 
 ## Members
-* SURNAME, GivenName (sXXXX)
+* CHANDRA VANI, Siddhartha Raju (s3731026)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
