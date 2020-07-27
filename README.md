@@ -4,7 +4,7 @@
 
 ## Members
 * CHANDRA VANI, Siddhartha Raju (s3731026)
-* SURNAME, GivenName (sXXXX)
+* Hui, Alvin Markus (s3677729)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
