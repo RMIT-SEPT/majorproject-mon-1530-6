@@ -6,11 +6,12 @@
 * CHANDRA VANI, Siddhartha Raju (s3731026)
 * Hui, Alvin Markus (s3677729)
 * Miari, Ashraf (s3782197)
-* SURNAME, GivenName (sXXXX)
+* Finlay, Stephen (s3786139)
 * SURNAME, GivenName (sXXXX)
 
 ## Records
 
+* Github : https://github.com/RMIT-SEPT/majorproject-mon-1530-6
 * Github repository : https://github.com/RMIT-SEPT/MajorProject/Groupx
 * ClickUp Workspace : https://app.clickup.com/xxxx/yyyy
 
