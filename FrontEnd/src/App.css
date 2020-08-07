@@ -1,38 +1,137 @@
-.App {
-  text-align: center;
+h1 {
+  font-size: 2em;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.product-title {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.product-id {
+  font-size: .8em;
+  margin: 1em 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.product-edit-icon {
+  opacity: .7;
+  position: absolute;
+  right: 2.3rem;
+  top: .4rem;
+}
+
+.product-edit-icon:hover {
+  opacity: 1;
+}
+
+.navbar, .navbar-end, .navbar-menu, .navbar-start {
+  align-items: stretch !important;
+  display: flex !important;
+}
+
+.navbar-menu {
+  flex-grow: 1 !important;
+  flex-shrink: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.navbar-item {
+  display: flex !important;
+  color: aliceblue;
+}
+
+.navbar-item a :hover {
+ color: #000000;
+}
+.navbar-end {
+  justify-content: flex-end !important;
+  margin-left: auto !important;
+}
+
+.features {
+  padding-bottom: 3em;
+}
+
+body {
+  visibility: visible !important;
+}
+
+
+.auth form {
+  margin-top: 1em;
+  max-width: 50%;
+}
+
+.buttons {
+  margin-left: 1em;
+}
+
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:100");
+* {
+  box-sizing: border-box;
+}
+.body-hov {
+ 
+  display: -webkit-box;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  height: 100px;
+  width: 380px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 650px;
 }
-
-.App-link {
-  color: #61dafb;
+.coolBeans {
+  border: 2px solid currentColor;
+  border-radius: 3rem;
+  color: #757575 ;
+  font-family: roboto;
+  font-size: 4rem;
+  font-weight: 100;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  position: relative;
+  text-decoration: none;
+  -webkit-transition: 0.2s -webkit-transform ease-in-out;
+  transition: 0.2s -webkit-transform ease-in-out;
+  transition: 0.2s transform ease-in-out;
+  transition: 0.2s transform ease-in-out, 0.2s -webkit-transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.coolBeans::after {
+  background-color:rgb(86, 88, 88);
+  border-radius: 3rem;
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  -webkit-transform: translate(-100%, 0) rotate(10deg);
+          transform: translate(-100%, 0) rotate(10deg);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+  -webkit-transition: 0.2s -webkit-transform ease-out;
+  transition: 0.2s -webkit-transform ease-out;
+  transition: 0.2s transform ease-out;
+  transition: 0.2s transform ease-out, 0.2s -webkit-transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+.coolBeans:hover::after {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+.coolBeans:hover {
+  border: 2px solid transparent;
+  color:#fbf9ff;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  will-change: transform;
 }
