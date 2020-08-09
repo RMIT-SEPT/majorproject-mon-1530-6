@@ -7,7 +7,7 @@
 * Hui, Alvin Markus (s3677729)
 * Miari, Ashraf (s3782197)
 * Finlay, Stephen (s3786139)
-* SURNAME, GivenName (sXXXX)
+* Go, Anson (s3767707)
 
 ## Records
 
