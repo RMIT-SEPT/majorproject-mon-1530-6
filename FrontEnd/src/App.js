@@ -4,6 +4,8 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Footer from './components/Footer';
+import LogIn from './components/auth/LogIn';
+import Register from './components/auth/Register';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 library.add(faEdit);
@@ -29,6 +31,8 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={LogIn} />
+              <Route exact path="/register" component={Register} />
             </Switch>
             <Footer />
           </div>

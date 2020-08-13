@@ -11,19 +11,16 @@ export default function Footer() {
                             <h6 className="mb-0">Get connected with us on social networks!</h6>
                         </div>
                         <div className="col-md-6 col-lg-7 text-center text-md-right">
-                            <a className="fb-ic" href="/">
+                            <a className="fb-ic" href="https://www.facebook.com/login/" target="_blank">
                                 <i className="fab fa-facebook-f white-text mr-4" > </i>
                             </a>
-                            <a className="tw-ic" href="/">
+                            <a className="tw-ic" href="https://twitter.com/LOGIN" target="_blank">
                                 <i className="fab fa-twitter white-text mr-4"> </i>
                             </a>
-                            <a className="gplus-ic" href="/">
+                            <a className="gplus-ic" href="https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin" target="_blank">
                                 <i className="fab fa-google-plus-g white-text mr-4"> </i>
                             </a>
-                            <a className="li-ic" href="/">
-                                <i className="fab fa-linkedin-in white-text mr-4"> </i>
-                            </a>
-                            <a className="ins-ic" href="/">
+                            <a className="ins-ic" href="https://www.instagram.com/accounts/login/?hl=en" target="_blank">
                                 <i className="fab fa-instagram white-text"> </i>
                             </a>
                         </div>
@@ -36,7 +33,7 @@ export default function Footer() {
                         <div className="col-md-3 col-lg-4 col-xl-3 mb-4">
                             <h6 className="text-uppercase font-weight-bold">About</h6>
                             <hr className="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" />
-                            <p>ADD CONTENT</p>
+                            <p>Our services are delivered through dedicated divisions, aligned by professional craft groups and service delivery.</p>
                         </div>
                         <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-2">
                             <h6 className="text-uppercase  font-weight-bold">Contact</h6>
