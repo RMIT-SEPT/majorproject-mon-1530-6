@@ -1,0 +1,11 @@
+User Stories: 
+1. As a / an Service Provider I want The appointments’ schedule be displayed on my dashboard So that I Could organize my workloads and appoint someone to attend the schedule
+2. As a / an Customer I want To be able to book 24/7 a time slot for an appointment So that I Am assigned with a specific service within the service provider
+3. As a / an customer want to be able to register a new account So that I can access my account data anytime4. 
+4. As a / an Customer I want to be able to cancel a booking until 48 hours before the appointment So that I will not get any notifications regarding that booking
+5. As a / an Customer want To know the details and availability of service providers So that I Can choose from the specialization that I am looking for
+6. As a/an Customer I want The previous booking history to be displayed So that it Makes it easier and helps me repeat the same previous booking
+7. As a / an Admin I want The availability of all the employees for the next 7 days displayed So that I Can roster them accordingly without any disputes
+8. As a / an Customer I want To filter through different services So that I Can only see the services which are relevant to my needs9.
+9. As a / an Customer I want To search for a specific service provider by name So that I Can book a service at that specific provider
+10. As a / an Customer I want The error to be displayed when the timeslot I chose has already been booked So that I Am not wasting time and may be able to choose another timeslot at once
