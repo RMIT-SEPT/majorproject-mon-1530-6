@@ -173,6 +173,7 @@ class Register extends Component {
                   Register
                 </button>
               </p>
+              <a href="/customer">link</a>
             </div>
           </form>
         </div>

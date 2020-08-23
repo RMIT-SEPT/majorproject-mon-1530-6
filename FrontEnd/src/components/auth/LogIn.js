@@ -7,14 +7,12 @@ class LogIn extends Component {
         username: "",
         password: "",
         errors: {
-            cognito: null,
             blankfield: false
         }
     };
     clearErrorState = () => {
         this.setState({
             errors: {
-                cognito: null,
                 blankfield: false
             }
         });

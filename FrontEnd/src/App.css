@@ -135,3 +135,15 @@ body {
           transform: scale(1.05);
   will-change: transform;
 }
+
+.avail-day{
+  display: none;
+}
+
+.avail-time{
+  display: none;
+}
+
+
+
+
