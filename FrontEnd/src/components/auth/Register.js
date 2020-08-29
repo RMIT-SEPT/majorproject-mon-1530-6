@@ -39,8 +39,21 @@ class Register extends Component {
         errors: { ...this.state.errors, ...error }
       });
     }
+    try {
+      if (!error)
+        this.props.history.push({
+          pathname: '/customer'
+        })
 
-
+    } catch (error) {
+      let err = null;
+      !error.message ? err = { "message": error } : err = error;
+      this.setState({
+        errors: {
+          ...this.state.errors
+        }
+      });
+    }
   };
 
   onInputChange = event => {
@@ -167,13 +180,13 @@ class Register extends Component {
                 <a href="/login">Already a user?</a>
               </p>
             </div>
+
             <div className="field">
               <p className="control">
                 <button className="button btn-secondary">
                   Register
                 </button>
               </p>
-              <a href="/customer">link</a>
             </div>
           </form>
         </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 export default class Navbar extends Component {
     render() {
+
         return (
 
             <nav className="navbar" style={{ backgroundColor: "#9e9e9e " }} role="navigation" aria-label="main navigation">
@@ -12,7 +13,9 @@ export default class Navbar extends Component {
                                 <a href="/" className="button is-light my-0">
                                     <strong>HOME</strong>
                                 </a>
+
                             </div>
+
                         </div>
                     </div>
 

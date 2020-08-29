@@ -5,12 +5,13 @@ import FormErrors from './FormErrors'
 export default class Customer extends Component {
 
     state = {
-        service_prodider: "",
+        service_prodider: "ff",
         appointment_day: "",
         appointment_time: "",
         errors: {
             blankfield: false
         },
+        service_list: ["Hair Dying", "Nail Polish", "Body Massage"],
         name_list: ["Alex", "James", "Kurt", "Jane", "Katie"],
         day_list: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         time_list: ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"]
@@ -24,14 +25,34 @@ export default class Customer extends Component {
         });
     };
 
+
     handleSubmit = async event => {
         event.preventDefault();
-        // Form validation
+
         this.clearErrorState();
         const error = Validate(event, this.state);
         if (error) {
             this.setState({
                 errors: { ...this.state.errors, ...error }
+            });
+        }
+
+        try {
+            if (!error)
+                this.props.history.push({
+                    pathname: '/receipt',
+                    service_prodider: this.state.service_prodider,
+                    appointment_day: this.state.appointment_day,
+                    appointment_time: this.state.appointment_time
+                })
+        } catch (error) {
+            let err = null;
+            !error.message ? err = { "message": error } : err = error;
+            this.setState({
+                errors: {
+                    ...this.state.errors
+
+                }
             });
         }
     };
@@ -53,6 +74,7 @@ export default class Customer extends Component {
             <section className="section">
                 <div className="container">
                     <h1 class="display-3">BOOKING</h1>
+
                     <FormErrors formerrors={this.state.errors} />
                     <form onSubmit={this.handleSubmit}>
                         <form>
@@ -101,11 +123,13 @@ export default class Customer extends Component {
                                 </p>
                             </div>
 
+
                             <div class="form-group row">
                                 <div class="col-sm-10">
                                     <button type="submit" className="button btn-secondary">Confirm</button>
                                 </div>
                             </div>
+
                         </form>
                     </form >
                 </div >

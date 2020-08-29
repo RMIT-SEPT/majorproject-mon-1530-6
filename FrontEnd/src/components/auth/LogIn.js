@@ -29,6 +29,20 @@ class LogIn extends Component {
                 errors: { ...this.state.errors, ...error }
             });
         }
+        try {
+            if (!error)
+                this.props.history.push({
+                    pathname: '/customer'
+                })
+        } catch (error) {
+            let err = null;
+            !error.message ? err = { "message": error } : err = error;
+            this.setState({
+                errors: {
+                    ...this.state.errors
+                }
+            });
+        }
     };
 
     onInputChange = event => {
