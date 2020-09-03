@@ -9,6 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,16 +30,35 @@ public class CustomerController {
 	@PostMapping("")
 	public ResponseEntity<?> createNewCustomer(@RequestBody Customer customer, BindingResult result)
 	{
-		if(result.hasErrors())
-		{
-			Map<String, String> errorMap = new HashMap<>();
-			for(FieldError error: result.getFieldErrors())
-			{
-				return new ResponseEntity<List<FieldError>>(result.getFieldErrors(), HttpStatus.BAD_REQUEST);
-			}
-		}
+		 ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+	        if(errorMap!=null) return errorMap;
+	        
 		Customer cus = customerService.saveOrUpdateCustomer(customer);
 		return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/{customerId}")
+    public ResponseEntity<?> getCustomerById(@PathVariable String customerId
+
+
+    ){
+
+        Customer customer = customerService.findByCustomerIdentifier(customerId);
+
+        return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/all")
+    public Iterable<Customer> getAllPersons(){return
+
+            customerService.findAllPersons();}
+
+
+    @DeleteMapping("/{customerId}")
+    public ResponseEntity<?> deleteProject(@PathVariable String customerId){
+        customerService.deletePersonByIdentifier(customerId);
+
+        return new ResponseEntity<String>("Customer with ID: '"+customerId+"' was deleted", HttpStatus.OK);
+    }
 }

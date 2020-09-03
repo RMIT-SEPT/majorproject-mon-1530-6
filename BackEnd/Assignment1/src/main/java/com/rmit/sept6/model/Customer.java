@@ -10,7 +10,7 @@ import java.util.Date;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
    @NotBlank(message = "Person name is required")
     private String name;
    @NotBlank(message = "Password is required")
@@ -25,7 +25,7 @@ public class Customer {
     }
 
     // Getter Methods
-    public Long getId() {
+    public String getId() {
         return id;
     }
     
@@ -38,7 +38,7 @@ public class Customer {
     }
     
     // Setter Methods
-    public void setId( Long id ) {
+    public void setId( String id ) {
     	this.id = id;
     }
     

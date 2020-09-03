@@ -7,9 +7,9 @@ import com.rmit.sept6.model.Customer;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	
-	@Override	
-	Iterable<Customer> findAllById(Iterable<Long> ids) ;
-	}
-
+	Customer findByCustomerIdentifier(String customerId);
+    @Override
+    Iterable<Customer> findAll();
+}
 
 
