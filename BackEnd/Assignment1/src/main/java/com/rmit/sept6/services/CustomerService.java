@@ -15,21 +15,21 @@ public class CustomerService {
 	 public Customer saveOrUpdateCustomer(Customer customer) {
 
 	        try{
-	            customer.setId(customer.getId());
+	            customer.setUsername(customer.getUsername());
 	            return customerRepository.save(customer);
 	        }catch (Exception e){
-	            throw new CustomerException("Customer ID '"+customer.getId()+"' already exists");
+	            throw new CustomerException("Customer Username '"+customer.getUsername()+"' already exists");
 	        }
 
 	    }
 
 
-	    public Customer findByCustomerIdentifier(String customerId){
+	    public Customer findByCustomerUsername(String customerUn){
 
-	    	Customer customer = customerRepository.findByCustomerIdentifier(customerId);
+	    	Customer customer = customerRepository.findByCustomerUsername(customerUn);
 
 	        if(customer == null){
-	            throw new CustomerException("Customer ID '"+customerId+"' does not exist");
+	            throw new CustomerException("Customer Username '"+customerUn+"' does not exist");
 
 	        }
 
@@ -37,16 +37,16 @@ public class CustomerService {
 	        return customer;
 	    }
 
-	    public Iterable<Customer> findAllPersons(){
+	    public Iterable<Customer> findAllCustomers(){
 	        return customerRepository.findAll();
 	    }
 
 
-	    public void deletePersonByIdentifier(String customerId){
-	    	Customer customer = customerRepository.findByCustomerIdentifier(customerId);
+	    public void deletePersonByUsername(String customerUn){
+	    	Customer customer = customerRepository.findByCustomerUsername(customerUn);
 
 	        if(customer == null){
-	            throw  new  CustomerException("Cannot Person with ID '"+customerId+"'. This person does not exist");
+	            throw  new  CustomerException("Cannot Customer with ID '"+customerUn+"'. This customer does not exist");
 	        }
 
 	        customerRepository.delete(customer);

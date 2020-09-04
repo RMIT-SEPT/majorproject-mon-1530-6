@@ -5,11 +5,11 @@ class AddCustomer extends Component {
         super();
 
         this.state= {
+        username: "",
         name: "",
-        id: "",
         password: "",
-        created_At: "",
-        updated_At: ""
+        address: "",
+        phoneNum: ""
     }; 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -22,11 +22,11 @@ class AddCustomer extends Component {
     onSubmit(e){
         e.preventDefault();
         const newCustomer = {
+            username: this.state.username,
             name: this.state.name,
-            id: this.state.id,
             password: this.state.password,
-            created_At:this.state.created_At,
-            updated_At: this.state.updated_At  
+            address:this.state.address,
+            phoneNum: this.state.phoneNum  
         }
 
         console.log(newCustomer);
@@ -42,18 +42,18 @@ class AddCustomer extends Component {
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg " 
-                                placeholder="Customer Name" 
-                                name="name"
-                                value= {this.state.name}
+                                placeholder="Customer Username" 
+                                name="username"
+                                value= {this.state.username}
                                 onChange = {this.onChange}
                                 />
                                 
                             </div>
                             <div className="form-group">
                                 <input type="text" className="form-control form-control-lg" 
-                                placeholder="Unique ID"
-                                name="id"
-                                value= {this.state.id}
+                                placeholder="Name"
+                                name="name"
+                                value= {this.state.name}
                                 onChange = {this.onChange}
                                     />
                             </div>
@@ -68,21 +68,25 @@ class AddCustomer extends Component {
                                 
 
                             </div>
-                            <h6>Start Date</h6>
                             <div className="form-group">
-                                <input type="date" className="form-control form-control-lg" 
-                                name="created_At"
-                                value= {this.state.created_At}
+                                <textarea className="form-control form-control-lg" 
+                                placeholder="Customer address"
+                                name = "address"
+                                value= {this.state.address}
                                 onChange = {this.onChange}
                                 />
+                                
+
                             </div>
-                            <h6>Estimated End Date</h6>
                             <div className="form-group">
-                                <input type="date" className="form-control form-control-lg" 
-                                name="end_date" 
-                                value= {this.state.updated_At}
+                                <textarea className="form-control form-control-lg" 
+                                placeholder="Phone Number"
+                                name = "phoneNum"
+                                value= {this.state.phoneNum}
                                 onChange = {this.onChange}
                                 />
+                                
+
                             </div>
     
                             <input type="submit" className="btn btn-primary btn-block mt-4" />

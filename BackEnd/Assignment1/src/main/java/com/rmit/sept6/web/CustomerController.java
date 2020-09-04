@@ -20,12 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rmit.sept6.model.Customer;
 import com.rmit.sept6.services.CustomerService;
+import com.rmit.sept6.services.MapValidationErrorService;
 
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+    private MapValidationErrorService mapValidationErrorService;
 	
 	@PostMapping("")
 	public ResponseEntity<?> createNewCustomer(@RequestBody Customer customer, BindingResult result)
@@ -38,27 +41,27 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{customerId}")
-    public ResponseEntity<?> getCustomerById(@PathVariable String customerId
+    public ResponseEntity<?> getCustomerByUsername(@PathVariable String customerId
 
 
     ){
 
-        Customer customer = customerService.findByCustomerIdentifier(customerId);
+        Customer customer = customerService.findByCustomerUsername(customerId);
 
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
 
 
     @GetMapping("/all")
-    public Iterable<Customer> getAllPersons(){return
+    public Iterable<Customer> getAllCustomers(){return
 
-            customerService.findAllPersons();}
+            customerService.findAllCustomers();}
 
 
     @DeleteMapping("/{customerId}")
-    public ResponseEntity<?> deleteProject(@PathVariable String customerId){
-        customerService.deletePersonByIdentifier(customerId);
+    public ResponseEntity<?> deleteProject(@PathVariable String customerUn){
+        customerService.deletePersonByUsername(customerUn);
 
-        return new ResponseEntity<String>("Customer with ID: '"+customerId+"' was deleted", HttpStatus.OK);
+        return new ResponseEntity<String>("Customer with Username: '"+customerUn+"' was deleted", HttpStatus.OK);
     }
 }
