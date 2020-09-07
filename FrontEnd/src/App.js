@@ -1,45 +1,35 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ListCustomerComponent from './components/ListCustomerComponent';
+import Register from './components/auth/Register';
 import Home from './components/Home';
+import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LogIn from './components/auth/LogIn';
-import Register from './components/auth/Register';
-import Customer from './components/Customer';
-import Receipt from './components/Receipt';
+import Booking from './components/Booking';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 library.add(faEdit);
 
 
+function App() {
+  return (
+    <Router>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Booking}></Route>
+          <Route exact path="/customer" component={ListCustomerComponent}></Route>
+          <Route exact path="/register" component={Register}></Route>
 
+          <Route exact path="/login" component={LogIn} />
 
-class App extends Component {
-
-
-
-  render() {
-
-    return (
-      <div className="App">
-        <Router>
-          <div>
-            <Navbar />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={LogIn} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/customer" component={Customer} />
-              <Route exact path="/receipt" component={Receipt} />
-
-            </Switch>
-            <Footer />
-          </div>
-        </Router>
+        </Switch>
+        <Footer />
       </div>
-    );
-  }
+    </Router>
+  );
 }
 
 export default App;

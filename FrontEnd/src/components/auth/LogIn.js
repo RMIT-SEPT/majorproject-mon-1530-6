@@ -7,12 +7,14 @@ class LogIn extends Component {
         username: "",
         password: "",
         errors: {
+            cognito: null,
             blankfield: false
         }
     };
     clearErrorState = () => {
         this.setState({
             errors: {
+
                 blankfield: false
             }
         });
@@ -29,20 +31,6 @@ class LogIn extends Component {
                 errors: { ...this.state.errors, ...error }
             });
         }
-        try {
-            if (!error)
-                this.props.history.push({
-                    pathname: '/customer'
-                })
-        } catch (error) {
-            let err = null;
-            !error.message ? err = { "message": error } : err = error;
-            this.setState({
-                errors: {
-                    ...this.state.errors
-                }
-            });
-        }
     };
 
     onInputChange = event => {
@@ -54,39 +42,45 @@ class LogIn extends Component {
 
     render() {
         return (
-            <section className="section auth">
+            <section className="auth">
                 <div className="container">
                     <h1>Log In</h1>
                     <FormErrors formerrors={this.state.errors} />
                     <form onSubmit={this.handleSubmit}>
-                        <div className="field">
-                            <p className="control">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    id="username"
-                                    aria-describedby="usernameHelp"
-                                    placeholder="Enter username or email"
-                                    value={this.state.username}
-                                    onChange={this.onInputChange}
-                                />
-                            </p>
+
+
+
+                        <div class="input-group mb-3">
+
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="username"
+                                aria-describedby="usernameHelp"
+                                placeholder="Enter username or email"
+                                value={this.state.username}
+                                onChange={this.onInputChange}
+                            />
                         </div>
-                        <div className="field">
-                            <p className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="password"
-                                    id="password"
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={this.onInputChange}
-                                />
-                                <span className="icon is-small is-left">
-                                    <i className="fas fa-lock"></i>
-                                </span>
-                            </p>
+
+
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i className="fas fa-lock"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="password"
+                                id="password"
+                                placeholder="Password"
+                                value={this.state.password}
+                                onChange={this.onInputChange}
+                            />
                         </div>
+
+
                         <div className="field">
                             <p className="control">
                                 <a href="/register">New user?</a>
@@ -94,7 +88,7 @@ class LogIn extends Component {
                         </div>
                         <div className="field">
                             <p className="control">
-                                <button className="button btn-secondary">Login</button>
+                                <button className="btn btn-outline-secondary">Login</button>
                             </p>
                         </div>
                     </form>

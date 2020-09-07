@@ -41,8 +41,24 @@ function validateForm(event, state) {
     }
 
 
+
+    if (
+        state.hasOwnProperty("verificationcode") &&
+        state.verificationcode === ""
+    ) {
+        document.getElementById("verificationcode").classList.add("is-danger");
+        return { blankfield: true };
+    }
     if (state.hasOwnProperty("password") && state.password === "") {
         document.getElementById("password").classList.add("is-danger");
+        return { blankfield: true };
+    }
+    if (state.hasOwnProperty("oldpassword") && state.oldpassword === "") {
+        document.getElementById("oldpassword").classList.add("is-danger");
+        return { blankfield: true };
+    }
+    if (state.hasOwnProperty("newpassword") && state.newpassword === "") {
+        document.getElementById("newpassword").classList.add("is-danger");
         return { blankfield: true };
     }
     if (state.hasOwnProperty("confirmpassword") && state.confirmpassword === "") {
@@ -58,6 +74,16 @@ function validateForm(event, state) {
         document.getElementById("confirmpassword").classList.add("is-danger");
         return { passwordmatch: true };
     }
+    if (
+        state.hasOwnProperty("newpassword") &&
+        state.hasOwnProperty("confirmpassword") &&
+        state.newpassword !== state.confirmpassword
+    ) {
+        document.getElementById("newpassword").classList.add("is-danger");
+        document.getElementById("confirmpassword").classList.add("is-danger");
+        return { passwordmatch: true };
+    }
+
     if (state.hasOwnProperty("service_prodider") && state.service_prodider === "") {
         document.getElementById("service_prodider").classList.add("is-danger");
         return { blankfield: true };
@@ -70,7 +96,10 @@ function validateForm(event, state) {
         document.getElementById("appointment_time").classList.add("is-danger");
         return { blankfield: true };
     }
-
+    if (state.hasOwnProperty("service") && state.service === "") {
+        document.getElementById("service").classList.add("is-danger");
+        return { blankfield: true };
+    }
     return;
 }
 
