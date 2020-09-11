@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import CustomerService from '../services/CustomerService';
+import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
+import AuthService from "../services/AuthService";
 
 export class RegisterCustomerComponent extends Component {
     constructor(props) {
@@ -13,8 +13,10 @@ export class RegisterCustomerComponent extends Component {
             address: "",
             phone: "",
             email: "",
+            username: "",
             password: "",
-            confirmpassword: ""
+            successful: false,
+            message: ""
 
 
         }
@@ -41,6 +43,14 @@ export class RegisterCustomerComponent extends Component {
 
     saveUser = (e) => {
         e.preventDefault();
+
+
+        this.setState({
+            message: "",
+            successful: false
+        });
+
+
         this.clearErrorState();
         const error = Validate(e, this.state);
         if (error) {
@@ -49,18 +59,39 @@ export class RegisterCustomerComponent extends Component {
             });
         }
         else {
-            let customer = {
-                firstname: this.state.firstname,
-                lastname: this.state.lastname,
-                address: this.state.address,
-                phone: this.state.phone,
-                email: this.state.email,
-                password: this.state.password,
-                confirmpassword: this.state.confirmpassword
-            };
-            CustomerService.createCustomer(customer).then(res => {
-                this.props.history.push('/');
-            });
+            AuthService.register(
+                this.state.firstname,
+                this.state.lastname,
+                this.state.address,
+                this.state.email,
+                this.state.phone,
+                this.state.password,
+                this.state.username
+
+            ).then(
+                () => {
+                    AuthService.login(this.state.username, this.state.password).then(
+                        () => {
+                            this.props.history.push("/profile");
+                            window.location.reload();
+                        })
+
+                },
+                error => {
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+
+                    this.setState({
+                        successful: false,
+                        message: resMessage
+                    });
+                }
+            );
+
         }
 
     }
@@ -68,146 +99,162 @@ export class RegisterCustomerComponent extends Component {
 
     render() {
 
-        const { id } = this.props.location
+
         return (
             <section className="auth">
                 <div className="container">
-                    <h1>Register {id}</h1>
+                    <h1>Register</h1>
                     <FormErrors formerrors={this.state.errors} />
 
 
+                    <form>
 
-
-
-
-
-                    <div class="input-group mb-3">
-                        <input
-                            className="form-control"
-                            type="name"
-                            id="firstname"
-                            aria-describedby="nameHelp"
-                            placeholder="Enter FirstName"
-                            value={this.state.firstname}
-                            onChange={this.onInputChange}
-                        />
-                    </div>
-
-
-                    <div class="input-group mb-3">
-                        <input
-                            className="form-control"
-                            type="name"
-                            id="lastname"
-                            aria-describedby="userNameHelp"
-                            placeholder="Enter LastName"
-                            value={this.state.lastname}
-                            onChange={this.onInputChange}
-                        />
-                    </div>
-
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i className="fas fa-envelope"></i></span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="name"
+                                id="username"
+                                placeholder="Enter UserName"
+                                value={this.state.username}
+                                onChange={this.onInputChange}
+                            />
                         </div>
-                        <input
-                            className="form-control"
-                            type="email"
-                            id="email"
-                            aria-describedby="emailHelp"
-                            placeholder="Enter Email"
-                            value={this.state.email}
-                            onChange={this.onInputChange}
-                        />
-                    </div>
 
 
 
 
-
-
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i className="fas fa-home"></i></span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fas fa-user"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="name"
+                                id="firstname"
+                                placeholder="Enter FirstName"
+                                value={this.state.firstname}
+                                onChange={this.onInputChange}
+                            />
                         </div>
-                        <input
-                            className="form-control"
-                            type="address"
-                            id="address"
-                            aria-describedby="addressHelp"
-                            placeholder="Enter Address"
-                            value={this.state.address}
-                            onChange={this.onInputChange}
-                        />
-                    </div>
 
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i className="fas fa-phone"></i></span>
+                        <div class="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fas fa-user"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="name"
+                                id="lastname"
+                                aria-describedby="userNameHelp"
+                                placeholder="Enter LastName"
+                                value={this.state.lastname}
+                                onChange={this.onInputChange}
+                            />
                         </div>
-                        <input
-                            className="form-control"
-                            type="phone"
-                            id="phone"
-                            aria-describedby="phoneHelp"
-                            placeholder="Enter Phone"
-                            value={this.state.phone}
-                            onChange={this.onInputChange}
-                        />
-                    </div>
 
 
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i className="fas fa-lock"></i></span>
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fas fa-envelope"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="email"
+                                id="email"
+                                aria-describedby="emailHelp"
+                                placeholder="Enter Email"
+                                value={this.state.email}
+                                onChange={this.onInputChange}
+                            />
                         </div>
-                        <input
-                            className="form-control"
-                            type="password"
-                            id="password"
-                            placeholder="Password"
-                            value={this.state.password}
-                            onChange={this.onInputChange}
-                        />
-                    </div>
 
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> <i className="fas fa-lock"></i></span>
+
+
+
+
+
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fas fa-home"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="address"
+                                id="address"
+                                aria-describedby="addressHelp"
+                                placeholder="Enter Address"
+                                value={this.state.address}
+                                onChange={this.onInputChange}
+                            />
                         </div>
-                        <input
-                            className="form-control"
-                            type="password"
-                            id="confirmpassword"
-                            placeholder="Confirm password"
-                            value={this.state.confirmpassword}
-                            onChange={this.onInputChange}
-                        />
-                    </div>
+
+
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fas fa-phone"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="phone"
+                                id="phone"
+                                aria-describedby="phoneHelp"
+                                placeholder="Enter Phone"
+                                value={this.state.phone}
+                                onChange={this.onInputChange}
+                            />
+                        </div>
 
 
 
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fas fa-lock"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="password"
+                                id="password"
+                                placeholder="Password"
+                                value={this.state.password}
+                                onChange={this.onInputChange}
+                            />
+                        </div>
 
 
-
-
-                    <div className="field">
-                        <p className="control">
-                            <a href="/login">Already a user?</a>
-                        </p>
-                    </div>
-                    <div className="field">
-                        <p className="control">
-                            <button className="btn btn-outline-secondary" onClick={this.saveUser}>
-                                Register
+                        <div className="field">
+                            <p className="control">
+                                <a href="/login">Already a user?</a>
+                            </p>
+                        </div>
+                        <div className="field">
+                            <p className="control">
+                                <button className="btn btn-outline-secondary" onClick={this.saveUser}>
+                                    Register
                     </button>
-                        </p>
-                    </div>
+                            </p>
+                        </div>
+
+                        {this.state.message && (
+                            <div className="form-group">
+                                <div
+                                    className={
+                                        this.state.successful
+                                            ? "alert alert-success"
+                                            : "alert alert-danger"
+                                    }
+                                    role="alert"
+                                >
+                                    {this.state.message}
+                                </div>
+                            </div>
+                        )}
+
+                    </form>
 
                 </div>
             </section>

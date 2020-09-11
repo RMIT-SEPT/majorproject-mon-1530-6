@@ -3,7 +3,7 @@ import AuthService from './services/AuthService'
 
 import { Redirect } from "react-router-dom";
 
-export default class Customer extends Component {
+export class Error extends Component {
 
     state = {
         redirect: null,
@@ -12,11 +12,11 @@ export default class Customer extends Component {
         currentUser: { username: "" },
 
     };
+
     confirm = () => {
-        this.props.history.push("/profile");
+        this.props.history.push("/booking");
         window.location.reload();
     }
-
     booking = () => {
         this.props.history.push("/booking");
         window.location.reload();
@@ -34,27 +34,30 @@ export default class Customer extends Component {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
+
         const { service_prodider } = this.props.location
         const { appointment_day } = this.props.location
         const { appointment_time } = this.props.location
 
         return (
-
-
             <section className="section">
                 <div className="container">
                     {(this.state.userReady && service_prodider != null) ?
                         <div className="card mx-5 my-5">
 
-                            <i className="d-inline-block mx-auto my-4 card-img-top fas fa-calendar-check fa-10x"></i>
 
+                            <i className="d-inline-block mx-auto my-4 card-img-top fas fa-calendar-times fa-10x"></i>
                             <div class="card-body d-inline-block mx-auto">
                                 <div className="card-text">
-                                    <h3><small>Your booking is confirmed with </small>{service_prodider} <small>on </small>{appointment_day} <small>at </small>{appointment_time}.</h3>
+                                    <h3><small>Your booking with </small>{service_prodider} <small>on </small>{appointment_day} <small>at </small>{appointment_time} <small> is not abailable.</small> </h3>
+                                    <div class="d-flex justify-content-center">
+
+                                        <h3 >Please select diferent day/time</h3>
+                                    </div>
+
                                 </div>
                             </div>
-
-                            <button type="button" class="btn btn-outline-success mx-5 my-5" onClick={this.confirm}>Confirmed </button>
+                            <button type="button" class="btn btn-outline-danger mx-5 my-5" onClick={this.confirm}>OK </button>
                         </div> :
 
 
@@ -64,21 +67,12 @@ export default class Customer extends Component {
                             <i className="d-inline-block mx-auto my-4 card-img-top fas fa-calendar-times fa-10x"></i>
 
                             <button type="button" class="btn btn-outline-danger mx-5 my-5" onClick={this.booking}>Make a Booking </button>
-                        </div>
+                        </div>}
 
-
-
-
-
-
-
-
-
-
-
-                    }
                 </div >
             </section >
         )
     }
 }
+
+export default Error

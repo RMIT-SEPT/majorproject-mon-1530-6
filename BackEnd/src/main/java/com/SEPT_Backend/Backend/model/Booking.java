@@ -1,11 +1,5 @@
 package com.SEPT_Backend.Backend.model;
 
-import java.sql.Time;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,8 +29,9 @@ public class Booking {
 	@Column(name="Day")
 	private String day;
 	
-	@Column(name="Status")
-	private Boolean status;
+	
+	@Column(name="Customer_ID")
+	private long custId;
 	
 
 	public Booking(){
@@ -76,12 +71,12 @@ public class Booking {
 		this.day = day;
 	}
 
-	public Boolean getStatus() {
-		return status;
+	public long getcustId() {
+		return custId;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setcustId(long custId) {
+		this.custId = custId;
 	}
 	
 
@@ -94,11 +89,11 @@ public class Booking {
 	}
 
 
-	public Booking(String name, String time, Boolean status, String day, String service) {
+	public Booking(String name, String time, long custId, String day, String service) {
 		super();
 		this.name = name;
 		this.time = time;
-		this.status = status;
+		this.custId = custId;
 		this.day = day;
 		this.service=service;
 	}

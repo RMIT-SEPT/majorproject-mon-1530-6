@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Validate from './utility/FormValidation'
 import FormErrors from './FormErrors'
 import BookingService from './services/BookingService'
+import AuthService from "./services/AuthService"
+
+import { Redirect } from "react-router-dom";
 
 export default class Booking extends Component {
 
@@ -10,6 +13,11 @@ export default class Booking extends Component {
         service: "",
         appointment_day: "",
         appointment_time: "",
+        redirect: null,
+        userReady: false,
+        check: false,
+        currentUser: { username: "" },
+
         errors: {
             blankfield: false
         },
@@ -28,9 +36,11 @@ export default class Booking extends Component {
     };
 
 
+
     saveBooking = (event) => {
         event.preventDefault();
         this.clearErrorState();
+
         const error = Validate(event, this.state);
         if (error) {
             this.setState({
@@ -43,36 +53,43 @@ export default class Booking extends Component {
                 name: this.state.service_prodider,
                 day: this.state.appointment_day,
                 time: this.state.appointment_time,
-                status: true
+                custId: this.state.currentUser.id
             };
-            BookingService.addBooking(booking).then(res => {
-                this.props.history.push({
-                    pathname: '/register'
-                    // id: BookingService.getBookingID(booking)
-                });
-            });
 
-            /*  try {
-                  if (!error)
-                      this.props.history.push({
-                          pathname: '/register',
-                          service_prodider: this.state.service_prodider,
-                          appointment_day: this.state.appointment_day,
-                          appointment_time: this.state.appointment_time,
-                          service: this.state.service
-                      })
-              } catch (error) {
-                  let err = null;
-                  !error.message ? err = { "message": error } : err = error;
-                  this.setState({
-                      errors: {
-                          ...this.state.errors
-  
-                      }
-                  });
-              }*/
+
+
+
+            BookingService.addBooking(booking).then(
+                () => {
+                    this.props.history.push({
+                        pathname: '/receipt',
+                        service_prodider: this.state.service_prodider,
+                        appointment_day: this.state.appointment_day,
+                        appointment_time: this.state.appointment_time
+                    })
+                },
+                error => {
+                    this.props.history.push({
+                        pathname: '/error',
+                        service_prodider: this.state.service_prodider,
+                        appointment_day: this.state.appointment_day,
+                        appointment_time: this.state.appointment_time
+                    })
+
+                }
+            );
+
+
         }
     };
+
+    componentDidMount() {
+        const user = AuthService.getCurrentUser();
+
+        if (!user) this.setState({ redirect: "/" });
+        this.setState({ currentUser: user, userReady: true })
+    }
+
 
     onInputChange = event => {
 
@@ -91,91 +108,123 @@ export default class Booking extends Component {
     };
 
     render() {
+
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        }
+
+
+
         return (
+
+
             <section className="section">
-                <div className="container">
-                    <h1 class="display-3">BOOKING</h1>
 
-                    <FormErrors formerrors={this.state.errors} />
-                    <form onSubmit={this.handleSubmit}>
-                        <form>
-                            <div className="form-group row">
-                                <label className="h6 col-sm-2 col-form-label">Service Provider</label>
-                                <div className="col-sm-10" value={this.state.service_prodider} onChange={this.onInputChange}>
-                                    <select class="form-control" id="service_prodider" >
-                                        <option selected="true" disabled="disabled">--SELECT--</option>
-                                        {this.state.name_list.map((item) =>
-                                            <option key={item}>{item}</option>
-                                        )}
-                                    </select>
+                {(this.state.userReady) ?
+                    <div className="container">
+                        <h1 class="display-3">BOOKING</h1>
+
+
+                        <FormErrors formerrors={this.state.errors} />
+                        <form onSubmit={this.handleSubmit}>
+                            <form>
+                                <div className="form-group row">
+                                    <label className="h6 col-sm-2 col-form-label">Service Provider</label>
+                                    <div className="col-sm-10" value={this.state.service_prodider} onChange={this.onInputChange}>
+                                        <select class="form-control" id="service_prodider" >
+                                            <option selected="true" disabled="disabled">--SELECT--</option>
+                                            {this.state.name_list.map((item) =>
+                                                <option key={item}>{item}</option>
+                                            )}
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
 
 
 
 
 
 
-                            <div className="field avail-day" id="availability-day">
-                                <p className="control">
-                                    <div className="h2">{this.state.service_prodider}'s Availability</div>
-                                    <form value={this.state.appointment_day} onChange={this.onInputChange} >
-                                        <div className="container form-group">
-                                            <label className="h6">Select Day</label>
-                                            <select class="form-control" id="appointment_day" >
-                                                <option selected="true" disabled="disabled">--SELECT--</option>
-                                                {this.state.day_list.map((item) =>
-                                                    <option key={item}>{item}</option>
-                                                )}
-                                            </select>
-                                        </div>
-                                    </form>
-                                </p>
-                            </div>
-
-                            <div className="field avail-time" id="availability-time">
-                                <p className="control">
-                                    <form value={this.state.appointment_time} onChange={this.onInputChange} >
-                                        <div className="container form-group">
-                                            <label className="h6">Select Time</label>
-                                            <select class="form-control" id="appointment_time" >
-                                                <option selected="true" disabled="disabled">--SELECT--</option>
-                                                {this.state.time_list.map((item) =>
-                                                    <option key={item}>{item}</option>
-                                                )}
-                                            </select>
-                                        </div>
-                                    </form>
-                                </p>
-                            </div>
-
-
-                            <div className="field service" id="service">
-                                <p className="control">
-                                    <form value={this.state.service} onChange={this.onInputChange} >
-                                        <div className="container form-group">
-                                            <label className="h6">Select Service</label>
-                                            <select class="form-control" id="service" >
-                                                <option selected="true" disabled="disabled">--SELECT--</option>
-                                                {this.state.service_list.map((item) =>
-                                                    <option key={item}>{item}</option>
-                                                )}
-                                            </select>
-                                        </div>
-                                    </form>
-                                </p>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <div class="col-sm-10">
-                                    <button type="submit" className="btn btn-outline-secondary" onClick={this.saveBooking}>Confirm</button>
+                                <div className="field avail-day" id="availability-day">
+                                    <p className="control">
+                                        <div className="h2">{this.state.service_prodider}'s Availability</div>
+                                        <form value={this.state.appointment_day} onChange={this.onInputChange} >
+                                            <div className="container form-group">
+                                                <label className="h6">Select Day</label>
+                                                <select class="form-control" id="appointment_day" >
+                                                    <option selected="true" disabled="disabled">--SELECT--</option>
+                                                    {this.state.day_list.map((item) =>
+                                                        <option key={item}>{item}</option>
+                                                    )}
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </p>
                                 </div>
-                            </div>
 
-                        </form>
-                    </form >
-                </div >
+                                <div className="field avail-time" id="availability-time">
+                                    <p className="control">
+                                        <form value={this.state.appointment_time} onChange={this.onInputChange} >
+                                            <div className="container form-group">
+                                                <label className="h6">Select Time</label>
+                                                <select class="form-control" id="appointment_time" >
+                                                    <option selected="true" disabled="disabled">--SELECT--</option>
+                                                    {this.state.time_list.map((item) =>
+                                                        <option key={item}>{item}</option>
+                                                    )}
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </p>
+                                </div>
+
+
+                                <div className="field service" id="service">
+                                    <p className="control">
+                                        <form value={this.state.service} onChange={this.onInputChange} >
+                                            <div className="container form-group">
+                                                <label className="h6">Select Service</label>
+                                                <select class="form-control" id="service" >
+                                                    <option selected="true" disabled="disabled">--SELECT--</option>
+                                                    {this.state.service_list.map((item) =>
+                                                        <option key={item}>{item}</option>
+                                                    )}
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </p>
+                                </div>
+                                {this.state.message && (
+                                    <div className="form-group">
+                                        <div
+                                            className={
+                                                this.state.successful
+                                                    ? "alert alert-success"
+                                                    : "alert alert-danger"
+                                            }
+                                            role="alert"
+                                        >
+                                            {this.state.message}
+                                        </div>
+                                    </div>
+                                )}
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <button type="submit" className="btn btn-outline-secondary" onClick={this.saveBooking}>Confirm</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </form >
+                    </div > :
+                    <div className="container">
+                        <header className="jumbotron mt-3">
+
+                            <h3>Please Register/Login</h3>
+                        </header>
+                    </div>}
             </section >
         )
     }
