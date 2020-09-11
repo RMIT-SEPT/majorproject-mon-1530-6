@@ -2,34 +2,86 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 
+import AuthService from "../services/AuthService";
+
 class LogIn extends Component {
-    state = {
-        username: "",
-        password: "",
-        errors: {
-            cognito: null,
-            blankfield: false
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            username: "",
+            password: "",
+            loading: false,
+            message: ""
+
         }
-    };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onInputChange = this.onInputChange.bind(this);
+
+    }
+
+
     clearErrorState = () => {
         this.setState({
             errors: {
-                cognito: null,
+
                 blankfield: false
             }
         });
     };
 
-    handleSubmit = async event => {
-        event.preventDefault();
+    handleSubmit(e) {
+        e.preventDefault();
+
+        this.setState({
+            message: "",
+            loading: true
+        });
 
         // Form validation
         this.clearErrorState();
-        const error = Validate(event, this.state);
+        const error = Validate(e, this.state);
         if (error) {
             this.setState({
                 errors: { ...this.state.errors, ...error }
             });
+        }
+        else {
+
+            AuthService.login(this.state.username, this.state.password).then(
+                () => {
+                    this.props.history.push("/profile");
+                    window.location.reload();
+                },
+                error => {
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+
+                    this.setState({
+                        loading: false,
+                        message: resMessage
+                    });
+                }
+            );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     };
 
@@ -42,39 +94,48 @@ class LogIn extends Component {
 
     render() {
         return (
-            <section className="section auth">
+            <section className="auth">
                 <div className="container">
                     <h1>Log In</h1>
                     <FormErrors formerrors={this.state.errors} />
                     <form onSubmit={this.handleSubmit}>
-                        <div className="field">
-                            <p className="control">
-                                <input
-                                    className="input"
-                                    type="text"
-                                    id="username"
-                                    aria-describedby="usernameHelp"
-                                    placeholder="Enter username or email"
-                                    value={this.state.username}
-                                    onChange={this.onInputChange}
-                                />
-                            </p>
+
+
+
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                            </div>
+
+                            <input
+                                className="form-control"
+                                type="text"
+                                id="username"
+
+                                placeholder="Enter username"
+                                value={this.state.username}
+                                onChange={this.onInputChange}
+                            />
                         </div>
-                        <div className="field">
-                            <p className="control has-icons-left">
-                                <input
-                                    className="input"
-                                    type="password"
-                                    id="password"
-                                    placeholder="Password"
-                                    value={this.state.password}
-                                    onChange={this.onInputChange}
-                                />
-                                <span className="icon is-small is-left">
-                                    <i className="fas fa-lock"></i>
-                                </span>
-                            </p>
+
+
+
+
+                        <div className="input-group mb-3">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fas fa-lock"></i></span>
+                            </div>
+                            <input
+                                className="form-control"
+                                type="password"
+                                id="password"
+                                placeholder="Password"
+                                value={this.state.password}
+                                onChange={this.onInputChange}
+                            />
                         </div>
+
+
                         <div className="field">
                             <p className="control">
                                 <a href="/register">New user?</a>
@@ -82,10 +143,17 @@ class LogIn extends Component {
                         </div>
                         <div className="field">
                             <p className="control">
-                                <button className="button btn-secondary">Login</button>
+                                <button className="btn btn-outline-secondary">Login</button>
                             </p>
                         </div>
                     </form>
+                    {this.state.message && (
+                        <div className="form-group">
+                            <div className="alert alert-danger" role="alert">
+                                {this.state.message}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
         );

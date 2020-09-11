@@ -17,20 +17,6 @@ function FormErrors(props) {
         </div>
       </div>
     );
-  } else if (props.apierrors) {
-    return (
-      <div className="error container help is-danger">
-        <div className="row justify-content-center">{props.apierrors}</div>
-      </div>
-    );
-  } else if (props.formerrors && props.formerrors.cognito) {
-    return (
-      <div className="error container help is-danger">
-        <div className="row justify-content-center">
-          {props.formerrors.cognito.message}
-        </div>
-      </div>
-    );
   } else {
     return <div />;
   }

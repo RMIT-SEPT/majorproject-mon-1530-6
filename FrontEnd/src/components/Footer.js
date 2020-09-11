@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function Footer() {
     return (
+
         <footer className="page-footer font-small blue-grey lighten-5">
 
             <div style={{ backgroundColor: "#e0e0e0 " }}>
@@ -11,16 +12,17 @@ export default function Footer() {
                             <h6 className="mb-0">Get connected with us on social networks!</h6>
                         </div>
                         <div className="col-md-6 col-lg-7 text-center text-md-right">
-                            <a className="fb-ic" href="https://www.facebook.com/login/" target="_blank">
+                            <a className="fb-ic" href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer">
                                 <i className="fab fa-facebook-f white-text mr-4" > </i>
                             </a>
-                            <a className="tw-ic" href="https://twitter.com/LOGIN" target="_blank">
+                            <a className="tw-ic" href="https://twitter.com/LOGIN" target="_blank" rel="noopener noreferrer">
                                 <i className="fab fa-twitter white-text mr-4"> </i>
                             </a>
-                            <a className="gplus-ic" href="https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin" target="_blank">
+                            <a className="gplus-ic" href="https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin" target="_blank" rel="noopener noreferrer">
                                 <i className="fab fa-google-plus-g white-text mr-4"> </i>
                             </a>
-                            <a className="ins-ic" href="https://www.instagram.com/accounts/login/?hl=en" target="_blank">
+                            <a className="ins-ic" href="https://www.instagram.com/accounts/login/?hl=en" target="_blank" rel="noopener noreferrer">
+
                                 <i className="fab fa-instagram white-text"> </i>
                             </a>
                         </div>
