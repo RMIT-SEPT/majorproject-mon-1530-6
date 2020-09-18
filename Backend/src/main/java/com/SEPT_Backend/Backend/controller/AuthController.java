@@ -130,4 +130,42 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+	
+	
+	@PostMapping("/addemp")
+	public ResponseEntity<?> addEmployee(@Valid @RequestBody SignupRequest signUpRequest) {
+		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Username is already taken!"));
+		}
+
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Email is already in use!"));
+		}
+
+		// Create new user's account
+		User user = new User(signUpRequest.getUsername(),signUpRequest.getFirstname(), signUpRequest.getLastname(), signUpRequest.getEmail(),
+				signUpRequest.getAddress(),signUpRequest.getPhone(), 
+							 encoder.encode(signUpRequest.getPassword()));
+
+		Set<String> strRoles = signUpRequest.getRole();
+		Set<Role> roles = new HashSet<>();
+
+		if (strRoles == null) {
+			Role userRole = roleRepository.findByName(ERole.ROLE_EMPLOYEE)
+					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+			roles.add(userRole);
+		} 
+
+		user.setRoles(roles);
+		userRepository.save(user);
+
+		return ResponseEntity.ok(new MessageResponse("Employee registered successfully!"));
+	}
+	
+	
 }
+

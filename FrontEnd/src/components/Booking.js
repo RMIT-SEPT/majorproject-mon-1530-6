@@ -15,6 +15,7 @@ export default class Booking extends Component {
         appointment_time: "",
         redirect: null,
         userReady: false,
+
         check: false,
         currentUser: { username: "" },
 
@@ -53,7 +54,7 @@ export default class Booking extends Component {
                 name: this.state.service_prodider,
                 day: this.state.appointment_day,
                 time: this.state.appointment_time,
-                custId: this.state.currentUser.id
+                username: this.state.currentUser.username
             };
 
 
@@ -84,10 +85,13 @@ export default class Booking extends Component {
     };
 
     componentDidMount() {
-        const user = AuthService.getCurrentUser();
+        const currentUser = AuthService.getCurrentUser();
 
-        if (!user) this.setState({ redirect: "/" });
-        this.setState({ currentUser: user, userReady: true })
+
+        if (!currentUser) this.setState({ redirect: "/" });
+        this.setState({ currentUser: currentUser, userReady: true })
+
+
     }
 
 
@@ -125,7 +129,10 @@ export default class Booking extends Component {
                         <h1 class="display-3">BOOKING</h1>
 
 
-                        <FormErrors formerrors={this.state.errors} />
+                        <div className="text-danger">
+
+                            <FormErrors formerrors={this.state.errors} />
+                        </div>
                         <form onSubmit={this.handleSubmit}>
                             <form>
                                 <div className="form-group row">

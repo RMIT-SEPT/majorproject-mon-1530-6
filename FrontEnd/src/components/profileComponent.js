@@ -10,15 +10,17 @@ export default class Profile extends Component {
     this.state = {
       redirect: null,
       userReady: false,
-      currentUser: { firstname: "" },
-      board: "",
+      currentUser: { username: "" },
+      userboard: "",
+      adminboard: "",
+      empboard: "",
       booking: []
     };
   }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
-    //this.setState({ booking: BookingService.findBooking(currentUser.id) });
+    this.setState({ booking: BookingService.findBooking(currentUser.username) });
 
     // this.state.booking = BookingService.findBooking(currentUser.id);
 
@@ -39,8 +41,29 @@ export default class Profile extends Component {
     if (currentUser) {
       this.setState({
 
-        board: currentUser.roles.includes("ROLE_USER")
+        userboard: currentUser.roles.includes("ROLE_USER")
       });
+    }
+    if (currentUser) {
+
+      this.setState({
+
+        adminboard: currentUser.roles.includes("ROLE_ADMIN")
+      });
+
+
+
+    }
+
+    if (currentUser) {
+
+      this.setState({
+
+        empboard: currentUser.roles.includes("ROLE_EMPLOYEE")
+      });
+
+
+
     }
 
 
@@ -55,7 +78,7 @@ export default class Profile extends Component {
   render() {
 
 
-    const { board } = this.state;
+    const { userboard, adminboard, empboard } = this.state;
 
 
     if (this.state.redirect) {
@@ -124,7 +147,7 @@ export default class Profile extends Component {
 
 
 
-        {board && (
+        {userboard && (
 
 
 
@@ -144,6 +167,27 @@ export default class Profile extends Component {
           < button type="button" class="btn btn-outline-secondary btn-lg btn-block my-4" onClick={this.book}>Book an Appointment </button>
         )
         }
+
+
+
+        {adminboard && (
+
+
+
+          <h1>DISPLAY LIST OF EMPLOYEES</h1>
+        )
+        }
+
+
+
+        {empboard && (
+
+
+
+          <h1>DISPLAY EMPLOYEE WORK ASSIGNED</h1>
+        )
+        }
+
 
       </div>
     );

@@ -9,8 +9,8 @@ import LogIn from './components/auth/LogIn';
 import Dashboard from './components/homeBoard';
 import Receipt from './components/Receipt';
 
-import BoardUser from "./components/userBoard";
-import BoardAdmin from "./components/adminBoard";
+import BoardRoster from "./components/rosterBoard";
+import BoardAddEmployee from "./components/addEmployeeBoard";
 
 import BoardEmployee from "./components/employeeBoard";
 import Booking from './components/Booking';
@@ -34,8 +34,8 @@ function App() {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/booking" component={Booking} />
-          <Route path="/user" component={BoardUser} />
-          <Route path="/admin" component={BoardAdmin} />
+          <Route path="/roster" component={BoardRoster} />
+          <Route path="/addemployee" component={BoardAddEmployee} />
           <Route path="/emp" component={BoardEmployee} />
           <Route path="/receipt" component={Receipt} />
           <Route path="/error" component={Error} />

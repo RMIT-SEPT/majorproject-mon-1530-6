@@ -152,13 +152,13 @@ export default class Navbar extends Component {
                         {showAdminBoard && (
                             <div className="navbar-nav ml-auto">
                                 <li className="nav-item" >
-                                    <a href={"/admin"} className="nav-link">
-                                        Admin Board
+                                    <a href={"/addemployee"} className="nav-link">
+                                        Employee
                                           </a>
                                 </li>
                                 <li className="nav-item" >
-                                    <a href={"/user"} className="nav-link">
-                                        User
+                                    <a href={"/roster"} className="nav-link">
+                                        Roster
                                       </a>
                                 </li>
 
