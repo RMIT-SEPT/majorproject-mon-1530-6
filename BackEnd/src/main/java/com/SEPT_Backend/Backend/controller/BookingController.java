@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SEPT_Backend.Backend.Service.BookingService;
 import com.SEPT_Backend.Backend.model.Booking;
 import com.SEPT_Backend.Backend.payload.response.MessageResponse;
 import com.SEPT_Backend.Backend.repository.BookingRepository;
@@ -22,20 +23,23 @@ import com.SEPT_Backend.Backend.repository.BookingRepository;
 @RequestMapping("/api/v1/")
 public class BookingController {
 	
+	
+	
 	@Autowired
-	public BookingRepository bookingRepository;
+	public BookingService bookingService;
+	
 	
 	
 	
 	// get all customers
 	@GetMapping("/booking")
-	public List<Booking> getAllBooking(Long id){
+	public List<Booking> getAllBooking(String name){
 		
 		//return bookingRepository.findById(id);
 		//return bookingRepository.findAll();
 		//return bookingRepository.findBooking(id);
 		
-		return bookingRepository.findBooking(id);
+		return bookingService.findBooking(name);
 		
 		
 		
@@ -48,10 +52,10 @@ public class BookingController {
 	{
 		
 		 
-		var temp = (List<Booking>) bookingRepository.findByDayAndTime(booking.getDay(), booking.getTime(), booking.getName());
+		var temp = (List<Booking>) bookingService.findByDayAndTime(booking.getDay(), booking.getTime(), booking.getName());
 		if (temp == null || temp.isEmpty()) {
 			
-			 bookingRepository.save(booking);
+			bookingService.saveBooking(booking);
 			 return ResponseEntity.ok(new MessageResponse("Booking Successfull!"));
 		}
 		return  ResponseEntity
@@ -59,11 +63,11 @@ public class BookingController {
 				.body(new MessageResponse("Error: BOOKING is already taken!"));
 		
 	}
-	
+	/*
 	@GetMapping("/booking/find")
 	public List<Booking> getbyID(long id){
-		return bookingRepository.findBooking(id);
-	}
+		return bookingService.findBooking(id);
+	}*/
 	
 	
 	

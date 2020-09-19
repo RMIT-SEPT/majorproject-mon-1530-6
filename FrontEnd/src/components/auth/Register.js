@@ -104,7 +104,10 @@ export class RegisterCustomerComponent extends Component {
             <section className="auth">
                 <div className="container">
                     <h1>Register</h1>
-                    <FormErrors formerrors={this.state.errors} />
+                    <div className="text-danger">
+
+                        <FormErrors formerrors={this.state.errors} />
+                    </div>
 
 
                     <form>
@@ -240,9 +243,9 @@ export class RegisterCustomerComponent extends Component {
                         </div>
 
                         {this.state.message && (
-                            <div className="form-group">
+                            <div className="form-group mt-2">
                                 <div
-                                    className={
+                                    className={"mt-2",
                                         this.state.successful
                                             ? "alert alert-success"
                                             : "alert alert-danger"

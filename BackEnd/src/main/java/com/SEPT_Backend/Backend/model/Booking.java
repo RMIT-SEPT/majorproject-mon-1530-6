@@ -30,8 +30,8 @@ public class Booking {
 	private String day;
 	
 	
-	@Column(name="Customer_ID")
-	private long custId;
+	@Column(name="Username")
+	private String username;
 	
 
 	public Booking(){
@@ -71,12 +71,12 @@ public class Booking {
 		this.day = day;
 	}
 
-	public long getcustId() {
-		return custId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setcustId(long custId) {
-		this.custId = custId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 
@@ -89,11 +89,11 @@ public class Booking {
 	}
 
 
-	public Booking(String name, String time, long custId, String day, String service) {
+	public Booking(String name, String time, String username, String day, String service) {
 		super();
 		this.name = name;
 		this.time = time;
-		this.custId = custId;
+		this.username = username;
 		this.day = day;
 		this.service=service;
 	}
