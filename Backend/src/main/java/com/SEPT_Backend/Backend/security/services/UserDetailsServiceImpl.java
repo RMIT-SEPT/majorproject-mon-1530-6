@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.SEPT_Backend.Backend.model.User;
 import com.SEPT_Backend.Backend.repository.UserRepository;
 
+//throw an erroro if no user found
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired

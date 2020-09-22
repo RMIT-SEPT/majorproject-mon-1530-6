@@ -2,7 +2,7 @@ package com.SEPT_Backend.Backend.payload.response;
 
 import java.util.List;
 
-
+//token 
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";

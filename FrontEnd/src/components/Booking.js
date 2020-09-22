@@ -3,9 +3,9 @@ import Validate from './utility/FormValidation'
 import FormErrors from './FormErrors'
 import BookingService from './services/BookingService'
 import AuthService from "./services/AuthService"
-
 import { Redirect } from "react-router-dom";
 
+//make a booking ny user
 export default class Booking extends Component {
 
     state = {
@@ -15,10 +15,8 @@ export default class Booking extends Component {
         appointment_time: "",
         redirect: null,
         userReady: false,
-
         check: false,
         currentUser: { username: "" },
-
         errors: {
             blankfield: false
         },
@@ -37,7 +35,7 @@ export default class Booking extends Component {
     };
 
 
-
+    //save the booking details in the database 
     saveBooking = (event) => {
         event.preventDefault();
         this.clearErrorState();
@@ -60,6 +58,7 @@ export default class Booking extends Component {
 
             BookingService.addBooking(booking).then(
                 () => {
+                    //show receipt if booking success
                     this.props.history.push({
                         pathname: '/receipt',
                         service_prodider: this.state.service_prodider,
@@ -68,6 +67,7 @@ export default class Booking extends Component {
                     })
                 },
                 error => {
+                    //display error is booking not successfull
                     this.props.history.push({
                         pathname: '/error',
                         service_prodider: this.state.service_prodider,
@@ -82,17 +82,15 @@ export default class Booking extends Component {
         }
     };
 
+    //to the the update of current user
     componentDidMount() {
         const currentUser = AuthService.getCurrentUser();
-
-
         if (!currentUser) this.setState({ redirect: "/" });
+        //set redirect path is no user found
         this.setState({ currentUser: currentUser, userReady: true })
-
-
     }
 
-
+    //assign values for each input
     onInputChange = event => {
 
         if (this.state.service_prodider !== "") {
@@ -111,24 +109,18 @@ export default class Booking extends Component {
 
     render() {
 
+        //if no user found, redirect to home page
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
 
-
-
         return (
-
-
             <section className="section">
 
                 {(this.state.userReady) ?
                     <div className="container">
                         <h1 class="display-3">BOOKING</h1>
-
-
                         <div className="text-danger">
-
                             <FormErrors formerrors={this.state.errors} />
                         </div>
                         <form onSubmit={this.handleSubmit}>
@@ -144,11 +136,6 @@ export default class Booking extends Component {
                                         </select>
                                     </div>
                                 </div>
-
-
-
-
-
 
                                 <div className="field avail-day" id="availability-day">
                                     <p className="control">
@@ -183,7 +170,6 @@ export default class Booking extends Component {
                                     </p>
                                 </div>
 
-
                                 <div className="field service" id="service">
                                     <p className="control">
                                         <form value={this.state.service} onChange={this.onInputChange} >
@@ -199,6 +185,7 @@ export default class Booking extends Component {
                                         </form>
                                     </p>
                                 </div>
+
                                 {this.state.message && (
                                     <div className="form-group">
                                         <div
@@ -214,7 +201,6 @@ export default class Booking extends Component {
                                     </div>
                                 )}
 
-
                                 <div class="form-group row">
                                     <div class="col-sm-10">
                                         <button type="submit" className="btn btn-outline-secondary" onClick={this.saveBooking}>Confirm</button>
@@ -226,7 +212,6 @@ export default class Booking extends Component {
                     </div > :
                     <div className="container">
                         <header className="jumbotron mt-3">
-
                             <h3>Please Register/Login</h3>
                         </header>
                     </div>}

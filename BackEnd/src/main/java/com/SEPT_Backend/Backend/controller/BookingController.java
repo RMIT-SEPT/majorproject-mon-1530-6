@@ -33,10 +33,9 @@ public class BookingController {
 	@PostMapping("/add")
 	public ResponseEntity<?> addBooking(@RequestBody Booking booking)
 	{
-		
 		List<Booking> temp = (List<Booking>) bookingService.findByDayAndTime(booking.getDay(), booking.getTime(), booking.getName());
 		if (temp == null || temp.isEmpty()) {
-			
+			//save the booking into database if no duplicate found
 			bookingService.saveBooking(booking);
 			 return ResponseEntity.ok(new MessageResponse("Booking Successfull!"));
 		}

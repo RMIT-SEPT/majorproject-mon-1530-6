@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-
 import AuthService from "./services/AuthService";
-
 import { Redirect } from "react-router-dom";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 
+//Only admin access, rostering an employee
 export default class BoardUser extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +24,11 @@ export default class BoardUser extends Component {
     };
   }
 
+  //get current user
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
     if (!currentUser) this.setState({ redirect: "/" });
     this.setState({ currentUser: currentUser, userReady: true })
-
     //Get Employee List from Backend
   }
 
@@ -38,7 +37,6 @@ export default class BoardUser extends Component {
       { days: [...this.state.days, event.target.value] }
     )
     console.log(this.state.days);
-
   }
 
   addTime = event => {
@@ -46,8 +44,6 @@ export default class BoardUser extends Component {
       { time: [...this.state.time, event.target.value] }
     )
     console.log(this.state.time);
-
-
   }
 
   addService = event => {
@@ -55,12 +51,8 @@ export default class BoardUser extends Component {
     this.setState(
       { service: [...this.state.service, event.target.value] }
     )
-
     console.log(this.state.service);
   }
-
-
-
   clearErrorState = () => {
     this.setState({
       errors: {
@@ -69,26 +61,19 @@ export default class BoardUser extends Component {
     });
   };
 
-
   onInputChange = event => {
-
     this.setState({
       name: event.target.value
     });
-
     console.log(this.state.name);
 
   }
 
-
+  //save the roster made by admin
   saveRoster = (event) => {
     event.preventDefault();
     this.clearErrorState();
   }
-
-
-
-
 
   render() {
 
@@ -98,19 +83,12 @@ export default class BoardUser extends Component {
 
     return (
 
-
       <div className="container mb-4">
         <h1 className="display-3">ROSTER EMPLOYEE</h1>
 
         <form >
-
-
-
-
-
           <div className="form-group row">
             <label className="col-sm-2  h5">Employee</label>
-
             <div className="col-sm-10" onChange={this.onInputChange}>
               <select className="custom-select mr-sm-2" id="service_prodider" >
                 <option selected disabled>Choose...</option>
@@ -119,10 +97,7 @@ export default class BoardUser extends Component {
                 )}
               </select>
             </div>
-
           </div>
-
-
 
           <div className="form-group row">
             <label className="col-sm-2  h5">Select Day</label>
@@ -158,68 +133,11 @@ export default class BoardUser extends Component {
             </div>
           </div>
 
-
-
-
-          {/*
-
-
-          <div >
-            <div >
-              <label className="mr-sm-2 h4" for="inlineFormCustomSelect">Select Days</label>
-              <div >
-                <form onChange={this.addDays} >
-                  <DropdownMultiselect
-                    options={this.state.day_list}
-                  />
-                </form>
-              </div>
-
-
-
-
-
-
-
-              <label className="mr-sm-2 h4" for="inlineFormCustomSelect">Select Time</label>
-              <div >
-
-                <form value={this.state.time} onChange={this.addTime} >
-
-                  <DropdownMultiselect
-                    options={this.state.time_list}
-                  />
-                </form>
-
-              </div>
-
-              <label className="mr-sm-2 h4" for="inlineFormCustomSelect">Select Service</label>
-              <div >
-
-                <form value={this.state.service} onChange={this.addService} >
-
-                  <DropdownMultiselect
-                    options={this.state.service_list}
-                  />
-                </form>
-
-              </div>
-            </div>
-          </div>
-        */}
-
-
-
           <div className="form-group row mt-4">
             <div className="col-sm-10">
               <button type="submit" className="btn btn-outline-secondary" onClick={this.saveRoster}>Confirm Roster</button>
             </div>
           </div>
-
-
-
-
-
 
         </form>
       </div>

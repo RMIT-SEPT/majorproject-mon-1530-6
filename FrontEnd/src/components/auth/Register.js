@@ -17,22 +17,20 @@ export class RegisterCustomerComponent extends Component {
             password: "",
             successful: false,
             message: ""
-
-
         }
         this.saveUser = this.saveUser.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
-
     }
 
+    //assign values for this state
     onInputChange = event => {
         this.setState({
             [event.target.id]: event.target.value
         });
         document.getElementById(event.target.id).classList.remove("is-danger");
-
     }
 
+    //clear error states
     clearErrorState = () => {
         this.setState({
             errors: {
@@ -41,15 +39,13 @@ export class RegisterCustomerComponent extends Component {
         });
     };
 
+    //to register user
     saveUser = (e) => {
         e.preventDefault();
-
-
         this.setState({
             message: "",
             successful: false
         });
-
 
         this.clearErrorState();
         const error = Validate(e, this.state);
@@ -59,6 +55,7 @@ export class RegisterCustomerComponent extends Component {
             });
         }
         else {
+            //pass the values into controller
             AuthService.register(
                 this.state.firstname,
                 this.state.lastname,
@@ -67,16 +64,16 @@ export class RegisterCustomerComponent extends Component {
                 this.state.phone,
                 this.state.password,
                 this.state.username
-
             ).then(
                 () => {
+                    //if success, navigate to profile page
                     AuthService.login(this.state.username, this.state.password).then(
                         () => {
                             this.props.history.push("/profile");
                             window.location.reload();
                         })
-
                 },
+                //else show error
                 error => {
                     const resMessage =
                         (error.response &&
@@ -91,27 +88,19 @@ export class RegisterCustomerComponent extends Component {
                     });
                 }
             );
-
         }
-
     }
 
-
     render() {
-
-
         return (
             <section className="auth">
                 <div className="container">
                     <h1>Register</h1>
                     <div className="text-danger">
-
                         <FormErrors formerrors={this.state.errors} />
                     </div>
 
-
                     <form>
-
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i class="fa fa-user-circle" aria-hidden="true"></i></span>
@@ -126,9 +115,6 @@ export class RegisterCustomerComponent extends Component {
                             />
                         </div>
 
-
-
-
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fas fa-user"></i></span>
@@ -142,7 +128,6 @@ export class RegisterCustomerComponent extends Component {
                                 onChange={this.onInputChange}
                             />
                         </div>
-
 
                         <div class="input-group mb-3">
                             <div className="input-group-prepend">
@@ -159,7 +144,6 @@ export class RegisterCustomerComponent extends Component {
                             />
                         </div>
 
-
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fas fa-envelope"></i></span>
@@ -174,12 +158,6 @@ export class RegisterCustomerComponent extends Component {
                                 onChange={this.onInputChange}
                             />
                         </div>
-
-
-
-
-
-
 
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
@@ -196,7 +174,6 @@ export class RegisterCustomerComponent extends Component {
                             />
                         </div>
 
-
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fas fa-phone"></i></span>
@@ -212,8 +189,6 @@ export class RegisterCustomerComponent extends Component {
                             />
                         </div>
 
-
-
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fas fa-lock"></i></span>
@@ -228,9 +203,7 @@ export class RegisterCustomerComponent extends Component {
                             />
                             <small id="passwordHelpBlock" class="form-text text-muted">
                                 Your password must be 8-20 characters long, contain letters, special character and numbers, and must not contain spaces. </small>
-
                         </div>
-
 
                         <div className="field">
                             <p className="control">
@@ -241,17 +214,17 @@ export class RegisterCustomerComponent extends Component {
                             <p className="control">
                                 <button className="btn btn-outline-secondary" onClick={this.saveUser}>
                                     Register
-                    </button>
+                                </button>
                             </p>
                         </div>
 
                         {this.state.message && (
                             <div className="form-group mt-2">
                                 <div
-                                    className={"mt-2",
+                                    className={
                                         this.state.successful
-                                            ? "alert alert-success"
-                                            : "alert alert-danger"
+                                            ? "alert alert-success mt-2"
+                                            : "alert alert-danger mt-2 "
                                     }
                                     role="alert"
                                 >

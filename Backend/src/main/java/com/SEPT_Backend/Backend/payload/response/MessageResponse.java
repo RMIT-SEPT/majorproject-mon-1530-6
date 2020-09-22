@@ -1,5 +1,6 @@
 package com.SEPT_Backend.Backend.payload.response;
 
+//error messages if token doesn't match 
 public class MessageResponse {
 	private String message;
 

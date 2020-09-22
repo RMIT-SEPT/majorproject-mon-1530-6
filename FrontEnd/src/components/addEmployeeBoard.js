@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-
-
 import FormErrors from './FormErrors';
-
 import Validate from './utility/FormValidation';
 import AuthService from "./services/AuthService";
-
 import { Redirect } from "react-router-dom";
 
+//adding an employee by admin
 export default class addEmployeeBoard extends Component {
   constructor(props) {
     super(props);
@@ -20,20 +17,16 @@ export default class addEmployeeBoard extends Component {
       email: "",
       username: "",
       password: "",
-
       content: ""
     };
   }
-
 
   onInputChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
     document.getElementById(event.target.id).classList.remove("is-danger");
-
   }
-
 
   clearErrorState = () => {
     this.setState({
@@ -44,48 +37,18 @@ export default class addEmployeeBoard extends Component {
   };
 
 
-
   componentDidMount() {
-
-
     const currentUser = AuthService.getCurrentUser();
-
-
     if (!currentUser) this.setState({ redirect: "/" });
     this.setState({ currentUser: currentUser, userReady: true })
-
-
-    /*
-    UserService.getAdminBoard().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );*/
   }
-
-
 
   addEmployee = (e) => {
     e.preventDefault();
-
-
     this.setState({
       message: "",
       successful: false
     });
-
 
     this.clearErrorState();
     const error = Validate(e, this.state);
@@ -95,6 +58,7 @@ export default class addEmployeeBoard extends Component {
       });
     }
     else {
+      //pass the values to register in the database
       AuthService.addEmployee(
         this.state.firstname,
         this.state.lastname,
@@ -106,12 +70,12 @@ export default class addEmployeeBoard extends Component {
 
       ).then(
         () => {
-
+          //if success push to profile page
           this.props.history.push("/profile");
           window.location.reload();
         },
 
-
+        //display error if failed
         error => {
           const resMessage =
             (error.response &&
@@ -119,58 +83,31 @@ export default class addEmployeeBoard extends Component {
               error.response.data.message) ||
             error.message ||
             error.toString();
-
           this.setState({
             successful: false,
             message: resMessage
           });
         }
       );
-
     }
-
   }
 
-
-
-
-
-
-
-
-
   render() {
-
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
     }
-
-
     return (
-
 
       <div className="container">
         <h1 class="display-3">ADD EMPLOYEE</h1>
-
         <div className="text-danger">
-
           <FormErrors formerrors={this.state.errors} />
         </div>
 
-
-
         <form className="mb-4">
-
-
           <div class="form-row">
-
-
             <div class="form-group col-md-6">
-
               <label>FirstName</label>
-
-
-
               <input
                 className="form-control"
                 type="name"
@@ -179,16 +116,10 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.firstname}
                 onChange={this.onInputChange}
               />
-
-
-
             </div>
-
 
             <div class="form-group col-md-6">
               <label>LastName</label>
-
-
               <input
                 className="form-control"
                 type="name"
@@ -198,19 +129,11 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.lastname}
                 onChange={this.onInputChange}
               />
-
-
             </div>
-
-
-
           </div>
+
           <div class="form-group">
             <label>Address</label>
-
-
-
-
             <input
               className="form-control"
               type="address"
@@ -220,20 +143,11 @@ export default class addEmployeeBoard extends Component {
               value={this.state.address}
               onChange={this.onInputChange}
             />
-
-
           </div>
 
-
           <div class="form-row">
-
-
             <div class="form-group col-md-6">
-
               <label>Email</label>
-
-
-
               <input
                 className="form-control"
                 type="email"
@@ -243,15 +157,10 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.email}
                 onChange={this.onInputChange}
               />
-
-
             </div>
-
 
             <div class="form-group col-md-6">
               <label>Phone Number</label>
-
-
               <input
                 className="form-control"
                 type="phone"
@@ -261,22 +170,12 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.phone}
                 onChange={this.onInputChange}
               />
-
-
             </div>
-
-
-
           </div>
 
-
           <div class="form-row">
-
-
             <div class="form-group col-md-6">
               <label>UserName</label>
-
-
               <input
                 className="form-control"
                 type="name"
@@ -285,15 +184,10 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.username}
                 onChange={this.onInputChange}
               />
-
-
             </div>
-
 
             <div class="form-group col-md-6">
               <label>Password</label>
-
-
               <input
                 className="form-control"
                 type="text"
@@ -302,22 +196,10 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.password}
                 onChange={this.onInputChange}
               />
-
-
             </div>
-
-
-
           </div>
 
-
-
-
-
           <button type="submit" class="btn btn-outline-secondary" onClick={this.addEmployee} >Add</button>
-
-
-
 
           {this.state.message && (
             <div className="form-group">
@@ -335,10 +217,7 @@ export default class addEmployeeBoard extends Component {
           )}
 
         </form>
-
-
       </div>
-
     );
   }
 }

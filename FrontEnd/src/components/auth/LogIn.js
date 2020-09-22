@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
-
 import AuthService from "../services/AuthService";
 
+//login for an user/Employee and Admin
 class LogIn extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {
             username: "",
             password: "",
@@ -22,7 +21,6 @@ class LogIn extends Component {
     clearErrorState = () => {
         this.setState({
             errors: {
-
                 blankfield: false
             }
         });
@@ -44,11 +42,14 @@ class LogIn extends Component {
             });
         }
         else {
+            //pass the values into the controller and awair the result
             AuthService.login(this.state.username, this.state.password).then(
+                //if success, navigate to profile page
                 () => {
                     this.props.history.push("/profile");
                     window.location.reload();
                 },
+                //else show error on the page
                 error => {
                     const resMessage =
                         (error.response &&
@@ -63,7 +64,6 @@ class LogIn extends Component {
                     });
                 }
             );
-
         }
     };
 
@@ -80,6 +80,7 @@ class LogIn extends Component {
                 <div className="container">
                     <h1>Log In</h1>
                     <FormErrors formerrors={this.state.errors} />
+
                     <form onSubmit={this.handleSubmit}>
 
                         <div className="input-group mb-3">
@@ -122,7 +123,6 @@ class LogIn extends Component {
                                 <button className="btn btn-outline-secondary">Login</button>
                             </p>
                         </div>
-
                     </form>
 
                     {this.state.message && (
@@ -132,7 +132,6 @@ class LogIn extends Component {
                             </div>
                         </div>
                     )}
-
                 </div>
             </section>
         );

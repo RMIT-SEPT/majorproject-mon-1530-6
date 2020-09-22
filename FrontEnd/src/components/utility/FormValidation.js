@@ -1,3 +1,4 @@
+//for validation
 function validateForm(event, state) {
     // clear all error messages
     const inputs = document.getElementsByClassName("is-danger");
@@ -39,9 +40,6 @@ function validateForm(event, state) {
         document.getElementById("phone").classList.add("is-danger");
         return { blankfield: true };
     }
-
-
-
     if (
         state.hasOwnProperty("verificationcode") &&
         state.verificationcode === ""

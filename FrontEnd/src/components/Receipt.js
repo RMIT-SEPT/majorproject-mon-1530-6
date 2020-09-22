@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import AuthService from './services/AuthService'
-
 import { Redirect } from "react-router-dom";
 
+//Reciept of each booking displayed
 export default class Customer extends Component {
 
     state = {
@@ -21,10 +21,10 @@ export default class Customer extends Component {
         this.props.history.push("/booking");
         window.location.reload();
     }
-
+    //get surrent user
     componentDidMount() {
         const currentUser = AuthService.getCurrentUser();
-
+        //if no user redirect to home
         if (!currentUser) this.setState({ redirect: "/" });
         this.setState({ currentUser: currentUser, userReady: true })
     }
@@ -39,15 +39,12 @@ export default class Customer extends Component {
         const { appointment_time } = this.props.location
 
         return (
-
-
             <section className="section">
                 <div className="container">
                     {(this.state.userReady && service_prodider != null) ?
+                        /* If booking confirmed, show this*/
                         <div className="card mx-5 my-5">
-
                             <i className="d-inline-block mx-auto my-4 card-img-top fas fa-calendar-check fa-10x"></i>
-
                             <div class="card-body d-inline-block mx-auto">
                                 <div className="card-text">
                                     <h3><small>Your booking is confirmed with </small>{service_prodider} <small>on </small>{appointment_day} <small>at </small>{appointment_time}.</h3>
@@ -56,26 +53,11 @@ export default class Customer extends Component {
 
                             <button type="button" class="btn btn-outline-success mx-5 my-5" onClick={this.confirm}>Confirmed </button>
                         </div> :
-
-
-
+                        /*if loggged in and no booking made, show this */
                         <div className="card mx-5 my-5">
-
                             <i className="d-inline-block mx-auto my-4 card-img-top fas fa-calendar-times fa-10x"></i>
-
                             <button type="button" class="btn btn-outline-danger mx-5 my-5" onClick={this.booking}>Make a Booking </button>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
                     }
                 </div >
             </section >

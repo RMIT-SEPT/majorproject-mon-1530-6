@@ -1,35 +1,27 @@
 import React, { Component } from 'react'
-
-
 import AuthService from "./services/AuthService";
 
-
-
+//navbar
 export default class Navbar extends Component {
-
 
     constructor(props) {
         super(props);
         this.logOut = this.logOut.bind(this);
-
         this.state = {
             showEmployeeBoard: false,
             showAdminBoard: false,
             currentUser: undefined
-            //    showUserBoard: false
         };
     }
 
     componentDidMount() {
         const user = AuthService.getCurrentUser();
-
+        //get the current user type
         if (user) {
             this.setState({
                 currentUser: user,
                 showEmployeeBoard: user.roles.includes("ROLE_EMPLOYEE"),
                 showAdminBoard: user.roles.includes("ROLE_ADMIN")
-
-                //   showUserBoard: user.roles.includes("ROLE_USER")
             });
         }
     }
@@ -43,112 +35,21 @@ export default class Navbar extends Component {
         const { currentUser, showAdminBoard, showEmployeeBoard } = this.state;
 
         return (
-            /*
-                        <nav className="navbar navbar-expand navbar-dark bg-dark">
-                            <a href={"/"} className="navbar-brand">
-                                SID
-                                    </a>
-                            <div className="navbar-nav mr-auto">
-                                <li className="nav-item">
-                                    <a href={"/home"} className="nav-a">
-                                        Home
-                                        </a>
-                                </li>
-            
-                                {showUserBoard && (
-                                    <li className="nav-item">
-                                        <a href={"/emp"} className="nav-a">
-                                            Employee Board
-                                          </a>
-                                    </li>
-                                )}
-            
-                                {showAdminBoard && (
-                                    <li className="nav-item">
-                                        <a href={"/admin"} className="nav-a">
-                                            Admin Board
-                                          </a>
-                                    </li>
-                                )}
-            
-                                {currentUser && (
-                                    <li className="nav-item">
-                                        <a href={"/user"} className="nav-a">
-                                            User
-                                          </a>
-                                    </li>
-                                )}
-                            </div>
-            
-                            {currentUser ? (
-                                <div className="navbar-nav ml-auto">
-                                    <li className="nav-item">
-                                        <a href={"/profile"} className="nav-a">
-                                            {currentUser.username}
-                                        </a>
-                                    </li>
-                                    <li className="nav-item">
-                                        <a href="/login" className="nav-a" onClick={this.logOut}>
-                                            LogOut
-                                          </a>
-                                    </li>
-                                </div>
-                            ) : (
-                                    <div className="navbar-nav ml-auto">
-                                        <li className="nav-item">
-                                            <a href={"/login"} className="nav-a">
-                                                Login
-                                          </a>
-                                        </li>
-            
-                                        <li className="nav-item">
-                                            <a href={"/register"} className="nav-a">
-                                                Sign Up
-                                          </a>
-                                        </li>
-                                    </div>
-                                )}
-                        </nav>
-            
-            
-            
-            */
-
-
-
 
             <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#9e9e9e " }}>
 
-
+                {/* if current user, show the following links and navigations (COMMON TO ALL)*/}
                 {currentUser ? (
                     <a className="navbar-brand" href="/profile"><strong>SEPT</strong></a>
-
                 ) : (<a className="navbar-brand" href="/"><strong>SEPT</strong></a>)}
-
-
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                { /* showUserBoard && (
-                    <div className="navbar-nav ml-auto">
-                        <li className="nav-item" >
-                            <a href={"/booking"} className="nav-link">
-                               Book an Appointment
-                                          </a>
-                        </li>
-                   </div>
-            ) */}
-
-
-
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul class="navbar-nav">
 
-
-
-
-
+                        {/* if Admin, show the following links and navigations*/}
                         {showAdminBoard && (
                             <div className="navbar-nav ml-auto">
                                 <li className="nav-item" >
@@ -161,14 +62,10 @@ export default class Navbar extends Component {
                                         Roster
                                       </a>
                                 </li>
-
-
                             </div>
-
                         )}
 
-
-
+                        {/* if Employee, show the following links and navigations*/}
                         {showEmployeeBoard && (
 
                             <div className="navbar-nav ml-auto">
@@ -178,16 +75,9 @@ export default class Navbar extends Component {
                                         </a>
                                 </li>
                             </div>
-
-
-
                         )}
 
-
-
-
-
-
+                        {/* if current user, show the following links and navigations (COMMON TO ALL)*/}
                         {currentUser ? (
                             <div className="navbar-nav ml-auto">
 
@@ -210,51 +100,9 @@ export default class Navbar extends Component {
 
                             )}
 
-
-
-
-
-
-
-
                     </ul>
-
-
                 </div>
-
             </nav>
-
-
-
-
-
-
-
-
-
-
-            /*
-                        <nav className="navbar" style={{ backgroundColor: "#9e9e9e " }} role="navigation" aria-label="main navigation">
-                            <div id="navbarBasicExample" className="navbar-menu">
-                                <div className="navbar-end">
-                                    <div className="navbar-item">
-            
-                                        <div className="buttons">
-                                            <a href="/" className="btn is-light my-0">
-                                                <strong>HOME</strong>
-                                            </a>
-                                        </div>
-            
-            
-            
-            
-                                    </div>
-                                </div>
-            
-                            </div>
-                        </nav>*/
-
-
         )
     }
 }

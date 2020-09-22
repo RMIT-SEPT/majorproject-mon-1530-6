@@ -3,6 +3,7 @@ import axios from "axios";
 const API_URL = "http://localhost:8080/api/auth/";
 
 class AuthService {
+  //communicate with the controller
   login(username, password) {
     return axios
       .post(API_URL + "signin", {
@@ -18,10 +19,12 @@ class AuthService {
       });
   }
 
+  //logout user
   logout() {
     localStorage.removeItem("user");
   }
 
+  //register an user
   register(firstname, lastname, address, email, phone, password, username) {
     return axios.post(API_URL + "signup", {
       firstname,
@@ -34,6 +37,7 @@ class AuthService {
     });
   }
 
+  //adding an employee
   addEmployee(firstname, lastname, address, email, phone, password, username) {
     return axios.post(API_URL + "addemp", {
       firstname,
@@ -46,6 +50,7 @@ class AuthService {
     });
   }
 
+  //get current user
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));;
   }

@@ -10,9 +10,11 @@ import com.SEPT_Backend.Backend.repository.BookingRepository;
 @CrossOrigin(origins = "http://localhost:3001")
 @RestController
 @RequestMapping("/api/test")
+//To check if the user board can be accessed correctly from frontend
 public class TestController {
 	@Autowired
 	public BookingRepository bookingRepository;
+	
 	
 	@GetMapping("/all")
 	public String allAccess() {

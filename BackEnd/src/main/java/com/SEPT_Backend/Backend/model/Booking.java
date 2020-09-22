@@ -1,6 +1,4 @@
 package com.SEPT_Backend.Backend.model;
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="bookings")
+//booking table to store bookings of all customers
 public class Booking {
 	
 	@Id
@@ -96,10 +95,4 @@ public class Booking {
 		this.day = day;
 		this.service=service;
 	}
-
-	
-	
-	
-	
-
 }

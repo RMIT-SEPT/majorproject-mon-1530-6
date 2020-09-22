@@ -1,10 +1,9 @@
 import React from 'react'
 
+//footer, common to all pages
 export default function Footer() {
     return (
-
         <footer className="page-footer font-small blue-grey lighten-5">
-
             <div style={{ backgroundColor: "#e0e0e0 " }}>
                 <div className="container">
                     <div className="row py-4 d-flex align-items-center">

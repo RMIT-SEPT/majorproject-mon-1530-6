@@ -47,6 +47,7 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
+	//login for all users
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -70,6 +71,7 @@ public class AuthController {
 												 roles));
 	}
 
+	//create new user
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -125,7 +127,7 @@ public class AuthController {
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
 	
-	
+	//create a new employee
 	@PostMapping("/addemp")
 	public ResponseEntity<?> addEmployee(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -140,7 +142,7 @@ public class AuthController {
 					.body(new MessageResponse("Error: Email is already in use!"));
 		}
 
-		// Create new user's account
+		// Create new employee account
 		User user = new User(signUpRequest.getUsername(),signUpRequest.getFirstname(), signUpRequest.getLastname(), signUpRequest.getEmail(),
 				signUpRequest.getAddress(),signUpRequest.getPhone(), 
 							 encoder.encode(signUpRequest.getPassword()));

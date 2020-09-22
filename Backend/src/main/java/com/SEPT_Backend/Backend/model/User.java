@@ -1,6 +1,4 @@
 package com.SEPT_Backend.Backend.model;
-
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +7,7 @@ import javax.validation.constraints.Email;
 
 @Entity
 @Table(	name = "users") 
-		
+//to associate with user role for each user
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
