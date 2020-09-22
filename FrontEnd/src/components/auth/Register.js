@@ -226,6 +226,9 @@ export class RegisterCustomerComponent extends Component {
                                 value={this.state.password}
                                 onChange={this.onInputChange}
                             />
+                            <small id="passwordHelpBlock" class="form-text text-muted">
+                                Your password must be 8-20 characters long, contain letters, special character and numbers, and must not contain spaces. </small>
+
                         </div>
 
 
@@ -260,7 +263,7 @@ export class RegisterCustomerComponent extends Component {
                     </form>
 
                 </div>
-            </section>
+            </section >
         );
     }
 }

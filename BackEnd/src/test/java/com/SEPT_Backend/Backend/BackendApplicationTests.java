@@ -1,12 +1,10 @@
 package com.SEPT_Backend.Backend;
 
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;  
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;

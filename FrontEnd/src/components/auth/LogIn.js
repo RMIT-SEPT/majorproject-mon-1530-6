@@ -14,13 +14,10 @@ class LogIn extends Component {
             password: "",
             loading: false,
             message: ""
-
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
-
     }
-
 
     clearErrorState = () => {
         this.setState({
@@ -33,7 +30,6 @@ class LogIn extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
         this.setState({
             message: "",
             loading: true
@@ -48,7 +44,6 @@ class LogIn extends Component {
             });
         }
         else {
-
             AuthService.login(this.state.username, this.state.password).then(
                 () => {
                     this.props.history.push("/profile");
@@ -69,19 +64,6 @@ class LogIn extends Component {
                 }
             );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
     };
 
@@ -100,8 +82,6 @@ class LogIn extends Component {
                     <FormErrors formerrors={this.state.errors} />
                     <form onSubmit={this.handleSubmit}>
 
-
-
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i class="fa fa-user-circle" aria-hidden="true"></i></span>
@@ -118,9 +98,6 @@ class LogIn extends Component {
                             />
                         </div>
 
-
-
-
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fas fa-lock"></i></span>
@@ -135,7 +112,6 @@ class LogIn extends Component {
                             />
                         </div>
 
-
                         <div className="field">
                             <p className="control">
                                 <a href="/register">New user?</a>
@@ -146,7 +122,9 @@ class LogIn extends Component {
                                 <button className="btn btn-outline-secondary">Login</button>
                             </p>
                         </div>
+
                     </form>
+
                     {this.state.message && (
                         <div className="form-group">
                             <div className="alert alert-danger" role="alert">
@@ -154,6 +132,7 @@ class LogIn extends Component {
                             </div>
                         </div>
                     )}
+
                 </div>
             </section>
         );

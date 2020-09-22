@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import UserService from "./services/UserService";
 
 import FormErrors from './FormErrors';
 

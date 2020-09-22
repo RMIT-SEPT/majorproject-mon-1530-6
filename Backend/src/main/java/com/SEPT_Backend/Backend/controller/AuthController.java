@@ -1,13 +1,9 @@
-
 package com.SEPT_Backend.Backend.controller;
-
-import java.util.HashSet;
+import java.util.HashSet; 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,14 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
- 
 import com.SEPT_Backend.Backend.model.ERole;
 import com.SEPT_Backend.Backend.model.Role;
 import com.SEPT_Backend.Backend.model.User;
 import com.SEPT_Backend.Backend.payload.request.LoginRequest;
 import com.SEPT_Backend.Backend.payload.request.SignupRequest;
-
 import com.SEPT_Backend.Backend.payload.response.JwtResponse;
 import com.SEPT_Backend.Backend.payload.response.MessageResponse;
 import com.SEPT_Backend.Backend.repository.RoleRepository;
@@ -35,7 +28,7 @@ import com.SEPT_Backend.Backend.repository.UserRepository;
 import com.SEPT_Backend.Backend.security.jwt.JwtUtils;
 import com.SEPT_Backend.Backend.security.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3001")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -63,6 +56,8 @@ public class AuthController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
+		
+		
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
@@ -70,7 +65,6 @@ public class AuthController {
 
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
-												
 												 userDetails.getUsername(), 
 												 userDetails.getEmail(), 
 												 roles));

@@ -12,11 +12,11 @@ class BookingService {
     }
 
     addBooking(booking) {
-        return axios.post(BOOKING_API_BASE_URL, booking, { headers: authHeader() });
+        return axios.post(BOOKING_API_BASE_URL + "/add", booking, { headers: authHeader() });
     }
 
-    findBooking(id) {
-        return axios.get(BOOKING_API_BASE_URL, { headers: authHeader() });
+    findBooking(username) {
+        return axios.get(BOOKING_API_BASE_URL + 'info', username, { headers: authHeader() });
     }
 
 

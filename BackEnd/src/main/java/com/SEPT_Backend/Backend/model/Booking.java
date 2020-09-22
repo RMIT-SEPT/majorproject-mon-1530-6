@@ -35,8 +35,7 @@ public class Booking {
 	
 
 	public Booking(){
-		
-		
+			
 	}
 	
 	public long getId() {

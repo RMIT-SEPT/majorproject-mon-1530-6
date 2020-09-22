@@ -58,8 +58,6 @@ export default class Booking extends Component {
             };
 
 
-
-
             BookingService.addBooking(booking).then(
                 () => {
                     this.props.history.push({

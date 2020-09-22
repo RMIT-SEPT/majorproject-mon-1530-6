@@ -147,3 +147,5 @@ body {
 .service{
   display: none;
 }
+
+.big-checkbox {width: 20px; height: 20px;}
