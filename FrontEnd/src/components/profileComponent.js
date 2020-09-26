@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import AuthService from "./services/AuthService";
+import BookingService from "./services/BookingService";
 
 //like a dashboard, profile of each user displayed
 export default class Profile extends Component {
@@ -24,6 +25,18 @@ export default class Profile extends Component {
     //set the path to '/' if no user found
     if (!currentUser) this.setState({ redirect: "/" });
     this.setState({ currentUser: currentUser, userReady: true })
+
+
+    BookingService.findBooking({ username: currentUser.username }).then(
+      (result) => {
+        this.setState({
+          bookingList: result.data
+        });
+      })
+
+
+
+
 
     //set user type for each user in this page
     if (currentUser) {
@@ -89,17 +102,27 @@ export default class Profile extends Component {
                 <strong>Email:</strong>{" "}
                 {currentUser.email}
               </p>
-              {
-                this.state.bookingList.map(
-                  link =>
-                    <tr>{link.id}</tr>
-                )
-              }
+
+
             </header>
           </div> : null}
 
         {userboard && (
-          < button type="button" class="btn btn-outline-secondary btn-lg btn-block my-4" onClick={this.book}>Book an Appointment </button>
+          <div>
+
+            <div class="card mb-4">
+              <div class="card-body">
+                <h2>Booking's</h2>
+                <hr></hr>
+                {this.state.bookingList.map((item) =>
+                  <h4><small>You have a booking with </small>{item.name}<small> for </small>{item.service}<small> on </small>{item.day}<small> at </small>{item.time}<small> (status: </small>{item.status}<small>)</small></h4>
+                )}
+              </div>
+            </div>
+
+            < button type="button" class="btn btn-outline-secondary btn-lg btn-block my-4" onClick={this.book}>Book an Appointment </button>
+          </div>
+
         )
         }
       </div >

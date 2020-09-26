@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="bookings")
+@Table(name="Employee")
 public class Employee {
 	
 	@Id
@@ -22,8 +22,8 @@ public class Employee {
 	@Column(name="Service")
 	private String service;
 	
-	@Column(name="Date")
-	private String date;
+	@Column(name="Day")
+	private String day;
 	
 	@Column(name="Time")
 	private String time;
@@ -31,15 +31,17 @@ public class Employee {
 	@Column(name="Status")
 	private String status;
 	
-	public Employee(long id, String name, String service, String date, String time, String status) {
+	public Employee(long id, String name, String service, String day, String time, String status) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.service = service;
-		this.date = date;
+		this.day = day;
 		this.time = time;
 		this.status = status;
 	}
+	
+	public Employee() {}
 	
 
 	/**
@@ -87,15 +89,15 @@ public class Employee {
 	/**
 	 * @return the date
 	 */
-	public String getDate() {
-		return date;
+	public String getDay() {
+		return day;
 	}
 
 	/**
 	 * @param date the date to set
 	 */
-	public void setDate(String date) {
-		this.date = date;
+	public void setDay(String date) {
+		this.day = date;
 	}
 
 	/**

@@ -20,10 +20,10 @@ export default class Booking extends Component {
         errors: {
             blankfield: false
         },
-        service_list: ["Hair Dying", "Nail Polish", "Body Massage"],
-        name_list: ["Alex", "James", "Kurt", "Jane", "Katie"],
-        day_list: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        time_list: ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"]
+        service_list: [],
+        name_list: [],
+        day_list: [],
+        time_list: []
     };
 
     clearErrorState = () => {
@@ -52,7 +52,8 @@ export default class Booking extends Component {
                 name: this.state.service_prodider,
                 day: this.state.appointment_day,
                 time: this.state.appointment_time,
-                username: this.state.currentUser.username
+                username: this.state.currentUser.username,
+                status: "unconfirmed"
             };
 
 
@@ -88,24 +89,50 @@ export default class Booking extends Component {
         if (!currentUser) this.setState({ redirect: "/" });
         //set redirect path is no user found
         this.setState({ currentUser: currentUser, userReady: true })
+        this.state.name_list = ["Alex", "James", "Kurt", "Jane", "Katie"]
     }
 
-    //assign values for each input
-    onInputChange = event => {
-
-        if (this.state.service_prodider !== "") {
-            document.getElementById("availability-time").style.display = 'block';
-            document.getElementById("availability-day").style.display = 'block';
-            document.getElementById("service").style.display = 'block';
-        }
-
+    saveName = event => {
         this.setState({
             [event.target.id]: event.target.value
         });
-
+        document.getElementById("service").style.display = 'block';
         console.log(event.target.value);
         document.getElementById(event.target.id).classList.remove("is-danger");
-    };
+        this.state.service_list = ["Hair Dying", "Nail Polish", "Body Massage"]
+    }
+
+    saveDay = event => {
+        this.setState({
+            [event.target.id]: event.target.value
+        });
+        document.getElementById("availability-time").style.display = 'block';
+        console.log(event.target.value);
+        document.getElementById(event.target.id).classList.remove("is-danger");
+        this.state.time_list = ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"]
+
+    }
+
+    saveTime = event => {
+        this.setState({
+            [event.target.id]: event.target.value
+        });
+        console.log(event.target.value);
+        document.getElementById(event.target.id).classList.remove("is-danger");
+    }
+
+    saveService = event => {
+        this.setState({
+            [event.target.id]: event.target.value
+        });
+        document.getElementById("availability-day").style.display = 'block';
+        console.log(event.target.value);
+        document.getElementById(event.target.id).classList.remove("is-danger");
+        this.state.day_list = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    }
+
+
+
 
     render() {
 
@@ -123,92 +150,97 @@ export default class Booking extends Component {
                         <div className="text-danger">
                             <FormErrors formerrors={this.state.errors} />
                         </div>
-                        <form onSubmit={this.handleSubmit}>
-                            <form>
-                                <div className="form-group row">
-                                    <label className="h6 col-sm-2 col-form-label">Service Provider</label>
-                                    <div className="col-sm-10" value={this.state.service_prodider} onChange={this.onInputChange}>
-                                        <select class="form-control" id="service_prodider" >
-                                            <option selected="true" disabled="disabled">--SELECT--</option>
-                                            {this.state.name_list.map((item) =>
-                                                <option key={item}>{item}</option>
-                                            )}
-                                        </select>
-                                    </div>
-                                </div>
 
-                                <div className="field avail-day" id="availability-day">
-                                    <p className="control">
-                                        <div className="h2">{this.state.service_prodider}'s Availability</div>
-                                        <form value={this.state.appointment_day} onChange={this.onInputChange} >
-                                            <div className="container form-group">
-                                                <label className="h6">Select Day</label>
-                                                <select class="form-control" id="appointment_day" >
-                                                    <option selected="true" disabled="disabled">--SELECT--</option>
-                                                    {this.state.day_list.map((item) =>
-                                                        <option key={item}>{item}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </p>
+                        <form>
+                            <div className="form-group row">
+                                <label className="h6 col-sm-2 col-form-label">Service Provider</label>
+                                <div className="col-sm-10" value={this.state.service_prodider} onChange={this.saveName}>
+                                    <select class="form-control" id="service_prodider" >
+                                        <option selected="true" disabled="disabled">--SELECT--</option>
+                                        {this.state.name_list.map((item) =>
+                                            <option key={item}>{item}</option>
+                                        )}
+                                    </select>
                                 </div>
+                            </div>
 
-                                <div className="field avail-time" id="availability-time">
-                                    <p className="control">
-                                        <form value={this.state.appointment_time} onChange={this.onInputChange} >
-                                            <div className="container form-group">
-                                                <label className="h6">Select Time</label>
-                                                <select class="form-control" id="appointment_time" >
-                                                    <option selected="true" disabled="disabled">--SELECT--</option>
-                                                    {this.state.time_list.map((item) =>
-                                                        <option key={item}>{item}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </p>
-                                </div>
 
-                                <div className="field service" id="service">
-                                    <p className="control">
-                                        <form value={this.state.service} onChange={this.onInputChange} >
-                                            <div className="container form-group">
-                                                <label className="h6">Select Service</label>
-                                                <select class="form-control" id="service" >
-                                                    <option selected="true" disabled="disabled">--SELECT--</option>
-                                                    {this.state.service_list.map((item) =>
-                                                        <option key={item}>{item}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </p>
-                                </div>
-
-                                {this.state.message && (
-                                    <div className="form-group">
-                                        <div
-                                            className={
-                                                this.state.successful
-                                                    ? "alert alert-success"
-                                                    : "alert alert-danger"
-                                            }
-                                            role="alert"
-                                        >
-                                            {this.state.message}
+                            <div className="field service" id="service">
+                                <p className="control">
+                                    <div className="h2">{this.state.service_prodider}'s Availability</div>
+                                    <form value={this.state.service} onChange={this.saveService} >
+                                        <div className="container form-group">
+                                            <label className="h6">Select Service</label>
+                                            <select class="form-control" id="service" >
+                                                <option selected="true" disabled="disabled">--SELECT--</option>
+                                                {this.state.service_list.map((item) =>
+                                                    <option key={item}>{item}</option>
+                                                )}
+                                            </select>
                                         </div>
-                                    </div>
-                                )}
+                                    </form>
+                                </p>
+                            </div>
 
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <button type="submit" className="btn btn-outline-secondary" onClick={this.saveBooking}>Confirm</button>
+
+                            <div className="field avail-day" id="availability-day">
+                                <p className="control">
+
+                                    <form value={this.state.appointment_day} onChange={this.saveDay} >
+                                        <div className="container form-group">
+                                            <label className="h6">Select Day</label>
+                                            <select class="form-control" id="appointment_day" >
+                                                <option selected="true" disabled="disabled">--SELECT--</option>
+                                                {this.state.day_list.map((item) =>
+                                                    <option key={item}>{item}</option>
+                                                )}
+                                            </select>
+                                        </div>
+                                    </form>
+                                </p>
+                            </div>
+
+                            <div className="field avail-time" id="availability-time">
+                                <p className="control">
+                                    <form value={this.state.appointment_time} onChange={this.saveTime} >
+                                        <div className="container form-group">
+                                            <label className="h6">Select Time</label>
+                                            <select class="form-control" id="appointment_time" >
+                                                <option selected="true" disabled="disabled">--SELECT--</option>
+                                                {this.state.time_list.map((item) =>
+                                                    <option key={item}>{item}</option>
+                                                )}
+                                            </select>
+                                        </div>
+                                    </form>
+                                </p>
+                            </div>
+
+
+
+                            {this.state.message && (
+                                <div className="form-group">
+                                    <div
+                                        className={
+                                            this.state.successful
+                                                ? "alert alert-success"
+                                                : "alert alert-danger"
+                                        }
+                                        role="alert"
+                                    >
+                                        {this.state.message}
                                     </div>
                                 </div>
+                            )}
 
-                            </form>
-                        </form >
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" className="btn btn-outline-secondary" onClick={this.saveBooking}>Confirm</button>
+                                </div>
+                            </div>
+
+                        </form>
+
                     </div > :
                     <div className="container">
                         <header className="jumbotron mt-3">

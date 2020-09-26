@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import AuthService from "./services/AuthService";
 import { Redirect } from "react-router-dom";
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
+import EmployeeService from './services/EmployeeService';
+import Validate from './utility/FormValidation';
+import FormErrors from './FormErrors';
 
 //Only admin access, rostering an employee
 export default class BoardUser extends Component {
@@ -37,6 +40,8 @@ export default class BoardUser extends Component {
       { days: [...this.state.days, event.target.value] }
     )
     console.log(this.state.days);
+    document.getElementById(event.target.id).classList.remove("is-danger");
+
   }
 
   addTime = event => {
@@ -44,14 +49,17 @@ export default class BoardUser extends Component {
       { time: [...this.state.time, event.target.value] }
     )
     console.log(this.state.time);
+    document.getElementById(event.target.id).classList.remove("is-danger");
+
   }
 
   addService = event => {
-
     this.setState(
       { service: [...this.state.service, event.target.value] }
     )
     console.log(this.state.service);
+    document.getElementById(event.target.id).classList.remove("is-danger");
+
   }
   clearErrorState = () => {
     this.setState({
@@ -73,9 +81,32 @@ export default class BoardUser extends Component {
   saveRoster = (event) => {
     event.preventDefault();
     this.clearErrorState();
+
+    const error = Validate(event, this.state);
+    if (error) {
+      this.setState({
+        errors: { ...this.state.errors, ...error }
+      });
+    }
+    else {
+      let empRoster = {
+        name: this.state.name,
+        service: this.state.service,
+        day: this.state.days,
+        time: this.state.time,
+        status: "available"
+      };
+
+      EmployeeService.addEmployee(empRoster);
+
+    }
+
   }
 
+
+
   render() {
+
 
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
@@ -85,6 +116,9 @@ export default class BoardUser extends Component {
 
       <div className="container mb-4">
         <h1 className="display-3">ROSTER EMPLOYEE</h1>
+        <div className="text-danger">
+          <FormErrors formerrors={this.state.errors} />
+        </div>
 
         <form >
           <div className="form-group row">
@@ -99,7 +133,7 @@ export default class BoardUser extends Component {
             </div>
           </div>
 
-          <div className="form-group row">
+          <div className="form-group row" id="availability-day">
             <label className="col-sm-2  h5">Select Day</label>
             <div className="col-sm-10">
               <form onChange={this.addDays} >
@@ -110,7 +144,7 @@ export default class BoardUser extends Component {
             </div>
           </div>
 
-          <div className="form-group row">
+          <div className="form-group row" id="availability-time">
             <label className="col-sm-2  h5">Select Time</label>
             <div className="col-sm-10">
               <form onChange={this.addTime} >
@@ -122,7 +156,7 @@ export default class BoardUser extends Component {
           </div>
 
 
-          <div className="form-group row">
+          <div className="form-group row" id="service">
             <label className="col-sm-2  h5">Select Service</label>
             <div className="col-sm-10">
               <form onChange={this.addService} >
@@ -139,7 +173,16 @@ export default class BoardUser extends Component {
             </div>
           </div>
 
+
         </form>
+
+
+
+
+
+
+
+
       </div>
     );
   }

@@ -24,7 +24,7 @@ public class BookingController {
 	public BookingService bookingService;
 	
 	// get customers by name
-	@GetMapping("/info")
+	@PostMapping("/info")
 	public List<Booking> getAllBooking(@RequestBody InfoRequest info){
 		return bookingService.findBooking(info.getUsername());	 
 	}
@@ -39,11 +39,9 @@ public class BookingController {
 			bookingService.saveBooking(booking);
 			 return ResponseEntity.ok(new MessageResponse("Booking Successfull!"));
 		}
-		
 		return  ResponseEntity
 				.badRequest()
 				.body(new MessageResponse("Error: BOOKING is already taken!"));
-		
 	}
 	
 }

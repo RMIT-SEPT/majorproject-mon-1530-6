@@ -32,6 +32,23 @@ public class Booking {
 	@Column(name="Username")
 	private String username;
 	
+	@Column(name="Status")
+	private String status;
+	
+	
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Booking(){
 			
@@ -86,13 +103,17 @@ public class Booking {
 		this.service = service;
 	}
 
-
-	public Booking(String name, String time, String username, String day, String service) {
+	public Booking(long id, String name, String service, String time, String day, String username, String status) {
 		super();
+		this.id = id;
 		this.name = name;
+		this.service = service;
 		this.time = time;
-		this.username = username;
 		this.day = day;
-		this.service=service;
+		this.username = username;
+		this.status = status;
 	}
+
+
+	
 }

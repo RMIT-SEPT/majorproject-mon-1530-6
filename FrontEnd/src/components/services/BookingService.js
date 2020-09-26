@@ -19,7 +19,7 @@ class BookingService {
 
     //find a booking of a customer using username
     findBooking(username) {
-        return axios.get(BOOKING_API_BASE_URL + 'info', username, { headers: authHeader() });
+        return axios.post(BOOKING_API_BASE_URL + "/info", username, { headers: authHeader() });
     }
 
 

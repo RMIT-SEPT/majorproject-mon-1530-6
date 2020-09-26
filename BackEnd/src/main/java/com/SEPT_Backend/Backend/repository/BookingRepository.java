@@ -19,7 +19,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long>{
 	@Query(value = "SELECT * FROM Bookings WHERE Day = :bookedDay AND Time = :bookedTime AND Name = :bookedName", nativeQuery = true)
 	List<Booking> findByDayAndTime(@Param("bookedDay") String day, @Param("bookedTime") String time, @Param("bookedName") String name );
 
-	
 
 }
 

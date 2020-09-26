@@ -7,6 +7,14 @@ function validateForm(event, state) {
             inputs[i].classList.remove("is-danger");
         }
     }
+
+    if ((state.hasOwnProperty("service_prodider") || state.hasOwnProperty("name")) && (state.service_prodider === "" || state.name === "")) {
+        document.getElementById("service_prodider").classList.add("is-danger");
+        return { blankfield: true };
+    }
+
+
+
     if (state.hasOwnProperty("name") && state.name === "") {
         document.getElementById("name").classList.add("is-danger");
         return { blankfield: true };
@@ -82,10 +90,12 @@ function validateForm(event, state) {
         return { passwordmatch: true };
     }
 
-    if (state.hasOwnProperty("service_prodider") && state.service_prodider === "") {
+    if ((state.hasOwnProperty("service_prodider") || state.hasOwnProperty("name")) && (state.service_prodider === "" || state.name === "")) {
         document.getElementById("service_prodider").classList.add("is-danger");
         return { blankfield: true };
     }
+
+
     if (state.hasOwnProperty("appointment_day") && state.appointment_day === "") {
         document.getElementById("appointment_day").classList.add("is-danger");
         return { blankfield: true };
