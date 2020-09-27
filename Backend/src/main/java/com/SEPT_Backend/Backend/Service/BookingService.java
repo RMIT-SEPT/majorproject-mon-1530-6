@@ -38,5 +38,6 @@ public class BookingService {
 	public void deleteBooking(Booking booking){
 		bookingRepo.delete(booking);
 	}
-
+	
+	
 }

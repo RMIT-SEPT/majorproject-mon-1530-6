@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,8 @@ public class EmployeeController {
 		List<String> day = info.getDay();
 		List<String> time = info.getTime();
 		String status = info.getStatus();
+		//System.out.println("HHOHOHOHOHHO      "+info.getService().get(0));
+
 		for(int x=0;x<service.size();x++)
 		{
 			for(int y=0;y<day.size();y++)
@@ -49,5 +52,33 @@ public class EmployeeController {
 		
 		return ResponseEntity.ok(new MessageResponse("Roster Successfull!"));
 	}
+	
+	
+	@GetMapping("/service")
+	public List<String> getService(){
+		return employeeService.getService();
+	}
+	
+	@PostMapping("/day")
+	public List<String> getDay(@RequestBody EmployeeRequest info)
+	{
+		System.out.println("HHOHOHOHOHHO      "+info.getService().get(0));
+		return employeeService.getDay(info.getService().get(0));
+	}
+	
+	@PostMapping("/time")
+	public List<String> getTime(@RequestBody EmployeeRequest info)
+	{
+		return employeeService.getTime(info.getService().get(0),info.getDay().get(0));
+	}
+	
+	
+	@PostMapping("/serviceProvider")
+	public List<String> getServiceProvider(@RequestBody EmployeeRequest info)
+	{
+		return employeeService.getServiceProvider(info.getService().get(0),info.getDay().get(0),info.getTime().get(0));
+	}
+	
+	
 
 }

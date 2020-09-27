@@ -103,9 +103,9 @@ public class Booking {
 		this.service = service;
 	}
 
-	public Booking(long id, String name, String service, String time, String day, String username, String status) {
+	public Booking(String name, String service, String time, String day, String username, String status) {
 		super();
-		this.id = id;
+		
 		this.name = name;
 		this.service = service;
 		this.time = time;

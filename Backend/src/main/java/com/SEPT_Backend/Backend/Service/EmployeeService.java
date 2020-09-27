@@ -20,5 +20,31 @@ public class EmployeeService {
 	public Employee saveBooking(Employee employee) {
 		return employeeRepo.save(employee);
 	}
+	
+	public List<String> getService()
+	{
+		return employeeRepo.getService();
+	}
+
+	public List<String> getDay(String service)
+	{
+		return employeeRepo.getDay(service);
+	}
+	
+	
+	public List<String> getTime(String service, String day)
+	{
+		return employeeRepo.getTime(service,day);
+	}
+	
+	
+	public List<String> getServiceProvider(String service,String day, String time)
+	{
+		return employeeRepo.getServiceProvider(service,day,time);
+	}
+	
+	
+	
+	
 
 }

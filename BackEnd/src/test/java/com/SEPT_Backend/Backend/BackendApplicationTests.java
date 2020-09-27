@@ -33,7 +33,7 @@ class BackendApplicationTests {
 	@Test
 	public void getBookingTest() {
 		Mockito.when(bookingRepository.findAll()).thenReturn(Stream
-				.of(new Booking("Hair Dying","Jack","Tuesday","13:00","sid"),new Booking("Nail Polish","Katie","Friday","16:00","rose")).collect(Collectors.toList()));
+				.of(new Booking( "Hair Dying","Jack","Tuesday","13:00","sid","available"),new Booking("Nail Polish","Katie","Friday","16:00","rose","available")).collect(Collectors.toList()));
 		assertEquals(2,bookingService.getBookings().size());
 		
 	}
@@ -43,7 +43,7 @@ class BackendApplicationTests {
 	{
 		String username="sid";
 		Mockito.when(bookingRepository.findBooking(username)).thenReturn(Stream
-				.of(new Booking("Nail Polish","Katie","Friday","16:00","rose")).collect(Collectors.toList()));
+				.of(new Booking("Nail Polish","Katie","Friday","16:00","rose", "available")).collect(Collectors.toList()));
 		assertEquals(1,bookingService.findBooking(username).size());
 		
 	}
@@ -51,7 +51,7 @@ class BackendApplicationTests {
 	@Test
 	public void checkBookedTest() {
 		Mockito.when(bookingRepository.findByDayAndTime("Tuesday", "13:00", "James")).thenReturn(Stream
-				.of(new Booking("Nail Polish","James","Tuesday","13:00","rose")).collect(Collectors.toList()));
+				.of(new Booking("Nail Polish","James","Tuesday","13:00","rose","available")).collect(Collectors.toList()));
 		assertEquals(1,bookingService.findByDayAndTime("Tuesday","13:00","James").size());
 		
 	}
@@ -59,7 +59,7 @@ class BackendApplicationTests {
 	
 	@Test
 	public void deleteBooking() {
-		Booking booking =new Booking("Hair Dying","Jack","Tuesday","13:00","sid");
+		Booking booking =new Booking("Hair Dying","Jack","Tuesday","13:00","sid","available");
 		bookingService.deleteBooking(booking);
 		Mockito.verify(bookingRepository,Mockito.times(1)).delete(booking);
 	}

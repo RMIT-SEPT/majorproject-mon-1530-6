@@ -8,10 +8,6 @@ function validateForm(event, state) {
         }
     }
 
-    if ((state.hasOwnProperty("service_prodider") || state.hasOwnProperty("name")) && (state.service_prodider === "" || state.name === "")) {
-        document.getElementById("service_prodider").classList.add("is-danger");
-        return { blankfield: true };
-    }
 
 
 
@@ -59,14 +55,7 @@ function validateForm(event, state) {
         document.getElementById("password").classList.add("is-danger");
         return { blankfield: true };
     }
-    if (state.hasOwnProperty("oldpassword") && state.oldpassword === "") {
-        document.getElementById("oldpassword").classList.add("is-danger");
-        return { blankfield: true };
-    }
-    if (state.hasOwnProperty("newpassword") && state.newpassword === "") {
-        document.getElementById("newpassword").classList.add("is-danger");
-        return { blankfield: true };
-    }
+
     if (state.hasOwnProperty("confirmpassword") && state.confirmpassword === "") {
         document.getElementById("confirmpassword").classList.add("is-danger");
         return { blankfield: true };
@@ -94,7 +83,6 @@ function validateForm(event, state) {
         document.getElementById("service_prodider").classList.add("is-danger");
         return { blankfield: true };
     }
-
 
     if (state.hasOwnProperty("appointment_day") && state.appointment_day === "") {
         document.getElementById("appointment_day").classList.add("is-danger");
