@@ -2,11 +2,12 @@
 
 # Group 06
 
+## Please read the README.md files under Frontend and Backend to run 
+
 ## Members
-* CHANDRA VANI, Siddhartha Raju (s3731026)
+* Chandra Vani, Siddhartha Raju (s3731026)
 * Hui, Alvin Markus (s3677729)
 * Miari, Ashraf (s3782197)
-* Finlay, Stephen (s3786139)
 * Go, Anson (s3767707)
 
 ## Records

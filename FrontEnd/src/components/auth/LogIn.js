@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
-
 import AuthService from "../services/AuthService";
 
+//login for an user/Employee and Admin
 class LogIn extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {
             username: "",
             password: "",
             loading: false,
             message: ""
-
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
-
     }
-
 
     clearErrorState = () => {
         this.setState({
             errors: {
-
                 blankfield: false
             }
         });
@@ -33,7 +28,6 @@ class LogIn extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
         this.setState({
             message: "",
             loading: true
@@ -48,12 +42,14 @@ class LogIn extends Component {
             });
         }
         else {
-
+            //pass the values into the controller and awair the result
             AuthService.login(this.state.username, this.state.password).then(
+                //if success, navigate to profile page
                 () => {
                     this.props.history.push("/profile");
                     window.location.reload();
                 },
+                //else show error on the page
                 error => {
                     const resMessage =
                         (error.response &&
@@ -68,20 +64,6 @@ class LogIn extends Component {
                     });
                 }
             );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
     };
 
@@ -98,9 +80,8 @@ class LogIn extends Component {
                 <div className="container">
                     <h1>Log In</h1>
                     <FormErrors formerrors={this.state.errors} />
+
                     <form onSubmit={this.handleSubmit}>
-
-
 
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
@@ -118,9 +99,6 @@ class LogIn extends Component {
                             />
                         </div>
 
-
-
-
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fas fa-lock"></i></span>
@@ -135,7 +113,6 @@ class LogIn extends Component {
                             />
                         </div>
 
-
                         <div className="field">
                             <p className="control">
                                 <a href="/register">New user?</a>
@@ -147,6 +124,7 @@ class LogIn extends Component {
                             </p>
                         </div>
                     </form>
+
                     {this.state.message && (
                         <div className="form-group">
                             <div className="alert alert-danger" role="alert">

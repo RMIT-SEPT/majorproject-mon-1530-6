@@ -20,6 +20,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long>{
 	List<Booking> findByDayAndTime(@Param("bookedDay") String day, @Param("bookedTime") String time, @Param("bookedName") String name );
 
 	
+	
 
 }
 

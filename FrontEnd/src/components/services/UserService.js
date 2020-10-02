@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from './AuthHeader';
 
 const API_URL = 'http://localhost:8080/api/test/';
-
+//to get access to the navigation pages using rest api from the contoller
 class UserService {
   getPublicContent() {
     return axios.get(API_URL + 'all');

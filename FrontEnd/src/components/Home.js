@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 
+//home page for all users
 export default function Home() {
     return (
         <Fragment>

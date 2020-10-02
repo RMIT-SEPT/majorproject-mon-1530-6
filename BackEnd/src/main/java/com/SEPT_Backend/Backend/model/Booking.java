@@ -1,6 +1,4 @@
 package com.SEPT_Backend.Backend.model;
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="bookings")
+//booking table to store bookings of all customers
 public class Booking {
 	
 	@Id
@@ -33,10 +32,26 @@ public class Booking {
 	@Column(name="Username")
 	private String username;
 	
+	@Column(name="Status")
+	private String status;
+	
+	
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Booking(){
-		
-		
+			
 	}
 	
 	public long getId() {
@@ -88,19 +103,17 @@ public class Booking {
 		this.service = service;
 	}
 
-
-	public Booking(String name, String time, String username, String day, String service) {
+	public Booking(String name, String service, String time, String day, String username, String status) {
 		super();
+		
 		this.name = name;
+		this.service = service;
 		this.time = time;
-		this.username = username;
 		this.day = day;
-		this.service=service;
+		this.username = username;
+		this.status = status;
 	}
 
-	
-	
-	
-	
 
+	
 }

@@ -144,6 +144,8 @@ body {
   display: none;
 }
 
-.service{
+.service-provider{
   display: none;
 }
+
+.big-checkbox {width: 20px; height: 20px;}

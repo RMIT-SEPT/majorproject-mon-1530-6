@@ -1,3 +1,4 @@
+//for validation
 function validateForm(event, state) {
     // clear all error messages
     const inputs = document.getElementsByClassName("is-danger");
@@ -6,6 +7,10 @@ function validateForm(event, state) {
             inputs[i].classList.remove("is-danger");
         }
     }
+
+
+
+
     if (state.hasOwnProperty("name") && state.name === "") {
         document.getElementById("name").classList.add("is-danger");
         return { blankfield: true };
@@ -39,9 +44,6 @@ function validateForm(event, state) {
         document.getElementById("phone").classList.add("is-danger");
         return { blankfield: true };
     }
-
-
-
     if (
         state.hasOwnProperty("verificationcode") &&
         state.verificationcode === ""
@@ -53,14 +55,7 @@ function validateForm(event, state) {
         document.getElementById("password").classList.add("is-danger");
         return { blankfield: true };
     }
-    if (state.hasOwnProperty("oldpassword") && state.oldpassword === "") {
-        document.getElementById("oldpassword").classList.add("is-danger");
-        return { blankfield: true };
-    }
-    if (state.hasOwnProperty("newpassword") && state.newpassword === "") {
-        document.getElementById("newpassword").classList.add("is-danger");
-        return { blankfield: true };
-    }
+
     if (state.hasOwnProperty("confirmpassword") && state.confirmpassword === "") {
         document.getElementById("confirmpassword").classList.add("is-danger");
         return { blankfield: true };
@@ -84,10 +79,11 @@ function validateForm(event, state) {
         return { passwordmatch: true };
     }
 
-    if (state.hasOwnProperty("service_prodider") && state.service_prodider === "") {
+    if ((state.hasOwnProperty("service_prodider") || state.hasOwnProperty("name")) && (state.service_prodider === "" || state.name === "")) {
         document.getElementById("service_prodider").classList.add("is-danger");
         return { blankfield: true };
     }
+
     if (state.hasOwnProperty("appointment_day") && state.appointment_day === "") {
         document.getElementById("appointment_day").classList.add("is-danger");
         return { blankfield: true };

@@ -1,5 +1,6 @@
 import React from "react";
 
+//form error validation for user input
 function FormErrors(props) {
   if (
     props.formerrors &&

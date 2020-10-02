@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-
 import UserService from "./services/UserService";
 
+//accessable only by employee
 export default class BoardModerator extends Component {
   constructor(props) {
     super(props);
