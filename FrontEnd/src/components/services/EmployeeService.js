@@ -15,7 +15,15 @@ class EmployeeService {
 
     getServiceProvider(employee) {
         return axios.post(EMPLOYEE_API_BASE_URL + "/serviceProvider", employee, { headers: authHeader() });
+    }
 
+    //employeeName
+    getEmployeeName() {
+        return axios.get(EMPLOYEE_API_BASE_URL + "/employeeName", { headers: authHeader() });
+    }
+
+    getEmployee() {
+        return axios.get(EMPLOYEE_API_BASE_URL + "/allEmployee", { headers: authHeader() });
     }
 
     getServiceName() {
@@ -28,6 +36,16 @@ class EmployeeService {
 
     getServiceTime(employee) {
         return axios.post(EMPLOYEE_API_BASE_URL + "/time", employee, { headers: authHeader() });
+    }
+
+    getWork(username) {
+        return axios.post(EMPLOYEE_API_BASE_URL + "/confirmedWork", username, { headers: authHeader() });
+    }
+
+
+
+    getAllWork(username) {
+        return axios.post(EMPLOYEE_API_BASE_URL + "/allwork", username, { headers: authHeader() });
     }
 
 

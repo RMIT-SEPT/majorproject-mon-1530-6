@@ -101,7 +101,7 @@ export class RegisterCustomerComponent extends Component {
                     </div>
 
                     <form>
-                        <div className="input-group mb-3">
+                        <div className="input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i class="fa fa-user-circle" aria-hidden="true"></i></span>
                             </div>
@@ -114,8 +114,10 @@ export class RegisterCustomerComponent extends Component {
                                 onChange={this.onInputChange}
                             />
                         </div>
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            Your Username must be a combination of your FirstName and LastName. </small>
 
-                        <div className="input-group mb-3">
+                        <div className="input-group mt-1 mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text"> <i className="fas fa-user"></i></span>
                             </div>

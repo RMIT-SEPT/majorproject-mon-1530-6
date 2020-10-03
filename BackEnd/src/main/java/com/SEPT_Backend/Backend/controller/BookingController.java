@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.SEPT_Backend.Backend.Service.BookingService;
+import com.SEPT_Backend.Backend.Service.EmployeeService;
 import com.SEPT_Backend.Backend.model.Booking;
+import com.SEPT_Backend.Backend.model.User;
 import com.SEPT_Backend.Backend.payload.request.InfoRequest;
 import com.SEPT_Backend.Backend.payload.response.MessageResponse;
 
@@ -23,9 +25,12 @@ public class BookingController {
 	@Autowired
 	public BookingService bookingService;
 	
+	@Autowired
+	public EmployeeService employeeService;
+	
 	// get customers by name
 	@PostMapping("/info")
-	public List<Booking> getAllBooking(@RequestBody InfoRequest info){
+	public List<Booking> fingBooking(@RequestBody InfoRequest info){
 		return bookingService.findBooking(info.getUsername());	 
 	}
 	
@@ -37,12 +42,54 @@ public class BookingController {
 		if (temp == null || temp.isEmpty()) {
 			//save the booking into database if no duplicate found
 			bookingService.saveBooking(booking);
+			//change status into pending when a new booking is made
+			employeeService.updateEmployee(booking.getName(),booking.getService(),booking.getDay(),booking.getTime());
 			 return ResponseEntity.ok(new MessageResponse("Booking Successfull!"));
 		}
 		return  ResponseEntity
 				.badRequest()
 				.body(new MessageResponse("Error: BOOKING is already taken!"));
 	}
+	
+	@GetMapping("/all")
+	public List<Booking> getAllBooking()
+	{
+		return bookingService.getBookings();
+	}
+	
+	
+	public Booking findByID(long id)
+	{
+		return bookingService.findByID(id);
+	}
+	
+	@PostMapping("/approve")
+	public void approveBooking(@RequestBody Booking booking)
+	{
+		bookingService.approveBooking(booking.getId());
+		Booking booking_object = findByID(booking.getId());
+		employeeService.approve(booking_object.getName(),booking_object.getService(),booking_object.getDay(),booking_object.getTime());
+	}
+	
+	
+	@PostMapping("/reject")
+	public void rejectBooking(@RequestBody Booking booking)
+	{
+		bookingService.rejectBooking(booking.getId());
+		Booking booking_object = findByID(booking.getId());
+		employeeService.reject(booking_object.getName(),booking_object.getService(),booking_object.getDay(),booking_object.getTime());	
+	}
+	
+	@PostMapping("/delete")
+	public void deleteBooking(@RequestBody Booking booking)
+	{
+		bookingService.deleteBooking(booking.getId());	
+	}
+	
+	
+	
+	
+	
 	
 	
 	

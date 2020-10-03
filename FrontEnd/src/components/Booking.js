@@ -54,12 +54,13 @@ export default class Booking extends Component {
                 day: this.state.appointment_day,
                 time: this.state.appointment_time,
                 username: this.state.currentUser.username,
-                status: "unconfirmed"
+                status: "pending"
             };
 
 
             BookingService.addBooking(booking).then(
                 () => {
+
                     //show receipt if booking success
                     this.props.history.push({
                         pathname: '/receipt',

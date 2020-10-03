@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.SEPT_Backend.Backend.model.Booking;
+import com.SEPT_Backend.Backend.model.User;
 import com.SEPT_Backend.Backend.repository.BookingRepository;
 
 //perform booking operations 
@@ -34,10 +35,29 @@ public class BookingService {
 		return bookingRepo.findBooking(username);
 	}
 	
+	public Booking findByID(long id) {
+		return bookingRepo.findByID(id);
+	}
+	
+	
 	//delete a booking
-	public void deleteBooking(Booking booking){
+	public void deleteBooking(long id){
+		bookingRepo.deleteBooking(id);
+	}
+
+	public void approveBooking(long id) {
+		bookingRepo.approveBooking(id);
+	}
+	
+	public void rejectBooking(long id) {	
+		bookingRepo.rejectBooking(id);	
+	}
+	
+	public void deleteBooking(Booking booking)
+	{
 		bookingRepo.delete(booking);
 	}
+	
 	
 	
 }

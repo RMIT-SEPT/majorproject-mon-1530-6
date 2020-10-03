@@ -32,7 +32,7 @@ export default class Navbar extends Component {
 
     render() {
 
-        const { currentUser, showAdminBoard, showEmployeeBoard } = this.state;
+        const { currentUser, showAdminBoard } = this.state;
 
         return (
 
@@ -53,6 +53,11 @@ export default class Navbar extends Component {
                         {showAdminBoard && (
                             <div className="navbar-nav ml-auto">
                                 <li className="nav-item" >
+                                    <a href={"/booking"} className="nav-link">
+                                        Booking
+                                          </a>
+                                </li>
+                                <li className="nav-item" >
                                     <a href={"/addemployee"} className="nav-link">
                                         Employee
                                           </a>
@@ -65,17 +70,7 @@ export default class Navbar extends Component {
                             </div>
                         )}
 
-                        {/* if Employee, show the following links and navigations*/}
-                        {showEmployeeBoard && (
 
-                            <div className="navbar-nav ml-auto">
-                                <li className="nav-item" >
-                                    <a href={"/emp"} className="nav-link">
-                                        Employee Board
-                                        </a>
-                                </li>
-                            </div>
-                        )}
 
                         {/* if current user, show the following links and navigations (COMMON TO ALL)*/}
                         {currentUser ? (

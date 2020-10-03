@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.SEPT_Backend.Backend.Service.EmployeeService;
+import com.SEPT_Backend.Backend.Service.UserService;
+import com.SEPT_Backend.Backend.model.Booking;
 import com.SEPT_Backend.Backend.model.Employee;
+import com.SEPT_Backend.Backend.model.User;
 import com.SEPT_Backend.Backend.payload.request.EmployeeRequest;
+import com.SEPT_Backend.Backend.payload.request.InfoRequest;
 import com.SEPT_Backend.Backend.payload.response.MessageResponse;
 
 @CrossOrigin(origins = "http://localhost:3001")
@@ -22,6 +26,10 @@ public class EmployeeController {
 	@Autowired
 	public EmployeeService employeeService;
 	
+	
+	@Autowired
+	public UserService userService;
+	
 	// get customers by name
 	@PostMapping("/add")
 	public ResponseEntity<?> assignEmployee(@RequestBody EmployeeRequest info){
@@ -30,8 +38,8 @@ public class EmployeeController {
 		List<String> day = info.getDay();
 		List<String> time = info.getTime();
 		String status = info.getStatus();
-		//System.out.println("HHOHOHOHOHHO      "+info.getService().get(0));
-
+		
+		
 		for(int x=0;x<service.size();x++)
 		{
 			for(int y=0;y<day.size();y++)
@@ -44,14 +52,23 @@ public class EmployeeController {
 					employee.setDay(day.get(y));
 					employee.setTime(time.get(z));
 					employee.setStatus(status);
+					boolean check = employeeService.checkEmployee(name,day.get(y),time.get(z));
+					if(check == true)
 					employeeService.saveBooking(employee);
-					//System.out.println(name + " " + service.get(x) + " "+day.get(y)+" "+time.get(z) + " "+status);
+					
 				}
 			}
 		}
 		
 		return ResponseEntity.ok(new MessageResponse("Roster Successfull!"));
 	}
+	
+	@GetMapping("/employeeName")
+	public List<String> getEmployeeName(){
+		return employeeService.getEmployeeName();
+	}
+	
+	
 	
 	
 	@GetMapping("/service")
@@ -62,7 +79,7 @@ public class EmployeeController {
 	@PostMapping("/day")
 	public List<String> getDay(@RequestBody EmployeeRequest info)
 	{
-		System.out.println("HHOHOHOHOHHO      "+info.getService().get(0));
+		
 		return employeeService.getDay(info.getService().get(0));
 	}
 	
@@ -71,6 +88,37 @@ public class EmployeeController {
 	{
 		return employeeService.getTime(info.getService().get(0),info.getDay().get(0));
 	}
+	
+	@PostMapping("/update")
+	public void updateEmployee(@RequestBody EmployeeRequest info)
+	{
+		employeeService.updateEmployee(info.getName(),info.getService().get(0),info.getDay().get(0),info.getTime().get(0));
+	}
+	
+	@GetMapping("/allEmployee")
+	public List<User> getAllEmployee()
+	{
+		return userService.getEmployeeDetails();
+	}
+	
+	
+	
+	@PostMapping("/confirmedWork")
+	public List<Booking> confirmedWork(@RequestBody InfoRequest info)
+	{
+		
+		return employeeService.confirmedWork(info.getUsername());
+	}
+	
+	
+	@PostMapping("/allwork")
+	public List<Employee> AllWorkingHours(@RequestBody InfoRequest info)
+	{
+		
+		return employeeService.AllWorkingHours(info.getUsername());
+	}
+	
+	
 	
 	
 	@PostMapping("/serviceProvider")
