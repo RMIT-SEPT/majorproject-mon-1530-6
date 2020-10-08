@@ -19,7 +19,7 @@ public class SignupRequest {
 	private String email;
 	
 	@Column(name="Address")
-private String address;
+	private String address;
 	
 	@Column(name="Username")
 	private String username;

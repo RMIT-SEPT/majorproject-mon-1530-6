@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.SEPT_Backend.Backend.model.User;
 
+//Access details from User table
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);
@@ -17,7 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Boolean existsByUsername(String username);
 
 	Boolean existsByEmail(String email);
-	
 	
 	@Query(value = "SELECT USERS.* "
 			+ "FROM USER_ROLES,USERS "

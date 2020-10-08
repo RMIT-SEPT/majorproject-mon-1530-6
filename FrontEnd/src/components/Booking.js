@@ -57,7 +57,7 @@ export default class Booking extends Component {
                 status: "pending"
             };
 
-
+            //add the booking into the database using the selected values
             BookingService.addBooking(booking).then(
                 () => {
 
@@ -80,8 +80,6 @@ export default class Booking extends Component {
 
                 }
             );
-
-
         }
     };
 
@@ -97,9 +95,9 @@ export default class Booking extends Component {
                     service_list: result.data
                 });
             })
-
     }
 
+    //save name of the service provider selected
     saveName = event => {
         this.setState({
             service_prodider: event.target.value
@@ -107,8 +105,8 @@ export default class Booking extends Component {
         console.log(event.target.value);
     }
 
+    //save the booking in the databse by calling the Service function
     saveService = event => {
-
         this.setState(
             { service: event.target.value }
         );
@@ -118,16 +116,16 @@ export default class Booking extends Component {
         let employee = {
             service: [event.target.value]
         };
+        //pass the values into the controller to get days based on the service selected
         EmployeeService.getServiceDays(employee).then(
             (result) => {
                 this.setState({
                     day_list: result.data
                 });
             })
-
     }
 
-
+    //save the day selected by the user for booking
     saveDay = event => {
         this.setState({
             appointment_day: event.target.value
@@ -139,6 +137,7 @@ export default class Booking extends Component {
             service: [this.state.service],
             day: [event.target.value]
         };
+        //pass the values into the controller to get time based on the service and day selected
         EmployeeService.getServiceTime(employee).then(
             (result) => {
                 this.setState({
@@ -160,6 +159,7 @@ export default class Booking extends Component {
             day: [this.state.appointment_day],
             time: [event.target.value]
         };
+        //pass the values into the controller to get service provicer list based on the service, day and time selected
         EmployeeService.getServiceProvider(employee).then(
             (result) => {
                 this.setState({
@@ -169,19 +169,14 @@ export default class Booking extends Component {
     }
 
 
-
-
-
     render() {
 
         //if no user found, redirect to home page
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
-
         return (
             <section className="section">
-
                 {(this.state.userReady) ?
                     <div className="container">
                         <h1 class="display-3">BOOKING</h1>
@@ -189,8 +184,6 @@ export default class Booking extends Component {
                             <FormErrors formerrors={this.state.errors} />
                         </div>
                         <form>
-
-
                             <div className="field service" id="service">
                                 <p className="control">
                                     <form value={this.state.service} onChange={this.saveService} >
@@ -206,8 +199,6 @@ export default class Booking extends Component {
                                     </form>
                                 </p>
                             </div>
-
-
                             <div className="field avail-day" id="availability-day">
                                 <p className="control">
                                     <div className="h2">{this.state.service} is Avaibale on </div>
@@ -224,8 +215,6 @@ export default class Booking extends Component {
                                     </form>
                                 </p>
                             </div>
-
-
                             <div className="field avail-time" id="availability-time">
                                 <p className="control">
                                     <form value={this.state.appointment_time} onChange={this.saveTime} >
@@ -241,14 +230,6 @@ export default class Booking extends Component {
                                     </form>
                                 </p>
                             </div>
-
-
-
-
-
-
-
-
                             <div className="field service-provider" id="service_provider">
                                 <p className="control">
                                     <form value={this.state.appointment_time} onChange={this.saveName} >
@@ -264,16 +245,6 @@ export default class Booking extends Component {
                                     </form>
                                 </p>
                             </div>
-
-
-
-
-
-
-
-
-
-
 
                             {this.state.message && (
                                 <div className="form-group">
@@ -295,9 +266,7 @@ export default class Booking extends Component {
                                     <button type="submit" className="btn btn-outline-secondary" onClick={this.saveBooking}>Confirm</button>
                                 </div>
                             </div>
-
                         </form>
-
                     </div > :
                     <div className="container">
                         <header className="jumbotron mt-3">

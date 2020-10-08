@@ -31,13 +31,9 @@ export default class Navbar extends Component {
     }
 
     render() {
-
         const { currentUser, showAdminBoard } = this.state;
-
         return (
-
             <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: "#9e9e9e " }}>
-
                 {/* if current user, show the following links and navigations (COMMON TO ALL)*/}
                 {currentUser ? (
                     <a className="navbar-brand" href="/profile"><strong>SEPT</strong></a>
@@ -45,10 +41,8 @@ export default class Navbar extends Component {
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-
                         {/* if Admin, show the following links and navigations*/}
                         {showAdminBoard && (
                             <div className="navbar-nav ml-auto">
@@ -69,9 +63,6 @@ export default class Navbar extends Component {
                                 </li>
                             </div>
                         )}
-
-
-
                         {/* if current user, show the following links and navigations (COMMON TO ALL)*/}
                         {currentUser ? (
                             <div className="navbar-nav ml-auto">
@@ -88,13 +79,10 @@ export default class Navbar extends Component {
                                 </li>
                             </div>
                         ) : (
-
                                 <li class="nav-item">
                                     <a class="nav-link" href={"/"}><strong>Home</strong></a>
                                 </li>
-
                             )}
-
                     </ul>
                 </div>
             </nav>

@@ -35,7 +35,7 @@ export default class Profile extends Component {
     if (!currentUser) this.setState({ redirect: "/" });
     this.setState({ currentUser: currentUser, userReady: true })
 
-    //set user type for each user in this page
+    //check for the user type for current user 
     if (currentUser.roles.includes("ROLE_USER")) {
       this.setState({
         userboard: currentUser.roles.includes("ROLE_USER")
@@ -47,7 +47,6 @@ export default class Profile extends Component {
           });
         })
     }
-
     else if (currentUser.roles.includes("ROLE_ADMIN")) {
       this.setState({
         adminboard: currentUser.roles.includes("ROLE_ADMIN")
@@ -75,7 +74,6 @@ export default class Profile extends Component {
         }
       )
     }
-
     else if (currentUser.roles.includes("ROLE_EMPLOYEE")) {
       this.setState({
         empboard: currentUser.roles.includes("ROLE_EMPLOYEE")
@@ -98,7 +96,7 @@ export default class Profile extends Component {
     }
   }
 
-  //availabe only for customer, proceed to booking 
+  //navigate to booking page for a customer
   book = () => {
     this.props.history.push("/booking");
     window.location.reload();
@@ -111,7 +109,7 @@ export default class Profile extends Component {
     });
   };
 
-
+  //update a booking status, onlu for admin 
   updateBooking = event => {
     this.setState({
       update: event.target.value
@@ -120,6 +118,7 @@ export default class Profile extends Component {
   }
 
 
+  //check the status for corresponding display of status
   checkStatus(status) {
     if (status === "unconfirmed") {
       return <h4><small className="text-danger">unconfirmed</small></h4>
@@ -135,6 +134,7 @@ export default class Profile extends Component {
     }
   }
 
+  //change the status to 'confirmed'
   approveBooking = (e) => {
     e.preventDefault();
     this.setState({
@@ -150,20 +150,20 @@ export default class Profile extends Component {
       });
     }
     else {
-
+      //this calls the controller to change the status
       BookingService.approveBooking({ id: this.state.update }).then(
         window.location.reload()
       )
     }
   }
 
+  //change the status to 'unapproved'
   rejectBooking = (e) => {
     e.preventDefault();
     this.setState({
       message: "",
       successful: false
     });
-
     this.clearErrorState();
     const error = Validate(e, this.state);
     if (error) {
@@ -172,13 +172,14 @@ export default class Profile extends Component {
       });
     }
     else {
-
+      //call the controller and change status
       BookingService.rejectBooking({ id: this.state.update }).then(
         window.location.reload()
       )
     }
   }
 
+  //delete the booking from the database
   deleteBooking = (e) => {
     e.preventDefault();
     this.setState({
@@ -194,7 +195,7 @@ export default class Profile extends Component {
       });
     }
     else {
-
+      //this is sussessful only if the status of the booking is 'unapproved' before calling
       BookingService.deleteBooking({ id: this.state.update }).then(
         window.location.reload()
       )
@@ -221,8 +222,6 @@ export default class Profile extends Component {
 
     return (
       <div className="container">
-
-
         {(this.state.userReady) ?
           <div>
             <header className="jumbotron mt-3 pt-4 pb-2">
@@ -245,7 +244,7 @@ export default class Profile extends Component {
             </header>
           </div> : null}
 
-
+        {/* Display only for admin user */}
         {adminboard && (
           <div>
             <div class="card mb-4">
@@ -281,10 +280,8 @@ export default class Profile extends Component {
                       </tbody>
                     </table>
                     <div className="card py-3">
-
                       <div className="container mb-3 ">
                         <label className="h6">Select ID</label>
-
                         <form value={this.state.update} onChange={this.updateBooking} >
                           <div className="text-danger">
                             <FormErrors formerrors={this.state.errors} />
@@ -312,7 +309,6 @@ export default class Profile extends Component {
                 }
               </div>
             </div>
-
             <div class="card mb-4">
               <div class="card-body">
                 {this.state.customerList.length ? (
@@ -328,6 +324,7 @@ export default class Profile extends Component {
                           <th scope="col">Email</th>
                           <th scope="col">Address</th>
                           <th scope="col">Phone Number</th>
+                          <th scope="col">User Name</th>
                         </tr>
                       </thead>
                       {this.state.customerList.map((item) =>
@@ -338,6 +335,7 @@ export default class Profile extends Component {
                           <td>{item.email}</td>
                           <td>{item.address}</td>
                           <td>{item.phone}</td>
+                          <td>{item.username}</td>
                         </tr>
                       )}
                       <tbody>
@@ -349,7 +347,6 @@ export default class Profile extends Component {
                   </div>}
               </div>
             </div>
-
             <div class="card mb-4">
               <div class="card-body">
                 {this.state.employeeList.length ? (
@@ -377,7 +374,6 @@ export default class Profile extends Component {
                           <td>{item.address}</td>
                           <td>{item.phone}</td>
                           <td>{item.username}</td>
-
                         </tr>
                       )}
                       <tbody>
@@ -393,6 +389,7 @@ export default class Profile extends Component {
         )
         }
 
+        {/* Display only for customer user */}
         {userboard && (
           <div>
             <div class="card mb-4">
@@ -417,7 +414,7 @@ export default class Profile extends Component {
         )
         }
 
-
+        {/* Display only for employee user */}
         {empboard && (
           <div>
             <div class="card mb-4">
@@ -452,9 +449,6 @@ export default class Profile extends Component {
                   </div>}
               </div>
             </div>
-
-
-
             <div class="card mb-4">
               <div class="card-body">
                 {this.state.allWork.length ? (
@@ -487,14 +481,9 @@ export default class Profile extends Component {
                   </div>}
               </div>
             </div>
-
-
           </div>
-
         )
         }
-
-
       </div >
     );
   }

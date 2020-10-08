@@ -31,7 +31,6 @@ export default class BoardUser extends Component {
     if (!currentUser) this.setState({ redirect: "/" });
     this.setState({ currentUser: currentUser, userReady: true })
     //Get Employee List from Backend
-
     EmployeeService.getEmployeeName().then(
       (result) => {
         this.setState({
@@ -40,40 +39,32 @@ export default class BoardUser extends Component {
       })
   }
 
+  //assign the state variables with day
   addDay = event => {
-
-
     this.setState({
       day: event.target.value
     });
-
     console.log(this.state.days);
     document.getElementById(event.target.id).classList.remove("is-danger");
   }
 
+  //assign the state variables with time
   addTime = event => {
-
-
     this.setState(
       { time: [...this.state.time, event.target.value] }
     )
-
     console.log(this.state.time);
     document.getElementById(event.target.id).classList.remove("is-danger");
-
   }
 
+  //assign the state variables with service
   addService = event => {
-
-
     this.setState({
       service: event.target.value
     });
-
     console.log(this.state.service);
     document.getElementById(event.target.id).classList.remove("is-danger");
   }
-
   clearErrorState = () => {
     this.setState({
       errors: {
@@ -81,13 +72,11 @@ export default class BoardUser extends Component {
       }
     });
   };
-
-  onInputChange = event => {
-
+  //assign the state variables with service_provider
+  addservice_provider = event => {
     this.setState({
       service_provider: event.target.value
     });
-
     console.log(this.state.service_provider);
     document.getElementById(event.target.id).classList.remove("is-danger");
   }
@@ -101,7 +90,6 @@ export default class BoardUser extends Component {
   saveRoster = (event) => {
     event.preventDefault();
     this.clearErrorState();
-
     const error = Validate(event, this.state);
     if (error) {
       this.setState({
@@ -116,38 +104,30 @@ export default class BoardUser extends Component {
         time: this.state.time,
         status: "available"
       };
-
       EmployeeService.addEmployee(empRoster).then(
         () => {
           //if success push to profile page
           this.props.history.push("/roster");
           window.location.reload();
         }
-
       );
-
     }
-
   }
 
   render() {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
     }
-
     return (
-
       <div className="container mb-4">
         <h1 className="display-3">ROSTER EMPLOYEE</h1>
         <div className="text-danger">
           <FormErrors formerrors={this.state.errors} />
         </div>
-
-
         <form >
           <div className="form-group row">
             <label className="col-sm-2  h5">Employee</label>
-            <div className="col-sm-10" onChange={this.onInputChange}>
+            <div className="col-sm-10" onChange={this.addservice_provider}>
               <select className="custom-select mr-sm-2" id="service_provider" >
                 <option selected disabled>Choose...</option>
                 {this.state.name_list.map((item) =>
@@ -156,8 +136,6 @@ export default class BoardUser extends Component {
               </select>
             </div>
           </div>
-
-
           <div className="form-group row" id="availability-day">
             <label className="col-sm-2  h5">Select Day</label>
             <div className="col-sm-10" onChange={this.addDay}>
@@ -169,8 +147,6 @@ export default class BoardUser extends Component {
               </select>
             </div>
           </div>
-
-
           <div className="form-group row" id="availability-time">
             <label className="col-sm-2  h5">Select Time</label>
             <div className="col-sm-10">
@@ -181,8 +157,6 @@ export default class BoardUser extends Component {
               </form>
             </div>
           </div>
-
-
           <div className="form-group row" id="service">
             <label className="col-sm-2  h5">Select Service</label>
             <div className="col-sm-10" onChange={this.addService}>
@@ -194,28 +168,11 @@ export default class BoardUser extends Component {
               </select>
             </div>
           </div>
-
-
-
           <div class="col-4 form-group row mt-4 ">
-
             <button type="submit " className="btn btn-outline-secondary mr-2" onClick={this.saveRoster}>Confirm Roster</button>
             <button type="submit " className="btn btn-outline-danger" onClick={this.cancelRoster}>Back</button>
-
-
-
           </div>
-
-
         </form>
-
-
-
-
-
-
-
-
       </div>
     );
   }
