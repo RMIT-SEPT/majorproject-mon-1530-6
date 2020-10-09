@@ -3,9 +3,13 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk
+        auth:
+          username: siddharta23
+          password: docker123
     environment:
-      ECR_REPOSITORY_NAME: springbootdemo
-      FULL_IMAGE_NAME: 594973024332.dkr.ecr.us-east-1.amazonaws.com/siddharta23:milestone-3
+#      ECR_REPOSITORY_NAME: springbootdemo
+#      FULL_IMAGE_NAME: 594973024332.dkr.ecr.us-east-1.amazonaws.com/siddharta23:milestone-3
+       DOCKER_IMAGE_NAME: siddharta23:milestone-3
     steps:
       - checkout
       - setup_remote_docker
@@ -41,12 +45,15 @@ jobs:
       - run:
           name: Build image
           command: |
-            docker build -t $FULL_IMAGE_NAME .
+            docker login
+#            docker build -t $FULL_IMAGE_NAME .
+            docker build -t $DOCKER_IMAGE_NAME .
       - run:
           name: Push image
           command: |
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 594973024332.dkr.ecr.us-east-1.amazonaws.com
-            docker push $FULL_IMAGE_NAME
+#            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 594973024332.dkr.ecr.us-east-1.amazonaws.com
+#            docker push $FULL_IMAGE_NAME
+            docker push $DOCKER_IMAGE_NAME 
 workflows:
   version: 2
   build-deploy-qa:
