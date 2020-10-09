@@ -1,12 +1,11 @@
 version: 2.0
-
 jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk
     environment:
       ECR_REPOSITORY_NAME: springbootdemo
-      FULL_IMAGE_NAME: 594973024332.dkr.ecr.us-east-1.amazonaws.com/springbootdemo:latest
+      FULL_IMAGE_NAME: 594973024332.dkr.ecr.us-east-1.amazonaws.com/siddharta23:milestone-3
     steps:
       - checkout
       - setup_remote_docker
@@ -29,7 +28,7 @@ jobs:
 
       - store_artifacts: # store the uberjar as an artifact
             # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-            path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+            path: target/Backend-0.0.1-SNAPSHOT.jar
         # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 
       - run:
@@ -49,6 +48,7 @@ jobs:
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 594973024332.dkr.ecr.us-east-1.amazonaws.com
             docker push $FULL_IMAGE_NAME
 workflows:
+  version: 2
   build-deploy-qa:
     jobs:
       - build_and_deploy:
