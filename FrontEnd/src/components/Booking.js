@@ -4,6 +4,7 @@ import FormErrors from './FormErrors'
 import BookingService from './services/BookingService'
 import AuthService from "./services/AuthService"
 import { Redirect } from "react-router-dom";
+import EmployeeService from "./services/EmployeeService"
 
 //make a booking ny user
 export default class Booking extends Component {
@@ -20,10 +21,10 @@ export default class Booking extends Component {
         errors: {
             blankfield: false
         },
-        service_list: ["Hair Dying", "Nail Polish", "Body Massage"],
-        name_list: ["Alex", "James", "Kurt", "Jane", "Katie"],
-        day_list: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        time_list: ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"]
+        service_list: [],
+        name_list: [],
+        day_list: [],
+        time_list: []
     };
 
     clearErrorState = () => {
@@ -52,12 +53,14 @@ export default class Booking extends Component {
                 name: this.state.service_prodider,
                 day: this.state.appointment_day,
                 time: this.state.appointment_time,
-                username: this.state.currentUser.username
+                username: this.state.currentUser.username,
+                status: "pending"
             };
 
-
+            //add the booking into the database using the selected values
             BookingService.addBooking(booking).then(
                 () => {
+
                     //show receipt if booking success
                     this.props.history.push({
                         pathname: '/receipt',
@@ -77,8 +80,6 @@ export default class Booking extends Component {
 
                 }
             );
-
-
         }
     };
 
@@ -88,24 +89,85 @@ export default class Booking extends Component {
         if (!currentUser) this.setState({ redirect: "/" });
         //set redirect path is no user found
         this.setState({ currentUser: currentUser, userReady: true })
+        EmployeeService.getServiceName().then(
+            (result) => {
+                this.setState({
+                    service_list: result.data
+                });
+            })
     }
 
-    //assign values for each input
-    onInputChange = event => {
-
-        if (this.state.service_prodider !== "") {
-            document.getElementById("availability-time").style.display = 'block';
-            document.getElementById("availability-day").style.display = 'block';
-            document.getElementById("service").style.display = 'block';
-        }
-
+    //save name of the service provider selected
+    saveName = event => {
         this.setState({
-            [event.target.id]: event.target.value
+            service_prodider: event.target.value
         });
+        console.log(event.target.value);
+    }
 
+    //save the booking in the databse by calling the Service function
+    saveService = event => {
+        this.setState(
+            { service: event.target.value }
+        );
+        document.getElementById("availability-day").style.display = 'block';
         console.log(event.target.value);
         document.getElementById(event.target.id).classList.remove("is-danger");
-    };
+        let employee = {
+            service: [event.target.value]
+        };
+        //pass the values into the controller to get days based on the service selected
+        EmployeeService.getServiceDays(employee).then(
+            (result) => {
+                this.setState({
+                    day_list: result.data
+                });
+            })
+    }
+
+    //save the day selected by the user for booking
+    saveDay = event => {
+        this.setState({
+            appointment_day: event.target.value
+        });
+        document.getElementById("availability-time").style.display = 'block';
+        console.log(event.target.value);
+        document.getElementById(event.target.id).classList.remove("is-danger");
+        let employee = {
+            service: [this.state.service],
+            day: [event.target.value]
+        };
+        //pass the values into the controller to get time based on the service and day selected
+        EmployeeService.getServiceTime(employee).then(
+            (result) => {
+                this.setState({
+                    time_list: result.data
+                });
+            })
+
+    }
+
+    saveTime = event => {
+        this.setState({
+            appointment_time: event.target.value
+        });
+        document.getElementById("service_provider").style.display = 'block';
+        console.log(event.target.value);
+        document.getElementById(event.target.id).classList.remove("is-danger");
+        let employee = {
+            service: [this.state.service],
+            day: [this.state.appointment_day],
+            time: [event.target.value]
+        };
+        //pass the values into the controller to get service provicer list based on the service, day and time selected
+        EmployeeService.getServiceProvider(employee).then(
+            (result) => {
+                this.setState({
+                    name_list: result.data
+                });
+            })
+    }
+
 
     render() {
 
@@ -113,102 +175,98 @@ export default class Booking extends Component {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
-
         return (
             <section className="section">
-
                 {(this.state.userReady) ?
                     <div className="container">
                         <h1 class="display-3">BOOKING</h1>
                         <div className="text-danger">
                             <FormErrors formerrors={this.state.errors} />
                         </div>
-                        <form onSubmit={this.handleSubmit}>
-                            <form>
-                                <div className="form-group row">
-                                    <label className="h6 col-sm-2 col-form-label">Service Provider</label>
-                                    <div className="col-sm-10" value={this.state.service_prodider} onChange={this.onInputChange}>
-                                        <select class="form-control" id="service_prodider" >
-                                            <option selected="true" disabled="disabled">--SELECT--</option>
-                                            {this.state.name_list.map((item) =>
-                                                <option key={item}>{item}</option>
-                                            )}
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div className="field avail-day" id="availability-day">
-                                    <p className="control">
-                                        <div className="h2">{this.state.service_prodider}'s Availability</div>
-                                        <form value={this.state.appointment_day} onChange={this.onInputChange} >
-                                            <div className="container form-group">
-                                                <label className="h6">Select Day</label>
-                                                <select class="form-control" id="appointment_day" >
-                                                    <option selected="true" disabled="disabled">--SELECT--</option>
-                                                    {this.state.day_list.map((item) =>
-                                                        <option key={item}>{item}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </p>
-                                </div>
-
-                                <div className="field avail-time" id="availability-time">
-                                    <p className="control">
-                                        <form value={this.state.appointment_time} onChange={this.onInputChange} >
-                                            <div className="container form-group">
-                                                <label className="h6">Select Time</label>
-                                                <select class="form-control" id="appointment_time" >
-                                                    <option selected="true" disabled="disabled">--SELECT--</option>
-                                                    {this.state.time_list.map((item) =>
-                                                        <option key={item}>{item}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </p>
-                                </div>
-
-                                <div className="field service" id="service">
-                                    <p className="control">
-                                        <form value={this.state.service} onChange={this.onInputChange} >
-                                            <div className="container form-group">
-                                                <label className="h6">Select Service</label>
-                                                <select class="form-control" id="service" >
-                                                    <option selected="true" disabled="disabled">--SELECT--</option>
-                                                    {this.state.service_list.map((item) =>
-                                                        <option key={item}>{item}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </p>
-                                </div>
-
-                                {this.state.message && (
-                                    <div className="form-group">
-                                        <div
-                                            className={
-                                                this.state.successful
-                                                    ? "alert alert-success"
-                                                    : "alert alert-danger"
-                                            }
-                                            role="alert"
-                                        >
-                                            {this.state.message}
+                        <form>
+                            <div className="field service" id="service">
+                                <p className="control">
+                                    <form value={this.state.service} onChange={this.saveService} >
+                                        <div className="container form-group" >
+                                            <label className="h6">Select Service</label>
+                                            <select class="form-control" id="service" >
+                                                <option selected="true" disabled="disabled">--SELECT--</option>
+                                                {this.state.service_list.map((item) =>
+                                                    <option key={item}>{item}</option>
+                                                )}
+                                            </select>
                                         </div>
-                                    </div>
-                                )}
+                                    </form>
+                                </p>
+                            </div>
+                            <div className="field avail-day" id="availability-day">
+                                <p className="control">
+                                    <div className="h2">{this.state.service} is Avaibale on </div>
+                                    <form value={this.state.appointment_day} onChange={this.saveDay} >
+                                        <div className="container form-group">
+                                            <label className="h6">Select Day</label>
+                                            <select class="form-control" id="appointment_day" >
+                                                <option selected="true" disabled="disabled">--SELECT--</option>
+                                                {this.state.day_list.map((item) =>
+                                                    <option key={item}>{item}</option>
+                                                )}
+                                            </select>
+                                        </div>
+                                    </form>
+                                </p>
+                            </div>
+                            <div className="field avail-time" id="availability-time">
+                                <p className="control">
+                                    <form value={this.state.appointment_time} onChange={this.saveTime} >
+                                        <div className="container form-group">
+                                            <label className="h6">Select Time</label>
+                                            <select class="form-control" id="appointment_time" >
+                                                <option selected="true" disabled="disabled">--SELECT--</option>
+                                                {this.state.time_list.map((item) =>
+                                                    <option key={item}>{item}</option>
+                                                )}
+                                            </select>
+                                        </div>
+                                    </form>
+                                </p>
+                            </div>
+                            <div className="field service-provider" id="service_provider">
+                                <p className="control">
+                                    <form value={this.state.appointment_time} onChange={this.saveName} >
+                                        <div className="container form-group">
+                                            <label className="h6">Select Service Provider</label>
+                                            <select class="form-control" id="service_prodider" >
+                                                <option selected="true" disabled="disabled">--SELECT--</option>
+                                                {this.state.name_list.map((item) =>
+                                                    <option key={item}>{item}</option>
+                                                )}
+                                            </select>
+                                        </div>
+                                    </form>
+                                </p>
+                            </div>
 
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <button type="submit" className="btn btn-outline-secondary" onClick={this.saveBooking}>Confirm</button>
+                            {this.state.message && (
+                                <div className="form-group">
+                                    <div
+                                        className={
+                                            this.state.successful
+                                                ? "alert alert-success"
+                                                : "alert alert-danger"
+                                        }
+                                        role="alert"
+                                    >
+                                        {this.state.message}
                                     </div>
                                 </div>
+                            )}
 
-                            </form>
-                        </form >
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" className="btn btn-outline-secondary" onClick={this.saveBooking}>Confirm</button>
+                                </div>
+                            </div>
+                        </form>
                     </div > :
                     <div className="container">
                         <header className="jumbotron mt-3">

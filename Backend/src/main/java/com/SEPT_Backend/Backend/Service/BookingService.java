@@ -1,10 +1,9 @@
 package com.SEPT_Backend.Backend.Service;
 
-import java.util.List; 
+import java.util.List;  
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.SEPT_Backend.Backend.model.Booking;
 import com.SEPT_Backend.Backend.repository.BookingRepository;
 
@@ -34,10 +33,29 @@ public class BookingService {
 		return bookingRepo.findBooking(username);
 	}
 	
+	//find a booking by id
+	public Booking findByID(long id) {
+		return bookingRepo.findByID(id);
+	}
+	
 	//delete a booking
-	public void deleteBooking(Booking booking)
-	{
-		bookingRepo.delete(booking);
+	public void deleteBooking(long id){
+		bookingRepo.deleteBooking(id);
 	}
 
+	//change the status to 'approved'
+	public void approveBooking(long id) {
+		bookingRepo.approveBooking(id);
+	}
+	
+	//change the status to 'unapproved'
+	public void rejectBooking(long id) {	
+		bookingRepo.rejectBooking(id);	
+	}
+	
+	//delete the booking from the database
+	public void deleteBooking(Booking booking){
+		bookingRepo.delete(booking);
+	}
+	
 }
