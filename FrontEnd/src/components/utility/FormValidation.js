@@ -24,9 +24,12 @@ function validateForm(event, state) {
     }
 
     if (state.hasOwnProperty("firstname") && state.firstname === "") {
+
         document.getElementById("firstname").classList.add("is-danger");
         return { blankfield: true };
     }
+
+
     if (state.hasOwnProperty("lastname") && state.lastname === "") {
         document.getElementById("lastname").classList.add("is-danger");
         return { blankfield: true };

@@ -2,16 +2,22 @@ package com.SEPT_Backend.Backend.model;
 
 import javax.persistence. * ;
 
-@Entity@Table(name = "roles")
-//Roles to store roles of users
-public class Role {@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+/*
+ * User type roles are stored here
+ */
+@Entity
+@Table(name = "roles")
+
+public class Role {
+	
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   @Enumerated(EnumType.STRING)@Column(length = 20)
   private ERole name;
 
   public Role() {
-	  
   }
   
   public Role(ERole name) {

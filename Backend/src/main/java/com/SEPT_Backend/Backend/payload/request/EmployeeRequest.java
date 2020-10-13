@@ -4,7 +4,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
-//Used in Employee Controller to save the data 
+//Used in Employee Controller, passed as a paramater
+
 public class EmployeeRequest {
 
   @NotBlank

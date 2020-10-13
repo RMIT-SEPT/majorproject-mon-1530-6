@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import com.SEPT_Backend.Backend.model.Employee;
 
-//Access details from Employee table
+/*
+ * Appropriate changes in the database for customer bookings are made
+ */
 public interface EmployeeRepository extends JpaRepository < Employee,Long > {
 
   @Query(value = "SELECT DISTINCT Service FROM Employee WHERE Status = 'available'", nativeQuery = true)

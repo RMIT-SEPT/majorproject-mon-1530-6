@@ -16,6 +16,11 @@ import com.SEPT_Backend.Backend.payload.request.InfoRequest;
 import com.SEPT_Backend.Backend.payload.response.MessageResponse;
 
 
+/*
+ * The Booking controler takes in the input paramaters and makes the required changes in the database.
+ * This is responsible of any bookings made by the users. Bookings that are already booked are taken care of 
+ * and redundancy of bookings are minimised
+ */
 @CrossOrigin(origins = "http://localhost:3001")
 @RestController
 @RequestMapping("/api/v1/booking")

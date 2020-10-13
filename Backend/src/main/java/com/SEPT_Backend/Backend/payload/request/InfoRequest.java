@@ -1,7 +1,6 @@
 package com.SEPT_Backend.Backend.payload.request;
 
-
-//used in AuthController for logging in user
+//used in AuthController for logging in user, passed in paramater
 public class InfoRequest {
 
   private String username;

@@ -7,7 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity@Table(name = "Employee")
+/*
+ * Employee details are stored here 
+ */
+@Entity
+@Table(name = "Employee")
 public class Employee {
 
   @Id@GeneratedValue(strategy = GenerationType.IDENTITY)

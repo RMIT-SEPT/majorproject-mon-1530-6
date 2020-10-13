@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.SEPT_Backend.Backend.model.User;
 
-//Access details from User table
+/*
+ * Store all user details, i.e., Admin, Customer and Employee
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);

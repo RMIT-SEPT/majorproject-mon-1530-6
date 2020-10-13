@@ -28,6 +28,11 @@ import com.SEPT_Backend.Backend.repository.UserRepository;
 import com.SEPT_Backend.Backend.security.jwt.JwtUtils;
 import com.SEPT_Backend.Backend.security.services.UserDetailsImpl;
 
+/*
+ * This controller is responsible for logging in and Registering the user or add an employee by Admin user.
+ * The credentials are stored in the database with hashed passwords along with other details. 
+ * Jwt is used for authentication and authorization of users. 
+ */
 @CrossOrigin(origins = "http://localhost:3001")
 @RestController
 @RequestMapping("/api/auth")

@@ -8,6 +8,10 @@ import com.SEPT_Backend.Backend.model.Employee;
 import com.SEPT_Backend.Backend.repository.BookingRepository;
 import com.SEPT_Backend.Backend.repository.EmployeeRepository;
 
+/*
+ * Employee operations are caleed from here 
+ * into the repository to make necessary changes
+ */
 @Service
 public class EmployeeService {
 

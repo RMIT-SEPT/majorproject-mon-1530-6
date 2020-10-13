@@ -7,7 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity@Table(name = "bookings")
-//booking table to store bookings of all customers
+/*
+ * booking table to store all bookings of customers
+ */
+
 public class Booking {
 
   @Id@GeneratedValue(strategy = GenerationType.IDENTITY)

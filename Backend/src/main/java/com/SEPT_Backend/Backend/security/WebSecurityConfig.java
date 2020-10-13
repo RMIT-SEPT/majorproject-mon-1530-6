@@ -17,7 +17,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.SEPT_Backend.Backend.security.jwt.AuthEntryPointJwt;
 import com.SEPT_Backend.Backend.security.jwt.AuthTokenFilter;
 import com.SEPT_Backend.Backend.security.services.UserDetailsServiceImpl;
-
+/*
+ * We define the access to http pages. 
+ * A h2-console had permitAll access to reach 
+ * out the database
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

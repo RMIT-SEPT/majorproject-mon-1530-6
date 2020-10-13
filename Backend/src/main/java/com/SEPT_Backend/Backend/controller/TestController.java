@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.SEPT_Backend.Backend.repository.BookingRepository;
 
-@CrossOrigin(origins = "http://localhost:3001")@RestController@RequestMapping("/api/test")
+/*
+ * This is used to get/check the Authorization access for each user type using the application.
+ * Relavent information is passed based on access type of user, i.e., user/employee/admin. 
+ */
+@CrossOrigin(origins = "http://localhost:3001")
+@RestController
+@RequestMapping("/api/test")
 //To check if the user board can be accessed correctly from frontend
 public class TestController {@Autowired
   public BookingRepository bookingRepository;
@@ -17,7 +23,8 @@ public class TestController {@Autowired
     return "Public Content.";
   }
 
-  @GetMapping("/user")@PreAuthorize("hasRole('USER') or hasRole('EMPLOYEE') or hasRole('ADMIN')")
+  @GetMapping("/user")
+  @PreAuthorize("hasRole('USER') or hasRole('EMPLOYEE') or hasRole('ADMIN')")
   public String userAccess() {
     return "User Content.";
   }

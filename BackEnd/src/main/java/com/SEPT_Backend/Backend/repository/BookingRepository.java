@@ -9,7 +9,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.SEPT_Backend.Backend.model.Booking;
 
-//Access details from Booking table
+/*
+ * All the booking entries and changes are made here
+ */
 @Repository
 public interface BookingRepository extends JpaRepository < Booking, Long > {
 

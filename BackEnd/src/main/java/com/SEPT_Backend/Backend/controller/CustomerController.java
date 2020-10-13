@@ -9,7 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SEPT_Backend.Backend.Service.UserService;
 import com.SEPT_Backend.Backend.model.User;
 
-@CrossOrigin(origins = "http://localhost:3001")@RestController@RequestMapping("/api/v1/customer")
+/*
+ * This controller is used to fetch the customer list from the database alone. 
+ * No changes are made though this controller into the database.
+ */
+@CrossOrigin(origins = "http://localhost:3001")
+@RestController
+@RequestMapping("/api/v1/customer")
 public class CustomerController {
 
   @Autowired
