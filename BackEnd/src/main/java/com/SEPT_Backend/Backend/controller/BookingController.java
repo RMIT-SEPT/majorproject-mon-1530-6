@@ -21,7 +21,7 @@ import com.SEPT_Backend.Backend.payload.response.MessageResponse;
  * This is responsible of any bookings made by the users. Bookings that are already booked are taken care of 
  * and redundancy of bookings are minimised
  */
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://192.168.99.1:3001")
 @RestController
 @RequestMapping("/api/v1/booking")
 public class BookingController {

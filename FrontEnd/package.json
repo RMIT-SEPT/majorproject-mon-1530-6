@@ -41,5 +41,9 @@
   "devDependencies": {
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4"
-  }
+  },
+  "description": "To run the application (application runs on 'localhost:3001')",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

@@ -22,7 +22,9 @@ import com.SEPT_Backend.Backend.payload.response.MessageResponse;
  * This is responsible for adding a employee details into the database, fetch the details 
  * from the database based on user inputs and update the status of booking for an employee
  */
-@CrossOrigin(origins = "http://localhost:3001")@RestController@RequestMapping("/api/v1/employee")
+@CrossOrigin(origins = "http://192.168.99.1:3001")
+@RestController
+@RequestMapping("/api/v1/employee")
 public class EmployeeController {
 
   @Autowired

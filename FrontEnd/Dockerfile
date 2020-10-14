@@ -1,22 +1,21 @@
 # Step 1
 
 
-FROM node:10-alpine as build-step
+FROM node:latest
 
 
-RUN mkdir /app
+RUN mkdir -p /usr/src/app
 
 
-WORKDIR /app
-
-
-COPY package.json /app
+COPY package.json /usr/src/app
 
 
 RUN npm install
 
+ADD src /usr/src/app/src
+ADD public /usr/src/app/public
 
-COPY . /app
 
+RUN npm build
 
-RUN npm run start
+CMD [ "npm", "start" ]
