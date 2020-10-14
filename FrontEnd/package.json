@@ -40,7 +40,10 @@
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.4"
+    "enzyme-adapter-react-16": "^1.15.4",
+    "eslint": "^7.11.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-webpack-plugin": "^2.1.0"
   },
   "description": "To run the application (application runs on 'localhost:3001')",
   "main": "index.js",
