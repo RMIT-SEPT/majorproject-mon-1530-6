@@ -6,6 +6,10 @@ jobs:
         auth:
           username: siddharta23
           password: docker123
+      - image: siddharta23:milestone-3
+        auth:
+          username: siddharta23
+          password: docker123
     environment:
 #      ECR_REPOSITORY_NAME: springbootdemo
 #      FULL_IMAGE_NAME: 594973024332.dkr.ecr.us-east-1.amazonaws.com/siddharta23:milestone-3
