@@ -7,129 +7,98 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+/*
+ * Employee details are stored here 
+ */
 @Entity
-@Table(name="Employee")
+@Table(name = "Employee")
 public class Employee {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	@Column(name="Emp_Name")
-	private String name;
-	
-	@Column(name="Service")
-	private String service;
-	
-	@Column(name="Day")
-	private String day;
-	
-	@Column(name="Time")
-	private String time;
-	
-	@Column(name="Status")
-	private String status;
-	
-	public Employee(long id, String name, String service, String day, String time, String status) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.service = service;
-		this.day = day;
-		this.time = time;
-		this.status = status;
-	}
-	
-	public Employee() {}
-	
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
+  @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+  @Column(name = "Emp_Name")
+  private String name;
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+  @Column(name = "Service")
+  private String service;
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+  @Column(name = "Day")
+  private String day;
 
-	/**
-	 * @return the service
-	 */
-	public String getService() {
-		return service;
-	}
+  @Column(name = "Time")
+  private String time;
 
-	/**
-	 * @param service the service to set
-	 */
-	public void setService(String service) {
-		this.service = service;
-	}
+  @Column(name = "Status")
+  private String status;
 
-	/**
-	 * @return the date
-	 */
-	public String getDay() {
-		return day;
-	}
+  public Employee(long id, String name, String service, String day, String time, String status) {
+    super();
+    this.id = id;
+    this.name = name;
+    this.service = service;
+    this.day = day;
+    this.time = time;
+    this.status = status;
+  }
 
-	/**
-	 * @param date the date to set
-	 */
-	public void setDay(String date) {
-		this.day = date;
-	}
+  public Employee() {}
 
-	/**
-	 * @return the time
-	 */
-	public String getTime() {
-		return time;
-	}
+  public long getId() {
+    return id;
+  }
 
-	/**
-	 * @param time the time to set
-	 */
-	public void setTime(String time) {
-		this.time = time;
-	}
+  
+  public void setId(long id) {
+    this.id = id;
+  }
 
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
+ 
+  public String getName() {
+    return name;
+  }
 
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
+  
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	
-	
-	
+  
+  public String getService() {
+    return service;
+  }
+
+  
+  public void setService(String service) {
+    this.service = service;
+  }
+
+  
+  public String getDay() {
+    return day;
+  }
+
+  
+  public void setDay(String date) {
+    this.day = date;
+  }
+
+  
+  public String getTime() {
+    return time;
+  }
+
+ 
+  public void setTime(String time) {
+    this.time = time;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
 }

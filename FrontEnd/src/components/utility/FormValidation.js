@@ -8,8 +8,10 @@ function validateForm(event, state) {
         }
     }
 
-
-
+    if (state.hasOwnProperty("update") && state.update === "") {
+        document.getElementById("update").classList.add("is-danger");
+        return { blankfield: true };
+    }
 
     if (state.hasOwnProperty("name") && state.name === "") {
         document.getElementById("name").classList.add("is-danger");
@@ -22,9 +24,12 @@ function validateForm(event, state) {
     }
 
     if (state.hasOwnProperty("firstname") && state.firstname === "") {
+
         document.getElementById("firstname").classList.add("is-danger");
         return { blankfield: true };
     }
+
+
     if (state.hasOwnProperty("lastname") && state.lastname === "") {
         document.getElementById("lastname").classList.add("is-danger");
         return { blankfield: true };

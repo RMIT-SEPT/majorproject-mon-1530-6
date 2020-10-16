@@ -1,11 +1,11 @@
 version: '3'
 services:
   springboot-docker-compose-app-container:
-    image: springboot-docker-compose-app:1
+    image: siddhartha23/milestone-3
     build:
       context: ./
       dockerfile: Dockerfile
     volumes:
-      - /data/springboot-docker-compose-app
+      - /data/siddhartha23/milestone-3
     ports:
       - "8080:8080"

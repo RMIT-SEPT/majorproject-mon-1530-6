@@ -2,6 +2,9 @@ package com.SEPT_Backend.Backend.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
+/*
+ * LogIn request paramaters are passed in Auth contoller
+ */
 public class LoginRequest {
 	@NotBlank
 	private String username;

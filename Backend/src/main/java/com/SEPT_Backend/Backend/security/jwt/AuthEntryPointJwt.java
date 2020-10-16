@@ -12,6 +12,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+/*
+ * Logging in functionality are performed here.
+ * The user credientials are searched for in th database
+ * to match with the details
+ */
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 

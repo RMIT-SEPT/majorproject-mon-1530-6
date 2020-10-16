@@ -19,6 +19,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.SEPT_Backend.Backend.security.services.UserDetailsServiceImpl;
 
+/*
+ * User authentication are done
+ */
 public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtUtils jwtUtils;

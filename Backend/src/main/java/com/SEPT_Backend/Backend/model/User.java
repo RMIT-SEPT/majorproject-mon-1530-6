@@ -1,13 +1,13 @@
 package com.SEPT_Backend.Backend.model;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 
+/*
+ * All details of user registrations are stored using following paramaters
+ */
 @Entity
 @Table(	name = "users") 
-//to associate with user role for each user
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,11 +41,8 @@ public class User {
 	private Set<Role> roles = new HashSet<>();
 
 	public User() {
+	
 	}
-
-	
-	
-	
 	
 	public String getFirstname() {
 		return firstname;
@@ -79,9 +76,6 @@ public class User {
 		this.phone = phone;
 	}
 
-	
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -89,8 +83,6 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 
 	public User(String username, String firstname, String lastname, String email, String address, String phone,
 			String password) {
@@ -101,24 +93,16 @@ public class User {
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
-		this.password = password;
-		
+		this.password = password;	
 	}
-	
-	
-
 	
 	public String getUsername() {
 		return username;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-
-
 
 	public String getEmail() {
 		return email;

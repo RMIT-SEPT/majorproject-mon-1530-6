@@ -1,6 +1,9 @@
 package com.SEPT_Backend.Backend.model;
 
-//user roles
+/*
+ * This is used to define the user type while registering.
+ * The table is prefilled with these roles making it easier to assign user type.
+ */
 public enum ERole {
 	ROLE_USER,
     ROLE_EMPLOYEE,

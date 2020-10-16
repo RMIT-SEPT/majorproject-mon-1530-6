@@ -2,7 +2,9 @@ package com.SEPT_Backend.Backend.payload.response;
 
 import java.util.List;
 
-//token 
+/*
+ * Used in auth controller to generate a token 
+ */
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
@@ -17,7 +19,6 @@ public class JwtResponse {
 		this.id = id;
 		this.username = username;
 		this.email = email;
-		
 		this.roles = roles;
 	}
 
