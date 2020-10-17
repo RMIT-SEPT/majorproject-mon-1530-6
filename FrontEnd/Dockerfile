@@ -1,37 +1,58 @@
-# pull official base image
-FROM node:latest 
+FROM node:14.11.0
 
-# set working directory
 WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+
 COPY package.json ./
 RUN npm install
-#--silent
-#RUN npm install react-scripts@3.4.1 -g --silent
 
-# add app
 COPY . .
+EXPOSE 3000/tcp
 
-# start app
+EXPOSE 80/tcp
+
+#ENV CI true
+
 CMD ["npm", "run", "start"]
 
-# Step 1
 
+# # pull official base image
+# FROM node:14.11.0
 
-# FROM node:latest
+# # set working directory
+# WORKDIR /app
 
+# # add `/app/node_modules/.bin` to $PATH
+# ENV PATH /app/node_modules/.bin:$PATH
 
-# RUN mkdir -p /usr/src/app
+# # install app dependencies
+# COPY package.json ./
+# COPY package-lock.json ./
+# RUN npm install --silent
+# RUN npm install react-scripts@3.4.1 -g --silent
 
+# # add app
+# COPY . ./
 
-# COPY package.json /usr/src/app
+# # start app
+# CMD ["npm", "start"]
 
+# # build environment
+# FROM node:14.11.0
+# WORKDIR /app
+# ENV PATH /app/node_modules/.bin:$PATH
+# COPY package.json ./
+# COPY package-lock.json ./
+# RUN npm install 
+# RUN npm install react-scripts@3.4.1 -g 
+# COPY . ./
+# RUN npm run build
 
-# RUN npm install
+# production environment
+FROM nginx:stable-alpine
+COPY . ./ConsoleApp
 
-# ADD src /usr/src/app/src
-# ADD public /usr/src/app/public
-
-
-# RUN npm build
-
-# CMD [ "npm", "start" ]
+#COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

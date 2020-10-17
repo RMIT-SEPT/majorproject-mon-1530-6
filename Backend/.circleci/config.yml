@@ -8,8 +8,8 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk
     environment:
-      ECR_REPOSITORY_NAME: springbootdemo
-      FULL_IMAGE_NAME: 594973024332.dkr.ecr.us-east-1.amazonaws.com/springbootdemo:latest
+      ECR_REPOSITORY_NAME: backend
+      FULL_IMAGE_NAME: 549325186772.dkr.ecr.us-east-1.amazonaws.com/springbootdemo:latest
     steps:
       - checkout
       - setup_remote_docker
@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Push image
           command: |
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 594973024332.dkr.ecr.us-east-1.amazonaws.com
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
             docker push $FULL_IMAGE_NAME
 workflows:
   build-deploy-qa:
@@ -64,4 +64,4 @@ workflows:
       - build_and_deploy:
           filters:
             branches:
-              only: master
+              only: sid

@@ -13,7 +13,7 @@ import com.SEPT_Backend.Backend.model.User;
  * This controller is used to fetch the customer list from the database alone. 
  * No changes are made though this controller into the database.
  */
-@CrossOrigin(origins = "http://192.168.99.1:3001")
+@CrossOrigin(origins = "http://192.168.99.100:3000")
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
