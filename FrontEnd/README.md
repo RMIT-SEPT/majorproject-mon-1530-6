@@ -1,3 +1,3 @@
 ### npm start
 
-To run the application (application runs on 'localhost:3001')
+To run the application (application runs on 'localhost:3000')
