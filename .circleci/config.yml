@@ -41,21 +41,24 @@ jobs:
             path: Backend/target/Backend-0.0.1-SNAPSHOT.jar
         # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 
-      - run:
+      - run: 
           name: Install dependencies for AWS
           command: |
+            cd Backend
             sudo apt-get update
             sudo apt-get -y -qq install awscli
             sudo apt-get install python3-pip
             sudo pip3 install --upgrade awscli
-      - run: cd Backend && 
+      - run:  
           name: Build image
           command: |
+          cd Backend
           docker build -t $FULL_IMAGE_NAME .
-      - run: cd Backend && 
+      - run: 
           name: Push image
           command: |
-          cd Backend && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
+          cd Backend
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
           docker push $FULL_IMAGE_NAME
 workflows:
   build-deploy-qa:
