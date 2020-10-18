@@ -24,7 +24,7 @@ jobs:
             # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: circleci-demo-java-spring-{{ checksum "BackEnd/pom.xml" }}
 
-      - run: mvn dependency:go-offline # gets the project dependencies
+      - run: BackEnd/ mvn dependency:go-offline # gets the project dependencies
 
       - save_cache: # saves the project dependencies
           paths:
