@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.controller;
+package com.SEPT_Backend.BackEnd.controller;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.SEPT_Backend.Backend.model.ERole;
-import com.SEPT_Backend.Backend.model.Role;
-import com.SEPT_Backend.Backend.model.User;
-import com.SEPT_Backend.Backend.payload.request.LoginRequest;
-import com.SEPT_Backend.Backend.payload.request.SignupRequest;
-import com.SEPT_Backend.Backend.payload.response.JwtResponse;
-import com.SEPT_Backend.Backend.payload.response.MessageResponse;
-import com.SEPT_Backend.Backend.repository.RoleRepository;
-import com.SEPT_Backend.Backend.repository.UserRepository;
-import com.SEPT_Backend.Backend.security.jwt.JwtUtils;
-import com.SEPT_Backend.Backend.security.services.UserDetailsImpl;
+import com.SEPT_Backend.BackEnd.model.ERole;
+import com.SEPT_Backend.BackEnd.model.Role;
+import com.SEPT_Backend.BackEnd.model.User;
+import com.SEPT_Backend.BackEnd.payload.request.LoginRequest;
+import com.SEPT_Backend.BackEnd.payload.request.SignupRequest;
+import com.SEPT_Backend.BackEnd.payload.response.JwtResponse;
+import com.SEPT_Backend.BackEnd.payload.response.MessageResponse;
+import com.SEPT_Backend.BackEnd.repository.RoleRepository;
+import com.SEPT_Backend.BackEnd.repository.UserRepository;
+import com.SEPT_Backend.BackEnd.security.jwt.JwtUtils;
+import com.SEPT_Backend.BackEnd.security.services.UserDetailsImpl;
 
 /*
  * This controller is responsible for logging in and Registering the user or add an employee by Admin user.

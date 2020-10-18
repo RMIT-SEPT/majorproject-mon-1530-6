@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend;
+package com.SEPT_Backend.BackEnd;
 
 
 import static org.junit.Assert.assertEquals;  
@@ -14,9 +14,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
-import com.SEPT_Backend.Backend.Service.BookingService;
-import com.SEPT_Backend.Backend.model.Booking;
-import com.SEPT_Backend.Backend.repository.BookingRepository;
+import com.SEPT_Backend.BackEnd.Service.BookingService;
+import com.SEPT_Backend.BackEnd.model.Booking;
+import com.SEPT_Backend.BackEnd.repository.BookingRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

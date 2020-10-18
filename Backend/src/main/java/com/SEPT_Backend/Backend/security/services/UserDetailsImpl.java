@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.security.services;
+package com.SEPT_Backend.BackEnd.security.services;
 
 import java.util.Collection;  
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.SEPT_Backend.Backend.model.User;
+import com.SEPT_Backend.BackEnd.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {

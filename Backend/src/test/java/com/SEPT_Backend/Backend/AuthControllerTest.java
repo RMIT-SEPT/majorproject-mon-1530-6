@@ -1,8 +1,6 @@
-package com.SEPT_Backend.Backend;
+package com.SEPT_Backend.BackEnd;
 
-
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals; 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -26,13 +24,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.SEPT_Backend.Backend.controller.AuthController;
-import com.SEPT_Backend.Backend.model.Booking;
-import com.SEPT_Backend.Backend.model.ERole;
-import com.SEPT_Backend.Backend.model.Role;
-import com.SEPT_Backend.Backend.model.User;
-import com.SEPT_Backend.Backend.payload.request.LoginRequest;
-import com.SEPT_Backend.Backend.payload.request.SignupRequest;
+import com.SEPT_Backend.BackEnd.controller.AuthController;
+import com.SEPT_Backend.BackEnd.model.Booking;
+import com.SEPT_Backend.BackEnd.model.ERole;
+import com.SEPT_Backend.BackEnd.model.Role;
+import com.SEPT_Backend.BackEnd.model.User;
+import com.SEPT_Backend.BackEnd.payload.request.LoginRequest;
+import com.SEPT_Backend.BackEnd.payload.request.SignupRequest;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;

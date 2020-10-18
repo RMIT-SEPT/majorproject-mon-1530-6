@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.security.jwt;
+package com.SEPT_Backend.BackEnd.security.jwt;
 
 import java.io.IOException; 
 
@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.SEPT_Backend.Backend.security.services.UserDetailsServiceImpl;
+import com.SEPT_Backend.BackEnd.security.services.UserDetailsServiceImpl;
 
 /*
  * User authentication are done

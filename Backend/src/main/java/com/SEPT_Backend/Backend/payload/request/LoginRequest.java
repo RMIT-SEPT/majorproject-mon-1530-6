@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.payload.request;
+package com.SEPT_Backend.BackEnd.payload.request;
 
 import javax.validation.constraints.NotBlank;
 

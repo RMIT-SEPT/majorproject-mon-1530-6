@@ -1,8 +1,8 @@
-package com.SEPT_Backend.Backend.repository;
+package com.SEPT_Backend.BackEnd.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.SEPT_Backend.Backend.model.User;
+import com.SEPT_Backend.BackEnd.model.User;
 
 //Access details from User table
 @Repository

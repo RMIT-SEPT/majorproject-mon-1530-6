@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.model;
+package com.SEPT_Backend.BackEnd.model;
 
 /*
  * This is used to define the user type while registering.
