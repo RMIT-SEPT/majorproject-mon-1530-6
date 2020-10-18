@@ -58,7 +58,7 @@ jobs:
           name: Push image
           command: |
             cd Backend
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
+            (Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
             docker push $FULL_IMAGE_NAME
 workflows:
   build-deploy-qa:
