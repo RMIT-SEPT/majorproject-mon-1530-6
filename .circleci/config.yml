@@ -61,6 +61,7 @@ jobs:
             export AWS_ACCESS_KEY_ID=ASIAX7ZSVE3KGB6ABZG4
             export AWS_SECRET_ACCESS_KEY=F+py2S7AFSnKf+430ONCIxVuub5xHzQShkF9is7W
             export AWS_DEFAULT_REGION=us-east-1
+            export aws_session_token=FwoGZXIvYXdzEPL//////////wEaDCybuht0OPEei8roMyLMAfNyx5RmKabFCnHvCn9ve9X00l+3KBXVhav9zIN7TvWWsVVNflgbNvusC1HOkvjVgLi6rHqHyBU1aQIyb3wObPjgYiniqCxE/p77pNUHCp5H7enCynyJWjWOAbjyIYKE280w43hpLiCh6dZebgy6bodtTDhTSIUtTdaxrN08FX/ZxAyrrVU3b+7iKh72Rc+VPog7gKibAGyeT3uAtFugTZmsWDplX0S1hhhLoXliQrqZNa8FJ8vXZNJP1mdyaccjZQmPfrt1YSJAj2ke+Sjp7a/8BTIt6tNfmJXW3YOCAiWIhAUgpbHktXpECJKl6jSEBta+LV7M2LHK3adnMRU7EVd0
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
             docker push $FULL_IMAGE_NAME
 workflows:
