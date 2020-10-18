@@ -1,4 +1,4 @@
-package com.SEPT_Backend.BackEnd.model;
+package com.SEPT_Backend.Backend.model;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;

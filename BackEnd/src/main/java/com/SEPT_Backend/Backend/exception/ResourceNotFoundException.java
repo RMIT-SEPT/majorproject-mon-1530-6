@@ -1,4 +1,4 @@
-package com.SEPT_Backend.BackEnd.exception;
+package com.SEPT_Backend.Backend.exception;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.SEPT_Backend.BackEnd.model;
+package com.SEPT_Backend.Backend.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -7,12 +7,12 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LogIn from './components/auth/LogIn';
 import Receipt from './components/Receipt';
-import BoardRoster from "./components/RosterBoard";
+import BoardRoster from "./components/rosterBoard";
 import BoardAddEmployee from "./components/addEmployeeBoard";
 import Booking from './components/Booking';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import Profile from "./components/ProfileComponent";
+import Profile from "./components/profileComponent";
 import Error from "./components/Error";
 library.add(faEdit);
 

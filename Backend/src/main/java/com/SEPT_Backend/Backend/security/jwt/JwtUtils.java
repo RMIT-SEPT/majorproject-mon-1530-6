@@ -1,4 +1,4 @@
-package com.SEPT_Backend.BackEnd.security.jwt;
+package com.SEPT_Backend.Backend.security.jwt;
 
 import java.util.Date;       
 import org.slf4j.Logger;
@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import com.SEPT_Backend.BackEnd.security.services.UserDetailsImpl;
+import com.SEPT_Backend.Backend.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 
 @Component

@@ -1,4 +1,4 @@
-package com.SEPT_Backend.BackEnd.repository;
+package com.SEPT_Backend.Backend.repository;
 
 import java.util.List;
 import java.util.Optional; 
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.SEPT_Backend.BackEnd.model.User;
+import com.SEPT_Backend.Backend.model.User;
 
 /*
  * Store all user details, i.e., Admin, Customer and Employee

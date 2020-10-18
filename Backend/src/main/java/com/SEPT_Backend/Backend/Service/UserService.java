@@ -1,11 +1,11 @@
-package com.SEPT_Backend.BackEnd.Service;
+package com.SEPT_Backend.Backend.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.SEPT_Backend.BackEnd.model.User;
-import com.SEPT_Backend.BackEnd.repository.UserRepository;
+import com.SEPT_Backend.Backend.model.User;
+import com.SEPT_Backend.Backend.repository.UserRepository;
 
 /*
  * User repository is accesssed to make necessary changes from function call

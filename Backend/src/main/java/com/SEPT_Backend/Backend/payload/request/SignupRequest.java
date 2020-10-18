@@ -1,4 +1,4 @@
-package com.SEPT_Backend.BackEnd.payload.request;
+package com.SEPT_Backend.Backend.payload.request;
 
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package com.SEPT_Backend.BackEnd;
+package com.SEPT_Backend.Backend;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.SEPT_Backend.BackEnd.model.Booking;
+import com.SEPT_Backend.Backend.model.Booking;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
