@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.repository;
+package com.SEPT_Backend.BackEnd.repository;
 
 import java.util.List;
 import javax.transaction.Transactional;
@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import com.SEPT_Backend.Backend.model.Booking;
+import com.SEPT_Backend.BackEnd.model.Booking;
 
-//Access details from Booking table
+/*
+ * All the booking entries and changes are made here
+ */
 @Repository
 public interface BookingRepository extends JpaRepository < Booking, Long > {
 

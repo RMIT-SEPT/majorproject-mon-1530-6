@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.security.jwt;
+package com.SEPT_Backend.BackEnd.security.jwt;
 
 import java.io.IOException;
 

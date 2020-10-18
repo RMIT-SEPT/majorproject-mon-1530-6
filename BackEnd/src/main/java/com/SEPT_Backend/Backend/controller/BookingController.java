@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.controller;
+package com.SEPT_Backend.BackEnd.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.SEPT_Backend.Backend.Service.BookingService;
-import com.SEPT_Backend.Backend.Service.EmployeeService;
-import com.SEPT_Backend.Backend.model.Booking;
-import com.SEPT_Backend.Backend.payload.request.InfoRequest;
-import com.SEPT_Backend.Backend.payload.response.MessageResponse;
+import com.SEPT_Backend.BackEnd.Service.BookingService;
+import com.SEPT_Backend.BackEnd.Service.EmployeeService;
+import com.SEPT_Backend.BackEnd.model.Booking;
+import com.SEPT_Backend.BackEnd.payload.request.InfoRequest;
+import com.SEPT_Backend.BackEnd.payload.response.MessageResponse;
 
 
 /*

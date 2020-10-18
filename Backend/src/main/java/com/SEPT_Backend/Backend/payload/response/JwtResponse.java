@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.payload.response;
+package com.SEPT_Backend.BackEnd.payload.response;
 
 import java.util.List;
 

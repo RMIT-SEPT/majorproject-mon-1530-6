@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.security;
+package com.SEPT_Backend.BackEnd.security;
 
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.context.annotation.Bean;
@@ -14,9 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.SEPT_Backend.Backend.security.jwt.AuthEntryPointJwt;
-import com.SEPT_Backend.Backend.security.jwt.AuthTokenFilter;
-import com.SEPT_Backend.Backend.security.services.UserDetailsServiceImpl;
+import com.SEPT_Backend.BackEnd.security.jwt.AuthEntryPointJwt;
+import com.SEPT_Backend.BackEnd.security.jwt.AuthTokenFilter;
+import com.SEPT_Backend.BackEnd.security.services.UserDetailsServiceImpl;
 /*
  * We define the access to http pages. 
  * A h2-console had permitAll access to reach 

@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.controller;
+package com.SEPT_Backend.BackEnd.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.SEPT_Backend.Backend.Service.UserService;
-import com.SEPT_Backend.Backend.model.User;
+import com.SEPT_Backend.BackEnd.Service.UserService;
+import com.SEPT_Backend.BackEnd.model.User;
 
 /*
  * This controller is used to fetch the customer list from the database alone. 

@@ -1,4 +1,4 @@
-package com.SEPT_Backend.Backend.security.services;
+package com.SEPT_Backend.BackEnd.security.services;
 
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.SEPT_Backend.Backend.model.User;
-import com.SEPT_Backend.Backend.repository.UserRepository;
+import com.SEPT_Backend.BackEnd.model.User;
+import com.SEPT_Backend.BackEnd.repository.UserRepository;
 
 /*
  * User details with no particular username match displayed the error message

@@ -1,11 +1,11 @@
-package com.SEPT_Backend.Backend.Service;
+package com.SEPT_Backend.BackEnd.Service;
 
 import java.util.List;  
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.SEPT_Backend.Backend.model.Booking;
-import com.SEPT_Backend.Backend.repository.BookingRepository;
+import com.SEPT_Backend.BackEnd.model.Booking;
+import com.SEPT_Backend.BackEnd.repository.BookingRepository;
 
 /*
  * Booking operations are called from here into 
