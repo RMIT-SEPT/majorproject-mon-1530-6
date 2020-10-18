@@ -11,7 +11,7 @@ import com.SEPT_Backend.Backend.repository.BookingRepository;
  * This is used to get/check the Authorization access for each user type using the application.
  * Relavent information is passed based on access type of user, i.e., user/employee/admin. 
  */
-@CrossOrigin(origins = "http://192.168.99.100:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/test")
 //To check if the user board can be accessed correctly from frontend

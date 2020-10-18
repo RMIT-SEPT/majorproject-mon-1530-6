@@ -33,7 +33,7 @@ import com.SEPT_Backend.Backend.security.services.UserDetailsImpl;
  * The credentials are stored in the database with hashed passwords along with other details. 
  * Jwt is used for authentication and authorization of users. 
  */
-@CrossOrigin(origins = "http://192.168.99.100:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {@Autowired
