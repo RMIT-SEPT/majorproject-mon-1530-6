@@ -51,12 +51,12 @@ jobs:
       - run:
           name: Build image
           command: |
-            docker build -t $FULL_IMAGE_NAME .
+          cd Backend && docker build -t $FULL_IMAGE_NAME .
       - run:
           name: Push image
           command: |
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
-            docker push $FULL_IMAGE_NAME
+          cd Backend && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
+          cd Backend && docker push $FULL_IMAGE_NAME
 workflows:
   build-deploy-qa:
     jobs:
