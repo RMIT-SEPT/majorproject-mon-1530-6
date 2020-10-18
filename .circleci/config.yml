@@ -66,4 +66,4 @@ workflows:
       - build_and_deploy:
           filters:
             branches:
-              only: sid
+              only: master
