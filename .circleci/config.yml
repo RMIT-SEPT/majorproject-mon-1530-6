@@ -58,6 +58,9 @@ jobs:
           name: Push image
           command: |
             cd Backend
+            export AWS_ACCESS_KEY_ID=ASIAX7ZSVE3KGB6ABZG4
+            export AWS_SECRET_ACCESS_KEY=F+py2S7AFSnKf+430ONCIxVuub5xHzQShkF9is7W
+            export AWS_DEFAULT_REGION=us-east-1
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
             docker push $FULL_IMAGE_NAME
 workflows:
