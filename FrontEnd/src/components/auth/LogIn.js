@@ -68,6 +68,8 @@ class LogIn extends Component {
     };
 
     onInputChange = event => {
+
+
         this.setState({
             [event.target.id]: event.target.value
         });

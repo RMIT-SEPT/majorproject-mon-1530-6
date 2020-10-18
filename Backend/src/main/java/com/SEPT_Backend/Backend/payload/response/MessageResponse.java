@@ -1,6 +1,9 @@
 package com.SEPT_Backend.Backend.payload.response;
 
-//error messages if token doesn't match 
+/*
+ * Error message is displayed from the Auth controller 
+ * for credientials that are already taken 
+ */
 public class MessageResponse {
 	private String message;
 

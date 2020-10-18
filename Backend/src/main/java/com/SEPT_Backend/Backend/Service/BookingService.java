@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import com.SEPT_Backend.Backend.model.Booking;
 import com.SEPT_Backend.Backend.repository.BookingRepository;
 
-//perform booking operations 
+/*
+ * Booking operations are called from here into 
+ * the repository 
+ */
 @Service
 public class BookingService {
 	

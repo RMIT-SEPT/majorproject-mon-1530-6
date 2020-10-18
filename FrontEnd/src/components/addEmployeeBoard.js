@@ -17,11 +17,67 @@ export default class addEmployeeBoard extends Component {
       email: "",
       username: "",
       password: "",
-      content: ""
+      content: "",
+      errors_message_password: "",
+      errors_message_email: "",
+      fields: {},
+      errors_message_phone: ""
+
     };
   }
 
   onInputChange = event => {
+
+    this.setState({
+      fields: event.target.value
+    });
+
+    if (event.target.id === "email") {
+      if (this.state.fields !== "") {
+        let lastAtPos = this.state.fields.lastIndexOf('@');
+        let lastDotPos = this.state.fields.lastIndexOf('.');
+        if (!(lastAtPos < lastDotPos && lastAtPos > 0 && this.state.fields.indexOf('@@') === -1 && lastDotPos > 2 && (this.state.fields.length - lastDotPos) > 2)) {
+          this.setState({
+            errors_message_email: "Email is not valid"
+          });
+        }
+        else {
+          this.setState({
+            errors_message_email: ""
+          });
+        }
+      }
+    }
+    if (event.target.id === "password") {
+      var pattern = new RegExp(/^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$)/i);
+      if (!pattern.test(this.state.fields)) {
+        this.setState({
+          errors_message_password: "Password not valid."
+        });
+
+      }
+      else {
+        this.setState({
+          errors_message_password: ""
+        });
+      }
+    }
+    if (event.target.id === "phone") {
+      var phone_pattern = new RegExp(/(\(+61\)|\+61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){6,9}/i);
+      if (!phone_pattern.test(this.state.fields)) {
+        this.setState({
+          errors_message_phone: "Phone not valid."
+        });
+
+      }
+      else {
+        this.setState({
+          errors_message_phone: ""
+        });
+      }
+    }
+
+
     this.setState({
       [event.target.id]: event.target.value
     });
@@ -52,7 +108,7 @@ export default class addEmployeeBoard extends Component {
 
     this.clearErrorState();
     const error = Validate(e, this.state);
-    if (error) {
+    if (error || this.state.errors_message_email !== "" || this.state.errors_message_password !== "" || this.state.errors_message_phone !== "") {
       this.setState({
         errors: { ...this.state.errors, ...error }
       });
@@ -157,6 +213,8 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.email}
                 onChange={this.onInputChange}
               />
+              <small id="passwordHelpBlock" class="form-text text-danger">
+                {this.state.errors_message_email} </small>
             </div>
 
             <div class="form-group col-md-6">
@@ -170,6 +228,8 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.phone}
                 onChange={this.onInputChange}
               />
+              <small class="form-text text-danger">
+                {this.state.errors_message_phone} </small>
             </div>
           </div>
 
@@ -196,6 +256,10 @@ export default class addEmployeeBoard extends Component {
                 value={this.state.password}
                 onChange={this.onInputChange}
               />
+              <small id="passwordHelpBlock" class="form-text text-muted">
+                Password must contain at least one UpperCase, one LowerCase, one Digit, one Special character and minimum 8 character length.</small>
+              <small id="passwordHelpBlock" class="form-text text-danger">
+                {this.state.errors_message_password} </small>
             </div>
           </div>
 

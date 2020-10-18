@@ -1,13 +1,13 @@
 package com.SEPT_Backend.Backend.model;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 
+/*
+ * All details of user registrations are stored using following paramaters
+ */
 @Entity
 @Table(	name = "users") 
-//to associate with user role for each user
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import com.SEPT_Backend.Backend.model.User;
 import com.SEPT_Backend.Backend.repository.UserRepository;
 
+/*
+ * User repository is accesssed to make necessary changes from function call
+ */
 @Service
 public class UserService {
 

@@ -17,7 +17,14 @@ import com.SEPT_Backend.Backend.payload.request.EmployeeRequest;
 import com.SEPT_Backend.Backend.payload.request.InfoRequest;
 import com.SEPT_Backend.Backend.payload.response.MessageResponse;
 
-@CrossOrigin(origins = "http://localhost:3001")@RestController@RequestMapping("/api/v1/employee")
+/*
+ * All the activities done by admin/customer through bookings or rostering are handled here.
+ * This is responsible for adding a employee details into the database, fetch the details 
+ * from the database based on user inputs and update the status of booking for an employee
+ */
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/v1/employee")
 public class EmployeeController {
 
   @Autowired
