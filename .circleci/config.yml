@@ -48,15 +48,15 @@ jobs:
             sudo apt-get -y -qq install awscli
             sudo apt-get install python3-pip
             sudo pip3 install --upgrade awscli
-      - run:
+      - run: cd Backend && 
           name: Build image
           command: |
-          cd Backend && docker build -t $FULL_IMAGE_NAME .
-      - run:
+          docker build -t $FULL_IMAGE_NAME .
+      - run: cd Backend && 
           name: Push image
           command: |
           cd Backend && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 549325186772.dkr.ecr.us-east-1.amazonaws.com
-          cd Backend && docker push $FULL_IMAGE_NAME
+          docker push $FULL_IMAGE_NAME
 workflows:
   build-deploy-qa:
     jobs:
